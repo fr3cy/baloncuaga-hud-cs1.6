@@ -1,0 +1,1987 @@
+{
+  "theme": "baLONCUaga Glass HUD",
+  "format": "Valve KeyValues native UI overrides",
+  "game": "Counter-Strike 1.6 Steam Legacy x86",
+  "files": 79,
+  "coverage_by_root": {
+    "cstrike": 27,
+    "platform": 11,
+    "valve": 41
+  },
+  "control_classes": {
+    "bitmapimagepanel": 1,
+    "buildmodedialog": 7,
+    "button": 123,
+    "ccdkeyentrydialog": 2,
+    "cclientscoreboarddialog": 2,
+    "ccvarslider": 11,
+    "ccvartextentry": 2,
+    "ccvartogglecheckbutton": 3,
+    "cdialoggameinfo": 3,
+    "checkbutton": 29,
+    "cinternetgames": 3,
+    "clabeledcommandcombobox": 8,
+    "cloadingdialog": 3,
+    "combobox": 21,
+    "cpanellistpanel": 3,
+    "cplayerlistdialog": 1,
+    "crefreshsteamlogin": 1,
+    "cvacbannedconnrefuseddialog": 1,
+    "divider": 8,
+    "frame": 29,
+    "html": 3,
+    "imagepanel": 9,
+    "label": 209,
+    "listpanel": 13,
+    "menu": 14,
+    "mouseoverpanelbutton": 83,
+    "panel": 27,
+    "progressbar": 22,
+    "propertysheet": 2,
+    "radiobutton": 18,
+    "sectionedlistpanel": 2,
+    "slider": 1,
+    "textentry": 27,
+    "togglebutton": 7,
+    "urllabel": 4,
+    "wizardsubpanel": 13
+  },
+  "validation": {
+    "all_keyvalues_parse": true,
+    "all_original_non_style_leaves_unchanged": true,
+    "all_commands_layout_localization_unchanged": true,
+    "team_colors_unchanged": true,
+    "preserved_functional_keys": {
+      "controlname": 715,
+      "fieldname": 715,
+      "xpos": 713,
+      "ypos": 713,
+      "wide": 710,
+      "autoresize": 710,
+      "pincorner": 714,
+      "visible": 715,
+      "enabled": 715,
+      "labeltext": 445,
+      "command": 196,
+      "image": 9
+    },
+    "all_native_font_heights_unchanged": true
+  },
+  "not_runtime_tested": [
+    "Native GameUI resources need verification in the actual Steam Legacy process; this report validates file structure and bindings."
+  ],
+  "limitations": [
+    "Server HTML/MOTD page contents retain server CSS and colors; the surrounding native window is themed.",
+    "AMXX text command menus and server-defined gameplay HUD elements are not replaced by a resource skin.",
+    "The normal in-game weapon, chat and HUD semantic colors are preserved.",
+    "System, Steam overlay, browser and operating-system dialogs are outside these game resource overrides."
+  ],
+  "entries": [
+    {
+      "path": "cstrike/resource/ClientScheme.res",
+      "original_source": "cstrike/resource/ClientScheme.res",
+      "original_exists": true,
+      "original_sha256": "ece1aae091a9afe549b554f0fa81c4adeafcf73f8d242e3bd89a274ced98652b",
+      "sha256": "85d027157c48ba6bbe655e9ffff98c4b3d4b2ed2ac977bd06bd4eba1066e6cc4",
+      "bytes": 20567,
+      "changed_values": 156,
+      "kind": "scheme",
+      "font_faces": 37,
+      "font_bank": [
+        {
+          "font": "Default",
+          "face": "1",
+          "height": 12
+        },
+        {
+          "font": "Default",
+          "face": "2",
+          "height": 13
+        },
+        {
+          "font": "Default",
+          "face": "3",
+          "height": 14
+        },
+        {
+          "font": "Default",
+          "face": "4",
+          "height": 20
+        },
+        {
+          "font": "Default",
+          "face": "5",
+          "height": 24
+        },
+        {
+          "font": "DefaultUnderline",
+          "face": "1",
+          "height": 12
+        },
+        {
+          "font": "DefaultSmall",
+          "face": "1",
+          "height": 12
+        },
+        {
+          "font": "DefaultSmall",
+          "face": "2",
+          "height": 13
+        },
+        {
+          "font": "DefaultSmall",
+          "face": "3",
+          "height": 14
+        },
+        {
+          "font": "DefaultSmall",
+          "face": "4",
+          "height": 20
+        },
+        {
+          "font": "DefaultSmall",
+          "face": "5",
+          "height": 24
+        },
+        {
+          "font": "DefaultVerySmall",
+          "face": "1",
+          "height": 12
+        },
+        {
+          "font": "DefaultVerySmall",
+          "face": "2",
+          "height": 13
+        },
+        {
+          "font": "DefaultVerySmall",
+          "face": "3",
+          "height": 14
+        },
+        {
+          "font": "DefaultVerySmall",
+          "face": "4",
+          "height": 20
+        },
+        {
+          "font": "DefaultVerySmall",
+          "face": "5",
+          "height": 24
+        },
+        {
+          "font": "Title",
+          "face": "1",
+          "height": 18
+        },
+        {
+          "font": "CreditsTitle",
+          "face": "1",
+          "height": 26
+        },
+        {
+          "font": "CreditsStudioTitle",
+          "face": "1",
+          "height": 24
+        },
+        {
+          "font": "CreditsIndividualTitle",
+          "face": "1",
+          "height": 22
+        },
+        {
+          "font": "CreditsNormal",
+          "face": "1",
+          "height": 20
+        },
+        {
+          "font": "DialogTitle",
+          "face": "1",
+          "height": 14
+        },
+        {
+          "font": "GlassScoreboardRow",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "GlassScoreboardRow",
+          "face": "2",
+          "height": 18
+        },
+        {
+          "font": "GlassScoreboardRow",
+          "face": "3",
+          "height": 22
+        },
+        {
+          "font": "GlassScoreboardRow",
+          "face": "4",
+          "height": 28
+        },
+        {
+          "font": "GlassScoreboardRow",
+          "face": "5",
+          "height": 32
+        },
+        {
+          "font": "GlassScoreboardHeader",
+          "face": "1",
+          "height": 12
+        },
+        {
+          "font": "GlassScoreboardHeader",
+          "face": "2",
+          "height": 14
+        },
+        {
+          "font": "GlassScoreboardHeader",
+          "face": "3",
+          "height": 17
+        },
+        {
+          "font": "GlassScoreboardHeader",
+          "face": "4",
+          "height": 22
+        },
+        {
+          "font": "GlassScoreboardHeader",
+          "face": "5",
+          "height": 26
+        },
+        {
+          "font": "GlassScoreboardTitle",
+          "face": "1",
+          "height": 18
+        },
+        {
+          "font": "GlassScoreboardTitle",
+          "face": "2",
+          "height": 21
+        },
+        {
+          "font": "GlassScoreboardTitle",
+          "face": "3",
+          "height": 25
+        },
+        {
+          "font": "GlassScoreboardTitle",
+          "face": "4",
+          "height": 30
+        },
+        {
+          "font": "GlassScoreboardTitle",
+          "face": "5",
+          "height": 34
+        }
+      ],
+      "preserved_team_colors": {
+        "team0": "204 204 204 255",
+        "team1": "255 64 64 255",
+        "team2": "153 204 255 255"
+      }
+    },
+    {
+      "path": "cstrike/resource/CreateMultiplayerGameGameplayPage.res",
+      "original_source": "cstrike/resource/CreateMultiplayerGameGameplayPage.res",
+      "original_exists": true,
+      "original_sha256": "5e955d049a9958c1b6752fc63eb8d20f81cb6d476dcb44117e9a048fbb32a623",
+      "sha256": "e0293294a500e1e9e3bec72e4fd38ab36b9d988df3cbfa33be0e40395c206651",
+      "bytes": 1884,
+      "changed_values": 8,
+      "kind": "controls",
+      "controls": 5,
+      "control_classes": {
+        "cpanellistpanel": 1,
+        "label": 4
+      }
+    },
+    {
+      "path": "cstrike/resource/CreateMultiplayerGameServerPage.res",
+      "original_source": "cstrike/resource/CreateMultiplayerGameServerPage.res",
+      "original_exists": true,
+      "original_sha256": "57c18014106e4e74897834ec42df6977708956f8ad30c9772e021bf82a5c4eac",
+      "sha256": "6b7f890649c6da9ff3d96ff2a14d0fe63e5fe5a0426f622210ca3701aabb65a1",
+      "bytes": 4370,
+      "changed_values": 10,
+      "kind": "controls",
+      "controls": 11,
+      "control_classes": {
+        "checkbutton": 1,
+        "combobox": 1,
+        "divider": 1,
+        "label": 3,
+        "radiobutton": 4,
+        "textentry": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/OptionsSubMultiplayer.res",
+      "original_source": "cstrike/resource/OptionsSubMultiplayer.res",
+      "original_exists": true,
+      "original_sha256": "5182b842ee25ac2058e8e81c4b510be56e53f92ded8b76a3a4ecef74dc38bb8e",
+      "sha256": "8b45d12fc5506e804c2caab99a5628d0196c71c5420307add475822a28bf5dd0",
+      "bytes": 11827,
+      "changed_values": 22,
+      "kind": "controls",
+      "controls": 29,
+      "control_classes": {
+        "button": 4,
+        "ccvarslider": 2,
+        "ccvartextentry": 1,
+        "ccvartogglecheckbutton": 2,
+        "clabeledcommandcombobox": 4,
+        "combobox": 1,
+        "imagepanel": 1,
+        "label": 10,
+        "menu": 1,
+        "panel": 2,
+        "urllabel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/TrackerScheme.res",
+      "original_source": "platform/resource/TrackerScheme.res",
+      "original_exists": false,
+      "original_sha256": "e44adae9d6040bf91a238c0ca3393493788eeeb1ddf5d4e86c45ee1bcd70371f",
+      "sha256": "953bdc3a61b94d8bd758a1b7b2a91778f1980841e0f1354bdb994892dfafb6a7",
+      "bytes": 15728,
+      "changed_values": 112,
+      "kind": "scheme",
+      "font_faces": 15,
+      "font_bank": [
+        {
+          "font": "Default",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "DefaultBold",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "DefaultUnderline",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "DefaultSmall",
+          "face": "1",
+          "height": 13
+        },
+        {
+          "font": "DefaultSmallBold",
+          "face": "1",
+          "height": 12
+        },
+        {
+          "font": "DefaultVerySmall",
+          "face": "1",
+          "height": 12
+        },
+        {
+          "font": "MenuLarge",
+          "face": "1",
+          "height": 18
+        },
+        {
+          "font": "UiHeadline",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "EngineFont",
+          "face": "1",
+          "height": 12
+        },
+        {
+          "font": "EngineFont",
+          "face": "2",
+          "height": 13
+        },
+        {
+          "font": "EngineFont",
+          "face": "3",
+          "height": 14
+        },
+        {
+          "font": "EngineFont",
+          "face": "4",
+          "height": 20
+        },
+        {
+          "font": "EngineFont",
+          "face": "5",
+          "height": 24
+        },
+        {
+          "font": "CreditsFont",
+          "face": "1",
+          "height": 18
+        },
+        {
+          "font": "Legacy_CreditsFont",
+          "face": "1",
+          "height": 20
+        }
+      ],
+      "preserved_team_colors": {}
+    },
+    {
+      "path": "cstrike/resource/UI/BackgroundPanel.res",
+      "original_source": "cstrike/resource/UI/BackgroundPanel.res",
+      "original_exists": true,
+      "original_sha256": "031c1b79293a2dfbc08676953f70638f8a8de69e8eedbbbba2377623d49d9918",
+      "sha256": "c7315fc049669dd1f01a6e0b5382619af3e3bafb58b4c396034fc4f28efdf95b",
+      "bytes": 2474,
+      "changed_values": 8,
+      "kind": "controls",
+      "controls": 8,
+      "control_classes": {
+        "bitmapimagepanel": 1,
+        "frame": 1,
+        "label": 1,
+        "panel": 5
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/BottomSpectator.res",
+      "original_source": "cstrike/resource/UI/BottomSpectator.res",
+      "original_exists": true,
+      "original_sha256": "3eaf68934ba6b899422b6cc5677eb9eca350dd1ffe043f2ddb865611e8bf4e1a",
+      "sha256": "e5704c0737e9008f8c828fe93f555f050b83aae8571907eb65761ee5a432b53c",
+      "bytes": 2123,
+      "changed_values": 6,
+      "kind": "controls",
+      "controls": 6,
+      "control_classes": {
+        "button": 2,
+        "combobox": 3,
+        "frame": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/BuyEquipment.res",
+      "original_source": "cstrike/resource/UI/BuyEquipment.res",
+      "original_exists": true,
+      "original_sha256": "2c8e23dfcbe7b40f9d539ef419ee847e2e6f56f9f864df6f7542380af59d625e",
+      "sha256": "7e403d1df8d8ce59cb63d545b2c5ce6324b89968c17c1ad06a9c7211766f7274",
+      "bytes": 3498,
+      "changed_values": 1,
+      "kind": "controls",
+      "controls": 10,
+      "control_classes": {
+        "button": 8,
+        "html": 1,
+        "wizardsubpanel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/BuyEquipment_CT.res",
+      "original_source": "cstrike/resource/UI/BuyEquipment_CT.res",
+      "original_exists": true,
+      "original_sha256": "0620460748d5eec984c9114568ee96a473ae6e9deaa75e1598377ca9538a1649",
+      "sha256": "b670585194c04080ab069f48b32af1147821ef319925a832147cd1de78f145cf",
+      "bytes": 4641,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 12,
+      "control_classes": {
+        "label": 1,
+        "mouseoverpanelbutton": 9,
+        "panel": 1,
+        "wizardsubpanel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/BuyEquipment_TER.res",
+      "original_source": "cstrike/resource/UI/BuyEquipment_TER.res",
+      "original_exists": true,
+      "original_sha256": "dcb17b47169f2ce93d6fc15a355f049a352220bf1722d8823602852b7476b93f",
+      "sha256": "821b41a63ca709d5e11822dd50140c934ab6182d206ff10203e5f0f1fedaf95f",
+      "bytes": 3823,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 10,
+      "control_classes": {
+        "label": 1,
+        "mouseoverpanelbutton": 7,
+        "panel": 1,
+        "wizardsubpanel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/BuyMachineguns_CT.res",
+      "original_source": "cstrike/resource/UI/BuyMachineguns_CT.res",
+      "original_exists": true,
+      "original_sha256": "78af4315256f8e419dad31a92f5604d60910e474a7a388460e446963e5f57636",
+      "sha256": "c3d4ffc2455ce2e00648db932dc5cdd63fd1a0f36ef130acf02f337431c0dcb7",
+      "bytes": 1789,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 5,
+      "control_classes": {
+        "label": 1,
+        "mouseoverpanelbutton": 2,
+        "panel": 1,
+        "wizardsubpanel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/BuyMachineguns_TER.res",
+      "original_source": "cstrike/resource/UI/BuyMachineguns_TER.res",
+      "original_exists": true,
+      "original_sha256": "5bbe84c2e01eae13f56c7f3d14efb3fd68e82716c21d7e12f0d423591a5dcca5",
+      "sha256": "ca7c1aca34acd377e7bc9b66d393b5202bfb0862edfec834421120995e1c032a",
+      "bytes": 1810,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 5,
+      "control_classes": {
+        "label": 1,
+        "mouseoverpanelbutton": 2,
+        "panel": 1,
+        "wizardsubpanel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/BuyPistols_CT.res",
+      "original_source": "cstrike/resource/UI/BuyPistols_CT.res",
+      "original_exists": true,
+      "original_sha256": "01ffafc178be796205d1167d72bf6efa4e2d62f6e99363eb9b07ae900d5ab98f",
+      "sha256": "25e07bf60f827227e6d3d30a9f84df4a3ee59b2eb907050d6a2bdb1eb9d1415e",
+      "bytes": 3384,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 9,
+      "control_classes": {
+        "label": 1,
+        "mouseoverpanelbutton": 6,
+        "panel": 1,
+        "wizardsubpanel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/BuyPistols_TER.res",
+      "original_source": "cstrike/resource/UI/BuyPistols_TER.res",
+      "original_exists": true,
+      "original_sha256": "3ac16898e6c0c7f2594a0212952a6b5d453162c46b96b443286a2314e1914be9",
+      "sha256": "5fcbeb49323d0e15309e6625a29862565dc6d0fd804874705e158eb2ed65edfa",
+      "bytes": 3331,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 9,
+      "control_classes": {
+        "label": 1,
+        "mouseoverpanelbutton": 6,
+        "panel": 1,
+        "wizardsubpanel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/BuyRifles_CT.res",
+      "original_source": "cstrike/resource/UI/BuyRifles_CT.res",
+      "original_exists": true,
+      "original_sha256": "f5b6219b496f5f07844e2e1d8f12024d785c9628c57c808219c8839381992d54",
+      "sha256": "e56292b4dc6e9dfad0b313a755287e40c3a996a7add42da716939a8ea68ef1f1",
+      "bytes": 3781,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 10,
+      "control_classes": {
+        "label": 1,
+        "mouseoverpanelbutton": 7,
+        "panel": 1,
+        "wizardsubpanel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/BuyRifles_TER.res",
+      "original_source": "cstrike/resource/UI/BuyRifles_TER.res",
+      "original_exists": true,
+      "original_sha256": "03525b3d207dbe1ba9d2284d7672986bd4aa30996c134f2118749bc8ddc50d17",
+      "sha256": "a064b56f801d6584ff0dbfc98ef36b3ea08e03f706b90a558e973014f6186256",
+      "bytes": 3790,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 10,
+      "control_classes": {
+        "label": 1,
+        "mouseoverpanelbutton": 7,
+        "panel": 1,
+        "wizardsubpanel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/BuyShotguns_CT.res",
+      "original_source": "cstrike/resource/UI/BuyShotguns_CT.res",
+      "original_exists": true,
+      "original_sha256": "60fb0544d16f1080fe795ce9bde9074a7fcab582eba45f9bae9beef68d8c2e03",
+      "sha256": "4e1408337f6f92b7dc2b73b4e118e2922b40bbfadf4e4e59510f48949339773f",
+      "bytes": 2134,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 6,
+      "control_classes": {
+        "label": 1,
+        "mouseoverpanelbutton": 3,
+        "panel": 1,
+        "wizardsubpanel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/BuyShotguns_TER.res",
+      "original_source": "cstrike/resource/UI/BuyShotguns_TER.res",
+      "original_exists": true,
+      "original_sha256": "f0c929de77501120999b0f3b630bb36fcda4e2b891413ebf1268785d73d965ee",
+      "sha256": "cfe744c6f774137ce430d94dfa7ff521043691525f7283d5e6c57bbc6d73989a",
+      "bytes": 2191,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 6,
+      "control_classes": {
+        "label": 1,
+        "mouseoverpanelbutton": 3,
+        "panel": 1,
+        "wizardsubpanel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/BuySubMachineguns_CT.res",
+      "original_source": "cstrike/resource/UI/BuySubMachineguns_CT.res",
+      "original_exists": true,
+      "original_sha256": "796a6a4da22f24eaee16390f0933e3c00df7e54b229a9a3429dbc32a90de3310",
+      "sha256": "4068432a18a20745d896881ccbba7008569b055e42e5898b48800bb27e698b5b",
+      "bytes": 2961,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 8,
+      "control_classes": {
+        "label": 1,
+        "mouseoverpanelbutton": 5,
+        "panel": 1,
+        "wizardsubpanel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/BuySubMachineguns_TER.res",
+      "original_source": "cstrike/resource/UI/BuySubMachineguns_TER.res",
+      "original_exists": true,
+      "original_sha256": "5643dac0cc08e28cb166b36e1fb3e2ad976eceac62417384a1ec12e3b3641943",
+      "sha256": "7c332e575a2c9ee26176e712d231da4eee0372a48c17791a13568fc5ec0b8e07",
+      "bytes": 2983,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 8,
+      "control_classes": {
+        "label": 1,
+        "mouseoverpanelbutton": 5,
+        "panel": 1,
+        "wizardsubpanel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/Classmenu_CT.res",
+      "original_source": "cstrike/resource/UI/Classmenu_CT.res",
+      "original_exists": true,
+      "original_sha256": "004ddde8499036713cd3afb485b0e875fd3ca81a3b7f35a4ebf5e35c4cebd25c",
+      "sha256": "04714aa74581c995b1327984d61aece650085e7e776ec9be14a9fbf0ad112f21",
+      "bytes": 4468,
+      "changed_values": 6,
+      "kind": "controls",
+      "controls": 12,
+      "control_classes": {
+        "button": 1,
+        "frame": 1,
+        "label": 2,
+        "menu": 1,
+        "mouseoverpanelbutton": 6,
+        "panel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/Classmenu_TER.res",
+      "original_source": "cstrike/resource/UI/Classmenu_TER.res",
+      "original_exists": true,
+      "original_sha256": "f239bfb66b86db47b4066238188fbde16a982e5d695a6ab985efdce8ffb21965",
+      "sha256": "48b9af2009597261f40acacac9d5e1871cff2c08ea61dddc831fbc7b58871724",
+      "bytes": 4492,
+      "changed_values": 6,
+      "kind": "controls",
+      "controls": 12,
+      "control_classes": {
+        "button": 1,
+        "frame": 1,
+        "label": 2,
+        "menu": 1,
+        "mouseoverpanelbutton": 6,
+        "panel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/MOTD.res",
+      "original_source": "cstrike/resource/UI/MOTD.res",
+      "original_exists": true,
+      "original_sha256": "ae995b068cde415df6b34b5629e07ca8764f24d659dd32f15f5756773a08773e",
+      "sha256": "51f51ecbd77df62e9dc6bff6b74848d952a424baae7fc146dfeedfc36ca841d3",
+      "bytes": 1439,
+      "changed_values": 5,
+      "kind": "controls",
+      "controls": 4,
+      "control_classes": {
+        "button": 1,
+        "frame": 1,
+        "html": 1,
+        "label": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/MainBuyMenu.res",
+      "original_source": "cstrike/resource/UI/MainBuyMenu.res",
+      "original_exists": true,
+      "original_sha256": "d22e3dfb03bf1506f0444329b7db671ed2241e9ac4a1dd50dc3ae712f9d5173b",
+      "sha256": "d53cfbc387b5359dfe1888be8f63493130c77bc62a244e6eccb67dc3ecb5cbbe",
+      "bytes": 5891,
+      "changed_values": 4,
+      "kind": "controls",
+      "controls": 15,
+      "control_classes": {
+        "button": 2,
+        "divider": 1,
+        "label": 2,
+        "mouseoverpanelbutton": 9,
+        "panel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/ScoreBoard.res",
+      "original_source": "cstrike/resource/UI/ScoreBoard.res",
+      "original_exists": true,
+      "original_sha256": "890c4e334cc475959823df08ea4e9903e304620c64175f499e722f7473b16fa2",
+      "sha256": "890c4e334cc475959823df08ea4e9903e304620c64175f499e722f7473b16fa2",
+      "bytes": 916,
+      "changed_values": 4,
+      "kind": "controls",
+      "controls": 3,
+      "control_classes": {
+        "cclientscoreboarddialog": 1,
+        "label": 1,
+        "sectionedlistpanel": 1
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/Spectator.res",
+      "original_source": "cstrike/resource/UI/Spectator.res",
+      "original_exists": true,
+      "original_sha256": "51b1899b1df000895666c185bd8030237677b45ac0a378a95dc72a79f5986501",
+      "sha256": "1297494e40acbcfd8cef5a21addde74da62dd243ce2ae044ce7be66106b4c289",
+      "bytes": 4338,
+      "changed_values": 14,
+      "kind": "controls",
+      "controls": 13,
+      "control_classes": {
+        "frame": 2,
+        "imagepanel": 2,
+        "label": 7,
+        "panel": 2
+      }
+    },
+    {
+      "path": "cstrike/resource/UI/Teammenu.res",
+      "original_source": "cstrike/resource/UI/Teammenu.res",
+      "original_exists": true,
+      "original_sha256": "d5334bc2776c34ed0abb88d0e2348ab9dda7533bde3a85b93a293c9b5168f2ee",
+      "sha256": "c440a26f506e4b6a5cbf3f2d2de04945cd95036b500065cf8cf0cd46872f8adc",
+      "bytes": 3895,
+      "changed_values": 7,
+      "kind": "controls",
+      "controls": 11,
+      "control_classes": {
+        "button": 6,
+        "frame": 1,
+        "html": 1,
+        "label": 2,
+        "menu": 1
+      }
+    },
+    {
+      "path": "platform/resource/TrackerScheme.res",
+      "original_source": "platform/resource/TrackerScheme.res",
+      "original_exists": true,
+      "original_sha256": "e44adae9d6040bf91a238c0ca3393493788eeeb1ddf5d4e86c45ee1bcd70371f",
+      "sha256": "953bdc3a61b94d8bd758a1b7b2a91778f1980841e0f1354bdb994892dfafb6a7",
+      "bytes": 15728,
+      "changed_values": 112,
+      "kind": "scheme",
+      "font_faces": 15,
+      "font_bank": [
+        {
+          "font": "Default",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "DefaultBold",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "DefaultUnderline",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "DefaultSmall",
+          "face": "1",
+          "height": 13
+        },
+        {
+          "font": "DefaultSmallBold",
+          "face": "1",
+          "height": 12
+        },
+        {
+          "font": "DefaultVerySmall",
+          "face": "1",
+          "height": 12
+        },
+        {
+          "font": "MenuLarge",
+          "face": "1",
+          "height": 18
+        },
+        {
+          "font": "UiHeadline",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "EngineFont",
+          "face": "1",
+          "height": 12
+        },
+        {
+          "font": "EngineFont",
+          "face": "2",
+          "height": 13
+        },
+        {
+          "font": "EngineFont",
+          "face": "3",
+          "height": 14
+        },
+        {
+          "font": "EngineFont",
+          "face": "4",
+          "height": 20
+        },
+        {
+          "font": "EngineFont",
+          "face": "5",
+          "height": 24
+        },
+        {
+          "font": "CreditsFont",
+          "face": "1",
+          "height": 18
+        },
+        {
+          "font": "Legacy_CreditsFont",
+          "face": "1",
+          "height": 20
+        }
+      ],
+      "preserved_team_colors": {}
+    },
+    {
+      "path": "platform/servers/AddServerGamesPage.res",
+      "original_source": "platform/servers/AddServerGamesPage.res",
+      "original_exists": true,
+      "original_sha256": "6fc5904814a6eb8b16b92576e7e63afb141987fd9230d01115e7601c8e9b143e",
+      "sha256": "a7a1698a6fc79779f4f3426ffda9603cd097010b7b1fd8c67b443bdabccbebf1",
+      "bytes": 6986,
+      "changed_values": 14,
+      "kind": "controls",
+      "controls": 17,
+      "control_classes": {
+        "button": 5,
+        "checkbutton": 3,
+        "cinternetgames": 1,
+        "combobox": 4,
+        "label": 1,
+        "listpanel": 1,
+        "textentry": 1,
+        "togglebutton": 1
+      }
+    },
+    {
+      "path": "platform/servers/DialogAddServer.res",
+      "original_source": "platform/servers/DialogAddServer.res",
+      "original_exists": true,
+      "original_sha256": "1720929269cf5b484d422c6d542762a3123b9aa8e43044ee900a7a354a4b273f",
+      "sha256": "c66f0072c7030074559abedc78731c0bb7e59c660dd9f5c2234c00d9e92c6416",
+      "bytes": 3559,
+      "changed_values": 8,
+      "kind": "controls",
+      "controls": 9,
+      "control_classes": {
+        "button": 4,
+        "frame": 1,
+        "label": 2,
+        "propertysheet": 1,
+        "textentry": 1
+      }
+    },
+    {
+      "path": "platform/servers/DialogGameInfo.res",
+      "original_source": "platform/servers/DialogGameInfo.res",
+      "original_exists": true,
+      "original_sha256": "5a0a5c456f7540e52aba792fa64b0f9aa0ed074406b0659b9e45d336996d662a",
+      "sha256": "bac150f08246c1e8cdfce3d0edb876ce6667842e619c30d3268879480e1e3f35",
+      "bytes": 9594,
+      "changed_values": 32,
+      "kind": "controls",
+      "controls": 24,
+      "control_classes": {
+        "button": 3,
+        "cdialoggameinfo": 1,
+        "label": 14,
+        "listpanel": 1,
+        "menu": 1,
+        "radiobutton": 2,
+        "textentry": 1,
+        "togglebutton": 1
+      }
+    },
+    {
+      "path": "platform/servers/DialogGameInfo_AutoRetry.res",
+      "original_source": "platform/servers/DialogGameInfo_AutoRetry.res",
+      "original_exists": true,
+      "original_sha256": "9b1363b583ec80b287faf5e1f548c405cbb89754380f24551b39aa9518b45edb",
+      "sha256": "c62f68d91030f6dd601f20cbf05ffa52ac628cc26f0a34581c308a0724f5ffbd",
+      "bytes": 9667,
+      "changed_values": 32,
+      "kind": "controls",
+      "controls": 24,
+      "control_classes": {
+        "button": 3,
+        "cdialoggameinfo": 1,
+        "label": 14,
+        "listpanel": 1,
+        "menu": 1,
+        "radiobutton": 2,
+        "textentry": 1,
+        "togglebutton": 1
+      }
+    },
+    {
+      "path": "platform/servers/DialogGameInfo_SinglePlayer.res",
+      "original_source": "platform/servers/DialogGameInfo_SinglePlayer.res",
+      "original_exists": true,
+      "original_sha256": "b76fa3a603c2295d297fdc451e8b7d295679d5cd0c6048cd1e75391119a56e36",
+      "sha256": "025fbcc12373e7687c3c5db8281f5caa70fc2f6d3bf939b41b4acd78d25f2420",
+      "bytes": 9833,
+      "changed_values": 36,
+      "kind": "controls",
+      "controls": 25,
+      "control_classes": {
+        "button": 3,
+        "cdialoggameinfo": 1,
+        "label": 16,
+        "listpanel": 1,
+        "radiobutton": 2,
+        "textentry": 1,
+        "togglebutton": 1
+      }
+    },
+    {
+      "path": "platform/servers/DialogServerBrowser.res",
+      "original_source": "platform/servers/DialogServerBrowser.res",
+      "original_exists": true,
+      "original_sha256": "02adddf669356b285534432a94bf6c7c3489e0b3ccd5270fc60e1d4404198546",
+      "sha256": "29530540868b0e3b149902ddddf211a6b4fc6d51db137ec4d2dc73ee3ca20f83",
+      "bytes": 971,
+      "changed_values": 4,
+      "kind": "controls",
+      "controls": 3,
+      "control_classes": {
+        "frame": 1,
+        "label": 1,
+        "propertysheet": 1
+      }
+    },
+    {
+      "path": "platform/servers/DialogServerPassword.res",
+      "original_source": "platform/servers/DialogServerPassword.res",
+      "original_exists": true,
+      "original_sha256": "6c3c6db9c36518621c0a935f467f168b32d809aaa540d6b40fe6acc1864d9a1e",
+      "sha256": "2786b60fbac0de0c7ff8e5967040c340d5f1cbe1e3b04cbdef49b5b84569954d",
+      "bytes": 3002,
+      "changed_values": 10,
+      "kind": "controls",
+      "controls": 7,
+      "control_classes": {
+        "button": 2,
+        "frame": 1,
+        "label": 3,
+        "textentry": 1
+      }
+    },
+    {
+      "path": "platform/servers/InternetGamesPage.res",
+      "original_source": "platform/servers/InternetGamesPage.res",
+      "original_exists": true,
+      "original_sha256": "9e8989e81bb0af55bb359843b6a23d9ef79f02ac9ab3f77c640cbfbcf06d02b4",
+      "sha256": "5f74fb945323c11ac1440d22dbe91a29355ca2b65df8b4a3911e37764506069a",
+      "bytes": 7374,
+      "changed_values": 14,
+      "kind": "controls",
+      "controls": 18,
+      "control_classes": {
+        "button": 5,
+        "checkbutton": 4,
+        "cinternetgames": 1,
+        "combobox": 4,
+        "label": 1,
+        "listpanel": 1,
+        "textentry": 1,
+        "togglebutton": 1
+      }
+    },
+    {
+      "path": "platform/servers/InternetGamesPage_Filters.res",
+      "original_source": "platform/servers/InternetGamesPage_Filters.res",
+      "original_exists": true,
+      "original_sha256": "21400b093be556076489faac0676e6d0855406c0493ae3a1e4c3b2c1166f6d0f",
+      "sha256": "bf0cfc9fb7a0bf201dc2fccae05bd40d1322e70ed27975b19d1fd16e895d4e3f",
+      "bytes": 8600,
+      "changed_values": 20,
+      "kind": "controls",
+      "controls": 21,
+      "control_classes": {
+        "button": 5,
+        "checkbutton": 4,
+        "cinternetgames": 1,
+        "combobox": 3,
+        "label": 5,
+        "listpanel": 1,
+        "textentry": 1,
+        "togglebutton": 1
+      }
+    },
+    {
+      "path": "platform/servers/VACBannedConnRefusedDialog.res",
+      "original_source": "platform/servers/VACBannedConnRefusedDialog.res",
+      "original_exists": true,
+      "original_sha256": "dbc9a1f85b6dfcc43e37c5e7038e6594d8c196b35548c947e671d9b8f5512c4d",
+      "sha256": "a604c4aed9cb0a30298d0ed9fde94beffc25f0ebaf30aaa251032f91c198f66e",
+      "bytes": 2043,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 5,
+      "control_classes": {
+        "button": 1,
+        "cvacbannedconnrefuseddialog": 1,
+        "imagepanel": 1,
+        "label": 1,
+        "urllabel": 1
+      }
+    },
+    {
+      "path": "valve/resource/CDKeyEntryDialog.res",
+      "original_source": "valve/resource/CDKeyEntryDialog.res",
+      "original_exists": true,
+      "original_sha256": "d2d82c47b1609ee44d934fb24359a974cccd68ab92b53a2b56f16c6d5cb143c5",
+      "sha256": "da1fbafe517e18262e30c737b40547f994c7e30e6d6c916e0571045c5e4d6550",
+      "bytes": 3997,
+      "changed_values": 14,
+      "kind": "controls",
+      "controls": 11,
+      "control_classes": {
+        "button": 2,
+        "ccdkeyentrydialog": 1,
+        "label": 4,
+        "menu": 1,
+        "textentry": 3
+      }
+    },
+    {
+      "path": "valve/resource/ChangeGameDialog.res",
+      "original_source": "valve/resource/ChangeGameDialog.res",
+      "original_exists": true,
+      "original_sha256": "733fb25550573e13885406e1a618d380627afc94d71d2ee3b95e335d9a64f934",
+      "sha256": "5bec26710b5f2312c7717fb7e86a701c8901b3aa443793b5e408d61403690948",
+      "bytes": 2049,
+      "changed_values": 6,
+      "kind": "controls",
+      "controls": 6,
+      "control_classes": {
+        "button": 2,
+        "frame": 1,
+        "label": 1,
+        "listpanel": 1,
+        "menu": 1
+      }
+    },
+    {
+      "path": "valve/resource/ClientScheme.res",
+      "original_source": "valve/resource/ClientScheme.res",
+      "original_exists": true,
+      "original_sha256": "6a90c78621c5b2cf2c80cfc09e6870c27b8c7e4327f8f3ef75580b434306bd82",
+      "sha256": "c90e780334b3231b0cf700b28ff5dc24cd80d55ba9cde7276d49d67f854e8eb9",
+      "bytes": 15241,
+      "changed_values": 67,
+      "kind": "scheme",
+      "font_faces": 20,
+      "font_bank": [
+        {
+          "font": "Default",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "DefaultBold",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "DefaultUnderline",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "DefaultSmall",
+          "face": "1",
+          "height": 13
+        },
+        {
+          "font": "DefaultVerySmall",
+          "face": "1",
+          "height": 12
+        },
+        {
+          "font": "GlassScoreboardRow",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "GlassScoreboardRow",
+          "face": "2",
+          "height": 18
+        },
+        {
+          "font": "GlassScoreboardRow",
+          "face": "3",
+          "height": 22
+        },
+        {
+          "font": "GlassScoreboardRow",
+          "face": "4",
+          "height": 28
+        },
+        {
+          "font": "GlassScoreboardRow",
+          "face": "5",
+          "height": 32
+        },
+        {
+          "font": "GlassScoreboardHeader",
+          "face": "1",
+          "height": 12
+        },
+        {
+          "font": "GlassScoreboardHeader",
+          "face": "2",
+          "height": 14
+        },
+        {
+          "font": "GlassScoreboardHeader",
+          "face": "3",
+          "height": 17
+        },
+        {
+          "font": "GlassScoreboardHeader",
+          "face": "4",
+          "height": 22
+        },
+        {
+          "font": "GlassScoreboardHeader",
+          "face": "5",
+          "height": 26
+        },
+        {
+          "font": "GlassScoreboardTitle",
+          "face": "1",
+          "height": 18
+        },
+        {
+          "font": "GlassScoreboardTitle",
+          "face": "2",
+          "height": 21
+        },
+        {
+          "font": "GlassScoreboardTitle",
+          "face": "3",
+          "height": 25
+        },
+        {
+          "font": "GlassScoreboardTitle",
+          "face": "4",
+          "height": 30
+        },
+        {
+          "font": "GlassScoreboardTitle",
+          "face": "5",
+          "height": 34
+        }
+      ],
+      "preserved_team_colors": {
+        "team0": "125 165 210",
+        "team1": "200 90 70",
+        "team2": "225 205 45",
+        "team3": "145 215 140",
+        "team4": "255 170 0"
+      }
+    },
+    {
+      "path": "valve/resource/ContentControlDialog.res",
+      "original_source": "valve/resource/ContentControlDialog.res",
+      "original_exists": true,
+      "original_sha256": "0e275ade9ff0cceea0baddb9f574c6529937a5efb9d260e22491fd8ea6ebcd9a",
+      "sha256": "8edeab69f1a0a6df937e60f2833b8b60779e02634adef352307ff00c30a98d47",
+      "bytes": 3655,
+      "changed_values": 14,
+      "kind": "controls",
+      "controls": 10,
+      "control_classes": {
+        "buildmodedialog": 1,
+        "button": 2,
+        "frame": 1,
+        "label": 4,
+        "textentry": 2
+      }
+    },
+    {
+      "path": "valve/resource/CreateMultiplayerGameGameplayPage.res",
+      "original_source": "valve/resource/CreateMultiplayerGameGameplayPage.res",
+      "original_exists": true,
+      "original_sha256": "8c33b6bacebdce59a18ff4b764eaf93bff7bdf10becb2ae41652545d58150ab2",
+      "sha256": "e093270be836f58313e821101e49505749fc1639283eb2177678e7c1a0e4ad02",
+      "bytes": 1785,
+      "changed_values": 8,
+      "kind": "controls",
+      "controls": 5,
+      "control_classes": {
+        "cpanellistpanel": 1,
+        "label": 4
+      }
+    },
+    {
+      "path": "valve/resource/CreateMultiplayerGameServerPage.res",
+      "original_source": "valve/resource/CreateMultiplayerGameServerPage.res",
+      "original_exists": true,
+      "original_sha256": "1d23924da8e5c8e427e291a28d59948557749bbf785d3b89f058bf02feecb3cf",
+      "sha256": "62a839e85a88ff49592c1db1c0e0626661138dc76246d6025ef7e251b1aeacc2",
+      "bytes": 4368,
+      "changed_values": 10,
+      "kind": "controls",
+      "controls": 11,
+      "control_classes": {
+        "checkbutton": 1,
+        "combobox": 1,
+        "divider": 1,
+        "label": 3,
+        "radiobutton": 4,
+        "textentry": 1
+      }
+    },
+    {
+      "path": "valve/resource/DemoEditDialog.res",
+      "original_source": "valve/resource/DemoEditDialog.res",
+      "original_exists": true,
+      "original_sha256": "1e2a95b54169bbeded76f19f2d8027e7ba2eeca50c0d9586ddcedf54a13f0b21",
+      "sha256": "6a13c36d4b04ad9ed33f6a2a0696b49d3ba3347a4095347a955a312e7c100a75",
+      "bytes": 2651,
+      "changed_values": 8,
+      "kind": "controls",
+      "controls": 8,
+      "control_classes": {
+        "button": 4,
+        "combobox": 1,
+        "label": 2,
+        "textentry": 1
+      }
+    },
+    {
+      "path": "valve/resource/DemoEventsDialog.res",
+      "original_source": "valve/resource/DemoEventsDialog.res",
+      "original_exists": true,
+      "original_sha256": "80469d72c71afe79f669645524db7d3403ddf1148a5f6e4bb64bc3328e9bc5a1",
+      "sha256": "027a943e3ba1d6df2fb71ac7043bdc92816e4d0905db7d50485d40b1e8ee0d59",
+      "bytes": 1437,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 5,
+      "control_classes": {
+        "button": 4,
+        "listpanel": 1
+      }
+    },
+    {
+      "path": "valve/resource/DemoPlayerDialog.res",
+      "original_source": "valve/resource/DemoPlayerDialog.res",
+      "original_exists": true,
+      "original_sha256": "a4ce71bc83084650123078a702fccb27ab387108c7cea3c8a0e473d4e7b4ec16",
+      "sha256": "d6a8fd5a5f30aa5f6e26413b6930474360a84e167fec41d41a62563358f0940a",
+      "bytes": 4154,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 15,
+      "control_classes": {
+        "button": 12,
+        "label": 1,
+        "slider": 1,
+        "togglebutton": 1
+      }
+    },
+    {
+      "path": "valve/resource/DemoPlayerFileDialog.res",
+      "original_source": "valve/resource/DemoPlayerFileDialog.res",
+      "original_exists": true,
+      "original_sha256": "e51844e1b142fd07c5428d26e1496ba329a76119813563d58992091c914b3e1f",
+      "sha256": "456397dc055d3cf01680dbd553fd100c703daa7a7b679a7f9613b79493460cee",
+      "bytes": 1006,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 3,
+      "control_classes": {
+        "button": 2,
+        "listpanel": 1
+      }
+    },
+    {
+      "path": "valve/resource/DialogOptionsIngame.res",
+      "original_source": "valve/resource/DialogOptionsIngame.res",
+      "original_exists": true,
+      "original_sha256": "78dc56276b0cb1d07bae3075747a41409df346e9d24b4e3940c79e9d7595c83a",
+      "sha256": "fffb2007685a10fc0a092eea5fe744b287f5917680e68fb6baa32f6130f94fa4",
+      "bytes": 1285,
+      "changed_values": 4,
+      "kind": "controls",
+      "controls": 4,
+      "control_classes": {
+        "buildmodedialog": 1,
+        "button": 1,
+        "frame": 1,
+        "label": 1
+      }
+    },
+    {
+      "path": "valve/resource/LoadGameDialog.res",
+      "original_source": "valve/resource/LoadGameDialog.res",
+      "original_exists": true,
+      "original_sha256": "00bf222f9568e901cfcf5a1d99b175f61ba33eecf05fbff0dadc419dd08b347b",
+      "sha256": "e6d7d43f2ca15a31c87c0ddc622cfa902b6d4773c404880a43f966801fd20e57",
+      "bytes": 3487,
+      "changed_values": 14,
+      "kind": "controls",
+      "controls": 10,
+      "control_classes": {
+        "buildmodedialog": 1,
+        "button": 2,
+        "frame": 1,
+        "label": 5,
+        "listpanel": 1
+      }
+    },
+    {
+      "path": "valve/resource/LoadingDialog.res",
+      "original_source": "valve/resource/LoadingDialog.res",
+      "original_exists": true,
+      "original_sha256": "6c9930ea84fd0725ab00ef71d45be0155f3af2665356548e57c01cfadb9f103d",
+      "sha256": "37aaeea4e1649c5bc02147ac5713f48abe18fb171df29f7a48811aeee5b1a308",
+      "bytes": 2568,
+      "changed_values": 12,
+      "kind": "controls",
+      "controls": 7,
+      "control_classes": {
+        "button": 1,
+        "frame": 1,
+        "label": 3,
+        "progressbar": 2
+      }
+    },
+    {
+      "path": "valve/resource/LoadingDialogConnectionLost.res",
+      "original_source": "valve/resource/LoadingDialogConnectionLost.res",
+      "original_exists": true,
+      "original_sha256": "ac8c4aa9fb424d6fa36eab9bfb1905ff009dcac9111f9a8501311dffac57b180",
+      "sha256": "bdb4adf0bce524e955c25c03d9af1a4b121615bc58a31197d9548b9ef28b7a3e",
+      "bytes": 2698,
+      "changed_values": 10,
+      "kind": "controls",
+      "controls": 7,
+      "control_classes": {
+        "button": 1,
+        "cloadingdialog": 1,
+        "label": 3,
+        "progressbar": 2
+      }
+    },
+    {
+      "path": "valve/resource/LoadingDialogDualProgress.res",
+      "original_source": "valve/resource/LoadingDialogDualProgress.res",
+      "original_exists": true,
+      "original_sha256": "b7d3c2e29aaeccd1202b590543f446ddea8e3b30321231aca3943038c0a45a84",
+      "sha256": "e2be2b6eb27b75b26482e3fe2b28932aec42ec365438898caeee5ff66d4ea891",
+      "bytes": 2616,
+      "changed_values": 12,
+      "kind": "controls",
+      "controls": 7,
+      "control_classes": {
+        "button": 1,
+        "frame": 1,
+        "label": 3,
+        "progressbar": 2
+      }
+    },
+    {
+      "path": "valve/resource/LoadingDialogDualProgressVAC.res",
+      "original_source": "valve/resource/LoadingDialogDualProgressVAC.res",
+      "original_exists": true,
+      "original_sha256": "9e4def26d2888bc152eb0371a18c313d13c5f75cf19904f47b9a5138c7364c69",
+      "sha256": "c1f808d8dc37f50be945805ec778d5b2b3748588246c1bf9debb83ec0bdae449",
+      "bytes": 3581,
+      "changed_values": 14,
+      "kind": "controls",
+      "controls": 10,
+      "control_classes": {
+        "button": 1,
+        "divider": 1,
+        "frame": 1,
+        "imagepanel": 1,
+        "label": 4,
+        "progressbar": 2
+      }
+    },
+    {
+      "path": "valve/resource/LoadingDialogError.res",
+      "original_source": "valve/resource/LoadingDialogError.res",
+      "original_exists": true,
+      "original_sha256": "c131954b54f09472959511cdd0b91466c18563864bfd8d380411079c6280316c",
+      "sha256": "74930971efc65df70f4e1ce4c9f3919a580070db7c1753669ef9879c4b63c1d4",
+      "bytes": 3247,
+      "changed_values": 14,
+      "kind": "controls",
+      "controls": 9,
+      "control_classes": {
+        "button": 1,
+        "divider": 1,
+        "frame": 1,
+        "label": 4,
+        "progressbar": 2
+      }
+    },
+    {
+      "path": "valve/resource/LoadingDialogErrorLoggedInElsewhere.res",
+      "original_source": "valve/resource/LoadingDialogErrorLoggedInElsewhere.res",
+      "original_exists": true,
+      "original_sha256": "be6fdc5bc68b3a1b7425f7bc2ceb05d9ef81a5651e346c06ede9fd1769b86005",
+      "sha256": "4eba65b7aed414cd345a117e7f439a04e5fa1a04b9c0e8d6959cecd8ab703e50",
+      "bytes": 2704,
+      "changed_values": 10,
+      "kind": "controls",
+      "controls": 7,
+      "control_classes": {
+        "button": 1,
+        "cloadingdialog": 1,
+        "label": 3,
+        "progressbar": 2
+      }
+    },
+    {
+      "path": "valve/resource/LoadingDialogErrorNoSteamConnection.res",
+      "original_source": "valve/resource/LoadingDialogErrorNoSteamConnection.res",
+      "original_exists": true,
+      "original_sha256": "51e0b8b4f5793c92cae16e2e7ee680411b243ff38fd2b617ad99bec70ee241b8",
+      "sha256": "e2c8ca03275bb547096c7a63425cabbfe27f1a9ca4e51147bbdd77ec4c9ab0ec",
+      "bytes": 3119,
+      "changed_values": 10,
+      "kind": "controls",
+      "controls": 8,
+      "control_classes": {
+        "button": 1,
+        "cloadingdialog": 1,
+        "label": 3,
+        "progressbar": 2,
+        "urllabel": 1
+      }
+    },
+    {
+      "path": "valve/resource/LoadingDialogErrorVACBanned.res",
+      "original_source": "valve/resource/LoadingDialogErrorVACBanned.res",
+      "original_exists": true,
+      "original_sha256": "aa7e2090540048542ecd7fe54038c229efeff931a90a1204a7a76ad5932f054a",
+      "sha256": "21fc576138c2075ba6025b9cda836d3a0768dae4872b571223ed5b0e657dcca1",
+      "bytes": 2925,
+      "changed_values": 12,
+      "kind": "controls",
+      "controls": 8,
+      "control_classes": {
+        "button": 1,
+        "frame": 1,
+        "imagepanel": 1,
+        "label": 3,
+        "progressbar": 2
+      }
+    },
+    {
+      "path": "valve/resource/LoadingDialogNoBanner.res",
+      "original_source": "valve/resource/LoadingDialogNoBanner.res",
+      "original_exists": true,
+      "original_sha256": "c28fe442f3cd602b59783954041c3dce79dd88848978eeb7b6572e676d8a4e87",
+      "sha256": "2c9f78800e8231d99a4e98e86e7cb3dc254d6d72fe13edc3d8bac357583d7f39",
+      "bytes": 2806,
+      "changed_values": 12,
+      "kind": "controls",
+      "controls": 8,
+      "control_classes": {
+        "button": 1,
+        "divider": 1,
+        "frame": 1,
+        "label": 3,
+        "progressbar": 2
+      }
+    },
+    {
+      "path": "valve/resource/LoadingDialogNoBannerSingle.res",
+      "original_source": "valve/resource/LoadingDialogNoBannerSingle.res",
+      "original_exists": true,
+      "original_sha256": "7545045133b803921b3bcf92ad18d7de206848a1797edd447563698f65acc18f",
+      "sha256": "56e89ac72f82216bb92c52fd435b79f43edc13f157f525818df0f93f182bc96f",
+      "bytes": 2798,
+      "changed_values": 12,
+      "kind": "controls",
+      "controls": 8,
+      "control_classes": {
+        "button": 1,
+        "divider": 1,
+        "frame": 1,
+        "label": 3,
+        "progressbar": 2
+      }
+    },
+    {
+      "path": "valve/resource/LoadingDialogVAC.res",
+      "original_source": "valve/resource/LoadingDialogVAC.res",
+      "original_exists": true,
+      "original_sha256": "1b3e43289fc6c90db8a53876d8efc52037ba3e34fe5c17c82c4009c835a4b253",
+      "sha256": "417b813fa9ce3c8ebc9eb2e677b7fc84cf862e7e4319bd8ba6efa7dc6ab8575d",
+      "bytes": 3763,
+      "changed_values": 14,
+      "kind": "controls",
+      "controls": 11,
+      "control_classes": {
+        "button": 1,
+        "divider": 1,
+        "frame": 1,
+        "imagepanel": 1,
+        "label": 4,
+        "menu": 1,
+        "progressbar": 2
+      }
+    },
+    {
+      "path": "valve/resource/MultiplayerAdvancedDialog.res",
+      "original_source": "valve/resource/MultiplayerAdvancedDialog.res",
+      "original_exists": true,
+      "original_sha256": "dd63dc19eb64f5f18957888dedbb168ee268d426662805698521347f6b0c2c88",
+      "sha256": "1b3ab91e86a978f7999ccb686bee5c26b7d66387ebeb008b7fa4818c8e8084d0",
+      "bytes": 1589,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 5,
+      "control_classes": {
+        "buildmodedialog": 1,
+        "button": 2,
+        "cpanellistpanel": 1,
+        "frame": 1
+      }
+    },
+    {
+      "path": "valve/resource/NewGameDialog.res",
+      "original_source": "valve/resource/NewGameDialog.res",
+      "original_exists": true,
+      "original_sha256": "158c796730f476e658d7dc5e794850df09ca251dd00f56c6839a9931ec6e1064",
+      "sha256": "49efc5b9122b4bc7552bc54eca7e31255239fead716862d4df7060ca4bcd4e7c",
+      "bytes": 3138,
+      "changed_values": 4,
+      "kind": "controls",
+      "controls": 9,
+      "control_classes": {
+        "buildmodedialog": 1,
+        "button": 2,
+        "frame": 1,
+        "label": 1,
+        "radiobutton": 4
+      }
+    },
+    {
+      "path": "valve/resource/OptionsSubAdvanced.res",
+      "original_source": "valve/resource/OptionsSubAdvanced.res",
+      "original_exists": true,
+      "original_sha256": "2836e159f9af31857e9e97ff64ee78ce1ea2f7bc9008d803df71c662e68cd4fc",
+      "sha256": "031352a40d132ace399b82716074c2cd2096fe78fd8729fac79d69900bb214ac",
+      "bytes": 888,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 2,
+      "control_classes": {
+        "button": 1,
+        "label": 1
+      }
+    },
+    {
+      "path": "valve/resource/OptionsSubAudio.res",
+      "original_source": "valve/resource/OptionsSubAudio.res",
+      "original_exists": true,
+      "original_sha256": "7b5351ed0e029d9c338c66362d65ebf606d7df39ba7331ca5337a1005c2c5b1d",
+      "sha256": "acd11e25356d25f73a6b1911f46acff909f6e6de7d0eb959c01ab9029a677ec1",
+      "bytes": 3372,
+      "changed_values": 10,
+      "kind": "controls",
+      "controls": 9,
+      "control_classes": {
+        "ccvarslider": 3,
+        "clabeledcommandcombobox": 1,
+        "label": 5
+      }
+    },
+    {
+      "path": "valve/resource/OptionsSubKeyboard.res",
+      "original_source": "valve/resource/OptionsSubKeyboard.res",
+      "original_exists": true,
+      "original_sha256": "f62d81476da7bd289ed98edb2f857d24fb64b4d97a685e1e0c21007bd2099e46",
+      "sha256": "a5056c6cd0ad01cd7b54c63ddd610b20814f513b4a9ce8ace06f8c834658dcc9",
+      "bytes": 1557,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 4,
+      "control_classes": {
+        "button": 3,
+        "listpanel": 1
+      }
+    },
+    {
+      "path": "valve/resource/OptionsSubMouse.res",
+      "original_source": "valve/resource/OptionsSubMouse.res",
+      "original_exists": true,
+      "original_sha256": "91c7d9548e3ba88d40943302cbef254dae841757cde8a1da8cc1c283e6825c7b",
+      "sha256": "ae0acbde18b5531c6c4ae040d5e404b703844803826b7750aa4ef2d152f8a7e0",
+      "bytes": 6624,
+      "changed_values": 18,
+      "kind": "controls",
+      "controls": 17,
+      "control_classes": {
+        "ccvarslider": 1,
+        "checkbutton": 7,
+        "label": 8,
+        "textentry": 1
+      }
+    },
+    {
+      "path": "valve/resource/OptionsSubMultiplayer.res",
+      "original_source": "valve/resource/OptionsSubMultiplayer.res",
+      "original_exists": true,
+      "original_sha256": "788df7697ab133d8ae26c1289544e28c4bcec6a4a241beed91fc22ba06e0b8fe",
+      "sha256": "83c2aa1bdeeca349a99e5008864f2d56c729a41af0749a3a384bb7eaaeb3b056",
+      "bytes": 9283,
+      "changed_values": 16,
+      "kind": "controls",
+      "controls": 23,
+      "control_classes": {
+        "button": 4,
+        "ccvarslider": 2,
+        "ccvartextentry": 1,
+        "ccvartogglecheckbutton": 1,
+        "clabeledcommandcombobox": 3,
+        "label": 8,
+        "menu": 1,
+        "panel": 2,
+        "urllabel": 1
+      }
+    },
+    {
+      "path": "valve/resource/OptionsSubVideo.res",
+      "original_source": "valve/resource/OptionsSubVideo.res",
+      "original_exists": true,
+      "original_sha256": "7d21f5fd93f643d35e1273831653026f0173ce6c9e7d0f599831431b7807adb2",
+      "sha256": "425ebf61168472b2adb33a35bc07444959301fe298e89acf75a1c19f852fd49c",
+      "bytes": 6453,
+      "changed_values": 18,
+      "kind": "controls",
+      "controls": 17,
+      "control_classes": {
+        "ccvarslider": 2,
+        "checkbutton": 6,
+        "combobox": 3,
+        "label": 6
+      }
+    },
+    {
+      "path": "valve/resource/OptionsSubVoice.res",
+      "original_source": "valve/resource/OptionsSubVoice.res",
+      "original_exists": true,
+      "original_sha256": "97a15bcb29528f4e20b7c94cd1b30a05a5ffdb537329902459852c90d0d90271",
+      "sha256": "dd8d2ddc69e95b0b9652919fc52eb2e2274ef220ea8ac29733f188077ac97cc6",
+      "bytes": 5352,
+      "changed_values": 14,
+      "kind": "controls",
+      "controls": 14,
+      "control_classes": {
+        "button": 1,
+        "ccvarslider": 1,
+        "checkbutton": 2,
+        "imagepanel": 2,
+        "label": 7,
+        "panel": 1
+      }
+    },
+    {
+      "path": "valve/resource/PlayerListDialog.res",
+      "original_source": "valve/resource/PlayerListDialog.res",
+      "original_exists": true,
+      "original_sha256": "3a9bc032a711c079526a84820feeec339ca2362caeeecdbed68f3affcf0d756e",
+      "sha256": "1aa9ccf5ae049d6cc2eea93abffcb6d0c53e4c36636c076f693a02d0f4aaeebd",
+      "bytes": 1414,
+      "changed_values": 2,
+      "kind": "controls",
+      "controls": 4,
+      "control_classes": {
+        "button": 2,
+        "cplayerlistdialog": 1,
+        "listpanel": 1
+      }
+    },
+    {
+      "path": "valve/resource/SaveGameDialog.res",
+      "original_source": "valve/resource/SaveGameDialog.res",
+      "original_exists": true,
+      "original_sha256": "43de9aca4157377782909152e061f66dd709abaf51357a22566921bb75621ec3",
+      "sha256": "4b4a71366e8bd1abc4dae6f7a4b9a7f4ceaddb636702552a747a80b0b9b57839",
+      "bytes": 2095,
+      "changed_values": 6,
+      "kind": "controls",
+      "controls": 6,
+      "control_classes": {
+        "buildmodedialog": 1,
+        "button": 2,
+        "frame": 1,
+        "label": 1,
+        "listpanel": 1
+      }
+    },
+    {
+      "path": "valve/resource/SteamPasswordDialog.res",
+      "original_source": "valve/resource/SteamPasswordDialog.res",
+      "original_exists": true,
+      "original_sha256": "0347efab8e3380e0d1bce8d49522cd61c0ada4679ae093046c03d209d74c2fcd",
+      "sha256": "12b7738ea4fcd5074549fd7b061bccf826942fd3e9450b9d0b1ca308bd4e272c",
+      "bytes": 2059,
+      "changed_values": 6,
+      "kind": "controls",
+      "controls": 6,
+      "control_classes": {
+        "buildmodedialog": 1,
+        "button": 2,
+        "frame": 1,
+        "label": 1,
+        "textentry": 1
+      }
+    },
+    {
+      "path": "valve/resource/TrackerScheme.res",
+      "original_source": "platform/resource/TrackerScheme.res",
+      "original_exists": false,
+      "original_sha256": "e44adae9d6040bf91a238c0ca3393493788eeeb1ddf5d4e86c45ee1bcd70371f",
+      "sha256": "953bdc3a61b94d8bd758a1b7b2a91778f1980841e0f1354bdb994892dfafb6a7",
+      "bytes": 15728,
+      "changed_values": 112,
+      "kind": "scheme",
+      "font_faces": 15,
+      "font_bank": [
+        {
+          "font": "Default",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "DefaultBold",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "DefaultUnderline",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "DefaultSmall",
+          "face": "1",
+          "height": 13
+        },
+        {
+          "font": "DefaultSmallBold",
+          "face": "1",
+          "height": 12
+        },
+        {
+          "font": "DefaultVerySmall",
+          "face": "1",
+          "height": 12
+        },
+        {
+          "font": "MenuLarge",
+          "face": "1",
+          "height": 18
+        },
+        {
+          "font": "UiHeadline",
+          "face": "1",
+          "height": 16
+        },
+        {
+          "font": "EngineFont",
+          "face": "1",
+          "height": 12
+        },
+        {
+          "font": "EngineFont",
+          "face": "2",
+          "height": 13
+        },
+        {
+          "font": "EngineFont",
+          "face": "3",
+          "height": 14
+        },
+        {
+          "font": "EngineFont",
+          "face": "4",
+          "height": 20
+        },
+        {
+          "font": "EngineFont",
+          "face": "5",
+          "height": 24
+        },
+        {
+          "font": "CreditsFont",
+          "face": "1",
+          "height": 18
+        },
+        {
+          "font": "Legacy_CreditsFont",
+          "face": "1",
+          "height": 20
+        }
+      ],
+      "preserved_team_colors": {}
+    },
+    {
+      "path": "valve/resource/UI/MOTD.res",
+      "original_source": "valve/resource/UI/MOTD.res",
+      "original_exists": true,
+      "original_sha256": "6d6ec6f91414da760067cfc356756c71db99782f206ebe8fa36b90e835a1b4bd",
+      "sha256": "acc668fcfa34a9a1d41b20bc0b3275d9d9f89d28a27fa26ae71b3b20a497d737",
+      "bytes": 1327,
+      "changed_values": 4,
+      "kind": "controls",
+      "controls": 4,
+      "control_classes": {
+        "button": 1,
+        "frame": 1,
+        "menu": 1,
+        "textentry": 1
+      }
+    },
+    {
+      "path": "valve/resource/UI/ScoreBoard.res",
+      "original_source": "valve/resource/UI/ScoreBoard.res",
+      "original_exists": true,
+      "original_sha256": "4125fef79809409b11cd97877afa6f5c9015e501b5ebfd85bff823103dadc357",
+      "sha256": "4125fef79809409b11cd97877afa6f5c9015e501b5ebfd85bff823103dadc357",
+      "bytes": 1098,
+      "changed_values": 4,
+      "kind": "controls",
+      "controls": 4,
+      "control_classes": {
+        "cclientscoreboarddialog": 1,
+        "label": 1,
+        "menu": 1,
+        "sectionedlistpanel": 1
+      }
+    },
+    {
+      "path": "valve/resource/UI/TextWindow.res",
+      "original_source": "valve/resource/UI/TextWindow.res",
+      "original_exists": true,
+      "original_sha256": "cec75ccaa0dcc777903bffad409abcd7cd7424a4edd609574fd6b0ac74b5798a",
+      "sha256": "e3a1b9bf5de79067596cbdc86dcf9cefdcb043971571f541639d28bb9560da16",
+      "bytes": 1355,
+      "changed_values": 4,
+      "kind": "controls",
+      "controls": 4,
+      "control_classes": {
+        "button": 1,
+        "frame": 1,
+        "menu": 1,
+        "textentry": 1
+      }
+    },
+    {
+      "path": "valve/resource/ValveCDKeyEntryDialog.res",
+      "original_source": "valve/resource/ValveCDKeyEntryDialog.res",
+      "original_exists": true,
+      "original_sha256": "d17371c392ad0d55f2b956917def495b468d22dcb50851d0415914c54357959f",
+      "sha256": "6c0282aab4faab8b0100136f2462ea761de28875892e661a7e5503c45a8888d8",
+      "bytes": 3628,
+      "changed_values": 12,
+      "kind": "controls",
+      "controls": 10,
+      "control_classes": {
+        "button": 2,
+        "ccdkeyentrydialog": 1,
+        "label": 1,
+        "menu": 1,
+        "textentry": 5
+      }
+    },
+    {
+      "path": "valve/resource/refreshlogin.res",
+      "original_source": "valve/resource/refreshlogin.res",
+      "original_exists": true,
+      "original_sha256": "eec6e958fb21abdebb15ffeb8da0f2c0175912e73c8db56deb7514888e63a73c",
+      "sha256": "828e3e8ee2bc494fcae24c97ceefc096ed6b0845ef9fb47a0364a19bbab4137f",
+      "bytes": 3735,
+      "changed_values": 10,
+      "kind": "controls",
+      "controls": 9,
+      "control_classes": {
+        "button": 2,
+        "checkbutton": 1,
+        "crefreshsteamlogin": 1,
+        "label": 3,
+        "textentry": 2
+      }
+    }
+  ],
+  "native_menu_item_visibility_seconds": 0.06,
+  "glass_scoreboard": {
+    "implementation": "native SectionedListPanel with a transparent RGBA backplate and isolated native-owned heavy fonts",
+    "original_global_fonts_unchanged": true,
+    "native_columns_data_scroll_input_unchanged": true,
+    "linespacing": 22,
+    "native_runtime_tested": false
+  }
+}

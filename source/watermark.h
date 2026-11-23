@@ -1,7 +1,8 @@
 #pragma once
-// Top info bar ("watermark"): BALONCUAGA brand plus nick, map, FPS, ping,
+// Top info bar ("watermark"): baLONCUaga brand plus nick, map, FPS, ping,
 // speed and time, in four styles, three positions and the menu palettes.
 namespace Watermark {
+static ImFont *modernBrand,*modernValue,*modernUnit;static bool modernChrome;
 enum { Plate, Text, Block, Chips, StyleCount };
 enum { Left, Center, Right };
 enum { Brand=1, Nick=2, Map=4, Fps=8, Ping=16, Speed=32, Time=64, AllFields=127 };
@@ -34,10 +35,14 @@ static void bar(ImDrawList *d,ImVec2 a,ImVec2 b,float alpha,float rounding=1){
 }
 struct Fonts {ImFont *brand,*value,*unit;float brandSize,valueSize,unitSize;};
 static float textWidth(ImFont *f,float s,const std::string &t){return t.empty()?0:f->CalcTextSizeA(s,FLT_MAX,0,t.c_str()).x;}
-static float brandWidth(const Fonts &f){return textWidth(f.brand,f.brandSize,"BALONCUAGA");}
+static float brandWidth(const Fonts &f){return f.brandSize*2.20f+textWidth(f.brand,f.brandSize,"baLONCUaga");}
 static void drawBrand(ImDrawList *d,const Fonts &f,ImVec2 p,float alpha){
-    if(style==Text||style==Block)d->AddText(f.brand,f.brandSize,p+ImVec2(1,1),IM_COL32(0,0,0,static_cast<int>(150*alpha)),"BALONCUAGA"); // readable over bright scenes
-    d->AddText(f.brand,f.brandSize,p,white(alpha),"BALONCUAGA");
+    // The visible game HUD and Insert share one embedded shoe texture. Closed
+    // native main-menu frames do not call this renderer or initialize the image.
+    SneakerArt::shoe(d,p+ImVec2(f.brandSize*.925f,f.brandSize*.47f),f.brandSize*.925f,MenuTheme::reduceMotion?0.f:float(ImGui::GetTime()),alpha);
+    p.x+=f.brandSize*2.20f;
+    if(style==Text||style==Block)d->AddText(f.brand,f.brandSize,p+ImVec2(1,1),IM_COL32(0,0,0,static_cast<int>(150*alpha)),"baLONCUaga"); // readable over bright scenes
+    d->AddText(f.brand,f.brandSize,p,white(alpha),"baLONCUaga");
 }
 static float fieldWidth(const Fonts &f,const Field &x){return textWidth(f.value,f.valueSize,x.value)+(x.unit.empty()?0:3+textWidth(f.unit,f.unitSize,x.unit));}
 static void drawField(ImDrawList *d,const Fonts &f,ImVec2 p,float lineH,const Field &x,float alpha){
@@ -48,23 +53,31 @@ static void drawField(ImDrawList *d,const Fonts &f,ImVec2 p,float lineH,const Fi
 }
 // Draws at the top of the given area; `fieldsIn` are already filtered.
 static ImVec2 draw(ImDrawList *d,ImVec2 areaMin,ImVec2 areaMax,const std::vector<Field> &list,bool brand,float alpha,float scale){
-    const float s=scale*std::clamp(size,70,150)/100.f;auto *io=ImGui::GetIO().Fonts;
+    float s=scale*std::clamp(size,70,150)/100.f;auto *io=ImGui::GetIO().Fonts;
     Fonts f{io->Fonts[3],io->Fonts[1],io->Fonts[0],15*s,13*s,11*s};
+    if(modernChrome&&modernBrand&&modernValue&&modernUnit)f={modernBrand,modernValue,modernUnit,modernBrand->FontSize*s,modernValue->FontSize*s,modernUnit->FontSize*s};
     float pad=10*s,sep=16*s,h=26*s;ImVec2 extent;
     float fieldsW=0;for(size_t i=0;i<list.size();++i)fieldsW+=fieldWidth(f,list[i])+(i?sep:0);
     float bw=brand?brandWidth(f):0;
-    if(style==Plate)extent={pad*2+(brand?10*s+bw+(list.empty()?0:sep):0)+fieldsW,h};
+    if(style==Plate)extent={pad*2+(brand?bw+(list.empty()?0:sep):0)+fieldsW,h};
     else if(style==Text)extent={(brand?bw+(list.empty()?0:sep):0)+fieldsW,h};
     else if(style==Block){float lineW=fieldsW;extent={8*s+std::max(bw,lineW),(brand?f.brandSize+6*s:0)+f.valueSize+4*s};}
     else{float w=0;if(brand)w+=bw+pad*2;for(const auto &x:list)w+=(w>0?5*s:0)+fieldWidth(f,x)+pad*1.6f;extent={w,h};}
+    // Keep all selected fields on narrow screens, including the compact 3XL
+    // badge. A single proportional fit preserves the four layouts and spacing.
+    float available=areaMax.x-areaMin.x-20*s;
+    if(available>0&&extent.x>available){
+        float fit=available/extent.x;s*=fit;pad*=fit;sep*=fit;h*=fit;
+        f.brandSize*=fit;f.valueSize*=fit;f.unitSize*=fit;fieldsW*=fit;bw*=fit;extent*=fit;
+    }
     float margin=10*s;float x=place==Left?areaMin.x+margin:place==Center?(areaMin.x+areaMax.x-extent.x)/2:areaMax.x-margin-extent.x;
     ImVec2 p(x,areaMin.y+margin);
     if(style==Plate){
-        d->AddRectFilled(p,p+extent,IM_COL32(28,22,26,static_cast<int>(225*alpha)),h/2);
+        d->AddRectFilled(p,p+extent,IM_COL32(17,19,23,static_cast<int>((modernChrome?130:225)*alpha)),h/2);
         d->AddRect(p,p+extent,IM_COL32(255,255,255,static_cast<int>(20*alpha)),h/2);
         bar(d,{p.x+h/2,p.y+h-2.2f*s},{p.x+extent.x-h/2,p.y+h-.6f*s},alpha);
         float cx=p.x+pad;
-        if(brand){d->AddCircleFilled({cx+3*s,p.y+h/2},3*s,color(0,alpha),16);cx+=10*s;drawBrand(d,f,{cx,p.y+(h-f.brandSize)/2},alpha);cx+=bw;}
+        if(brand){drawBrand(d,f,{cx,p.y+(h-f.brandSize)/2},alpha);cx+=bw;}
         for(size_t i=0;i<list.size();++i){if(brand||i){d->AddLine({cx+sep/2,p.y+7*s},{cx+sep/2,p.y+h-7*s},IM_COL32(255,255,255,static_cast<int>(40*alpha)));cx+=sep;}
             drawField(d,f,{cx,p.y},h,list[i],alpha);cx+=fieldWidth(f,list[i]);}
     }else if(style==Text){

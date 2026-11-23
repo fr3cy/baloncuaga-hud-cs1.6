@@ -75,7 +75,9 @@ static int (*originalSprite)(model_t *,int);
 static void (*originalColor)(float,float,float,float),(*originalModeColor)(float,float,float,float,int),(*originalTriangles)();
 static void (*originalByteColor)(unsigned char,unsigned char,unsigned char,unsigned char);
 static thread_local bool inParticles,bound,forwarding;
-static thread_local float color[4]={1,1,1,1};static thread_local int kind,mode;
+// Win32 dynamic TLS may be aligned to 8 bytes. Volatile scalar accesses
+// prevent aligned 16-byte SIMD stores into this per-thread colour bank.
+static thread_local volatile float color[4]={1,1,1,1};static thread_local int kind,mode;
 struct Forward {bool previous;Forward():previous(forwarding){forwarding=true;}~Forward(){forwarding=previous;}};
 static void emit(){float r=color[0],g=color[1],b=color[2];if(inParticles&&bound&&Hud::smokeTintOn&&!textureTintAvailable)tint(r,g,b);Forward guard;
     if(kind==2&&originalModeColor)originalModeColor(r,g,b,color[3],mode);

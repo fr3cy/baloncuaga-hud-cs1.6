@@ -56,7 +56,7 @@ static Matrix boneMatrix(float *v) {
              {cy*sz,sx*sy*sz+cx*cz,cx*sy*sz-sx*cz,v[1]},
              {-sy,sx*cy,cx*cy,v[2]}}};
 }
-static bool textures(const std::vector<byte> &data, Model &out) {
+static bool textures(const std::vector<byte> &data, Model &out,bool originalColors=false) {
     const studiohdr_t *header=at<studiohdr_t>(data,0);
     if(!header || header->numtextures<0 || header->numtextures>256) return false;
     const mstudiotexture_t *entries=at<mstudiotexture_t>(data,header->textureindex,header->numtextures);
@@ -73,14 +73,14 @@ static bool textures(const std::vector<byte> &data, Model &out) {
         for(size_t p=0;p<count;++p) {
             int index=indices[p];
             // A neutral preview exposure compensates for GoldSrc's texture gamma.
-            for(int c=0;c<3;++c)skin.pixels[p*4+c]=static_cast<byte>(255*std::pow(palette[index*3+c]/255.f,0.5f));
+            for(int c=0;c<3;++c)skin.pixels[p*4+c]=originalColors?palette[index*3+c]:static_cast<byte>(255*std::pow(palette[index*3+c]/255.f,0.5f));
             skin.pixels[p*4+3]=(t.flags&STUDIO_NF_MASKED)&&index==255?0:255;
         }
         out.skins.push_back(std::move(skin));
     }
     return true;
 }
-static bool parse(const std::vector<byte> &data,const std::vector<byte> &textureData,Model &out) {
+static bool parse(const std::vector<byte> &data,const std::vector<byte> &textureData,Model &out,bool originalColors=false) {
     out=Model{};
     const studiohdr_t *h=at<studiohdr_t>(data,0);
     if(!h || h->id!=0x54534449 || h->version!=10 || h->length<static_cast<int>(sizeof(*h)) ||
@@ -119,7 +119,7 @@ static bool parse(const std::vector<byte> &data,const std::vector<byte> &texture
     }
     const auto &td=textureData.empty()?data:textureData;
     const studiohdr_t *th=at<studiohdr_t>(td,0);
-    if(!th || th->id!=0x54534449 || th->version!=10 || !textures(td,out))return false;
+    if(!th || th->id!=0x54534449 || th->version!=10 || !textures(td,out,originalColors))return false;
     const short *skinrefs=nullptr;
     if(th->numskinref>0 && th->numskinref<=4096 && th->numskinfamilies>0)
         skinrefs=at<short>(td,th->skinindex,th->numskinref);
@@ -235,7 +235,9 @@ static bool load(const char *path) {
     if(header && !header->numtextures) {
         std::string name=path;if(name.size()>=4) name.insert(name.size()-4,"T");companion=read(name.c_str());
     }
-    if(!parse(data,companion,cached)) { cached=Model{};error="Cannot preview this MDL.";return false; }
+    static constexpr const char outfitPrefix[]="models/baloncuaga_outfits/";
+    bool originalColors=!_strnicmp(path,outfitPrefix,sizeof(outfitPrefix)-1);
+    if(!parse(data,companion,cached,originalColors)) { cached=Model{};error="Cannot preview this MDL.";return false; }
     for(auto &skin:cached.skins) {
         glGenTextures(1,&skin.handle);glBindTexture(GL_TEXTURE_2D,skin.handle);
         glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
@@ -247,7 +249,8 @@ static bool load(const char *path) {
     }
     return true;
 }
-static bool draw(int x,int y,int w,int h,int sw,int sh,const char *path,float time) {
+static bool draw(int x,int y,int w,int h,int sw,int sh,const char *path,float time,float opacity=1.f) {
+    opacity=std::isfinite(opacity)?std::max(0.f,std::min(opacity,1.f)):0.f;if(opacity<=.001f)return true;
     if(!wglGetCurrentContext()) {error="Preview requires OpenGL.";return false;}
     GLint viewport[4],mode;glGetIntegerv(GL_VIEWPORT,viewport);glGetIntegerv(GL_MATRIX_MODE,&mode);
     glPushAttrib(GL_ALL_ATTRIB_BITS);
@@ -268,7 +271,8 @@ static bool draw(int x,int y,int w,int h,int sw,int sh,const char *path,float ti
         glViewport(px,py,pw,ph);glEnable(GL_SCISSOR_TEST);glScissor(px,py,pw,ph);
         glDepthMask(GL_TRUE);glClearDepth(1);glClear(GL_DEPTH_BUFFER_BIT);
         glEnable(GL_DEPTH_TEST);glDepthFunc(GL_LEQUAL);
-        glDisable(GL_CULL_FACE);glDisable(GL_LIGHTING);glDisable(GL_FOG);glDisable(GL_BLEND);
+        glDisable(GL_CULL_FACE);glDisable(GL_LIGHTING);glDisable(GL_FOG);
+        if(opacity<.999f){glEnable(GL_BLEND);glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);}else glDisable(GL_BLEND);
         glMatrixMode(GL_PROJECTION);glPushMatrix();glLoadIdentity();
         bool weaponOnly=!showHands&&cached.hasWeapon;
         double r=(weaponOnly?cached.weaponRadius:cached.radius)*1.16,aspect=static_cast<double>(pw)/ph;
@@ -281,11 +285,11 @@ static bool draw(int x,int y,int w,int h,int sw,int sh,const char *path,float ti
         glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
         for(const auto &mesh:cached.meshes) {
             if(weaponOnly && mesh.hands)continue;
-            glColor4f(1,1,1,1);
+            glColor4f(1,1,1,opacity);
             if(mesh.skin>=0) {
                 const auto &skin=cached.skins[mesh.skin];glEnable(GL_TEXTURE_2D);glBindTexture(GL_TEXTURE_2D,skin.handle);
-                if(skin.flags&STUDIO_NF_MASKED){glEnable(GL_ALPHA_TEST);glAlphaFunc(GL_GREATER,0.5f);}else glDisable(GL_ALPHA_TEST);
-            } else {glDisable(GL_TEXTURE_2D);glDisable(GL_ALPHA_TEST);glColor4f(0.7f,0.8f,0.9f,1);}
+                if(skin.flags&STUDIO_NF_MASKED){glEnable(GL_ALPHA_TEST);glAlphaFunc(GL_GREATER,0.5f*opacity);}else glDisable(GL_ALPHA_TEST);
+            } else {glDisable(GL_TEXTURE_2D);glDisable(GL_ALPHA_TEST);glColor4f(0.7f,0.8f,0.9f,opacity);}
             glBegin(GL_TRIANGLES);
             for(const auto &v:mesh.triangles){glTexCoord2f(v.u,v.v);glVertex3f(v.p.x,v.p.y,v.p.z);}glEnd();
         }

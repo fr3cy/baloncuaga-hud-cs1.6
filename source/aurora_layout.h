@@ -2,18 +2,18 @@
 // Aurora: BALONCUAGA's animated theme, ported from the HTML mockup.
 // It reuses the shared page registry, Peach section search and visit history,
 // so every ASI setting stays reachable exactly as in the other themes.
-static float auroraOpen,auroraPillY=-1,auroraTabX=-1,auroraTabW,auroraSweep=-1;
+static float auroraPillY=-1,auroraTabX=-1,auroraTabW;
 static std::vector<float> auroraNavHover;
 static float auroraQuickHover[32];
 static int auroraBarTab=-1;
-static ULONGLONG auroraLastShown,auroraToastTick,auroraRippleTick;
+static ULONGLONG auroraToastTick,auroraRippleTick;
 static ImVec2 auroraRipplePos,auroraRippleMin,auroraRippleMax;
 static std::string auroraToastText;
 static ImU32 auroraC(ImU32 c){return ImGui::GetColorU32(c);}
 static ImU32 auroraAcc(float a=1){return auroraC(MenuTheme::accentColor(0,a));}
 static ImU32 auroraAcc2(float a=1){return auroraC(MenuTheme::accentColor(1,a));}
 static float auroraEase(float t){t=std::clamp(t,0.f,1.f);return 1-(1-t)*(1-t)*(1-t);}
-static float auroraStep(float v,float target,float speed){return ImLerp(v,target,std::min(1.f,speed*ImGui::GetIO().DeltaTime));}
+static float auroraStep(float v,float target,float speed){return ImLerp(v,target,1.f-std::exp(-speed*ImGui::GetIO().DeltaTime));}
 static void auroraToast(const char *text){auroraToastText=text;auroraToastTick=GetTickCount64();}
 // Horizontal gradient inside a rounded rectangle; vertex alpha comes from `alpha`.
 static void auroraGradient(ImDrawList *d,ImVec2 a,ImVec2 b,ImU32 left,ImU32 right,float rounding,float alpha=1,ImDrawFlags flags=0){
@@ -28,7 +28,10 @@ static void auroraGlow(ImDrawList *d,ImVec2 a,ImVec2 b,ImU32 color,float strengt
 // them never show the game through as dark stripes; a panel is just its outline.
 static void auroraPanel(ImVec2 p,ImVec2 s){
     auto *d=ImGui::GetWindowDrawList();
-    if(MenuTheme::frames)d->AddRect(p,p+s,auroraC(IM_COL32(255,255,255,17)),14);
+    if(MenuTheme::menuTemplate==MenuTheme::TemplateOrbit){
+        d->AddRectFilled(p+ImVec2(1,1),p+s-ImVec2(1,1),auroraC(IM_COL32(16,20,31,225)),14);
+        if(MenuTheme::frames)d->AddRect(p,p+s,auroraC(IM_COL32(124,140,183,30)),14);
+    }else if(MenuTheme::frames)d->AddRect(p,p+s,auroraC(IM_COL32(255,255,255,17)),14);
     float w=std::min(s.x*.5f,190.f);
     d->AddRectFilledMultiColor(p+ImVec2(14,0),p+ImVec2(14+w,1.2f),auroraAcc(.75f),auroraAcc(0),auroraAcc(0),auroraAcc(.75f));
     d->AddRectFilledMultiColor(p+ImVec2(s.x-14-w,s.y-1.2f),p+ImVec2(s.x-14,s.y),auroraAcc2(0),auroraAcc2(.55f),auroraAcc2(.55f),auroraAcc2(0));
@@ -88,7 +91,7 @@ static bool auroraIconButton(const char *id,ImVec2 p,bool left,bool enabled){
     if(hot)ImGui::SetMouseCursor(ImGuiMouseCursor_Hand);return clicked;
 }
 static void auroraBrand(ImDrawList *d,ImVec2 p){
-    const char *text="BALONCUAGA";auto *f=font(3);float x=p.x,t=frameTime;
+    const char *text="baLONCUaga";auto *f=font(3);float x=p.x,t=frameTime;
     for(const char *c=text;*c;++c){
         // Logo style (Settings -> Appearance): animated shine, static gradient or plain white.
         ImU32 col;
@@ -134,20 +137,28 @@ static void auroraToastDraw(ImVec2 origin){
     d->AddText(p+ImVec2(32,(s.y-ts.y)/2),alpha(IM_COL32(233,234,242,255)),auroraToastText.c_str());
 }
 static void auroraLayout(){
-    auto &io=ImGui::GetIO();ULONGLONG now=GetTickCount64();
-    if(now-auroraLastShown>250)auroraOpen=0;auroraLastShown=now;auroraOpen=auroraStep(auroraOpen,1,7.5f);
-    const float ga=auroraEase(auroraOpen);
+    auto &io=ImGui::GetIO();const float ga=1.f; // MenuFadeScope applies final window opacity to all child renderers.
+    const bool orbit=MenuTheme::menuTemplate==MenuTheme::TemplateOrbit;
+    const float rise=MenuTheme::reduceMotion?0.f:menuMotion.offsetY();
     if(peachVisit<0||peachVisits[peachVisit].tab!=ui::next_tab||peachVisits[peachVisit].sub!=ui::tabs[ui::next_tab].next_subtab)
         auroraNavigate(ui::next_tab,ui::tabs[ui::next_tab].next_subtab);
     constexpr float side=176,gap=8,right=176,bar=44;
     const float mainX=side+gap,mainW=ui::size.x-mainX-right-gap,bodyY=bar+gap,bodyH=ui::size.y-bodyY;
-    clampPosition();ImGui::SetNextWindowPos({menuX/scale,menuY/scale+(1-ga)*22},ImGuiCond_Always);ImGui::SetNextWindowSize(ui::size);
+    clampPosition();
+    float animatedY=std::clamp(menuY/scale+rise,8.f/scale,std::max(8.f/scale,io.DisplaySize.y-ui::size.y-8.f/scale));
+    ImGui::SetNextWindowPos({menuX/scale,animatedY},ImGuiCond_Always);ImGui::SetNextWindowSize(ui::size);
     ImGui::PushStyleVar(ImGuiStyleVar_Alpha,ga);ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,{0,0});
-    ImGui::Begin("BALONCUAGA Aurora",nullptr,ImGuiWindowFlags_NoDecoration|ImGuiWindowFlags_NoBackground|ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoScrollWithMouse|ImGuiWindowFlags_NoScrollbar);
+    ImGui::Begin("baLONCUaga Aurora",nullptr,ImGuiWindowFlags_NoDecoration|ImGuiWindowFlags_NoBackground|ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoScrollWithMouse|ImGuiWindowFlags_NoScrollbar|(menuRequested?0:ImGuiWindowFlags_NoInputs));
     auto origin=ImGui::GetWindowPos();auto *d=ImGui::GetWindowDrawList();auto *bg=ImGui::GetBackgroundDrawList();
     // Light dimming in game only; the game's own main menu stays untouched.
-    if(!outsideGame)bg->AddRectFilled({0,0},io.DisplaySize,auroraC(IM_COL32(4,5,9,55)));
-    d->AddRectFilled(origin,origin+ui::size,auroraC(IM_COL32(19,20,30,static_cast<int>(std::clamp(MenuTheme::windowOpacity,60,100)*2.55f))),14);
+    if(!outsideGame)bg->AddRectFilled({0,0},io.DisplaySize,auroraC(IM_COL32(4,5,9,orbit?65:55)));
+    if(MenuTheme::outerEffects)MenuMotion::drawDecor(bg,origin,ui::size,MenuTheme::accentColor(0),MenuTheme::accentColor(1),ga,menuEffectTime,menuMotion.progress,orbit,MenuTheme::particles,MenuTheme::reduceMotion);
+    d->AddRectFilled(origin,origin+ui::size,auroraC(IM_COL32(orbit?10:19,orbit?13:20,orbit?22:30,static_cast<int>(std::clamp(MenuTheme::windowOpacity,60,100)*2.55f))),14);
+    if(orbit){
+        d->AddRect(origin,origin+ui::size,auroraC(MenuTheme::accentColor(0,.34f)),14,0,1.2f);
+        // Soft inset highlight stays inside the rounded frame.
+        d->AddLine(origin+ImVec2(22,1),origin+ImVec2(ui::size.x-22,1),auroraC(MenuTheme::accentColor(1,.40f)),1.2f);
+    }
     auroraPanel(origin,{side,ui::size.y});
     auroraPanel(origin+ImVec2(mainX,0),{mainW,bar});
     auroraPanel(origin+ImVec2(mainX,bodyY),{mainW,bodyH});
@@ -165,12 +176,18 @@ static void auroraLayout(){
     {
         ImVec2 a=origin+ImVec2(8,auroraPillY),b=a+ImVec2(side-16,30);
         auroraGlow(d,a,b,MenuTheme::accentColor(0,.6f),1,10);
-        d->AddRectFilled(a,b,auroraAcc(.13f),10);
+        if(orbit)auroraGradient(d,a,b,MenuTheme::accentColor(0),MenuTheme::accentColor(1),10,.22f);
+        else d->AddRectFilled(a,b,auroraAcc(.13f),10);
         d->AddRectFilledMultiColor(a+ImVec2(10,0),b-ImVec2(10,0),auroraAcc(.24f),auroraAcc(0),auroraAcc(0),auroraAcc(.24f));
         d->AddRect(a,b,auroraAcc(.45f),10);
         d->AddRectFilled(a+ImVec2(-1,8),a+ImVec2(2,22),auroraAcc2(),2);d->AddRectFilled(a+ImVec2(-3,6),a+ImVec2(4,24),auroraAcc2(.18f),4);
     }
-    for(int i=0;i<navCount;++i){int tab=navOrder[i];if(tab<static_cast<int>(ui::tabs.size())&&auroraNavItem(tab,ui::tabs[tab].m_name,ui::tabs[tab].m_icon,origin+ImVec2(8,itemY(tab)),{side-16,27}))auroraNavigate(tab,0);}
+    for(int i=0;i<navCount;++i){
+        int tab=navOrder[i];float entry=MenuTheme::animations?MenuMotion::smooth((menuMotion.progress-i*.025f)/.70f):1.f;
+        ImGui::PushStyleVar(ImGuiStyleVar_Alpha,ga*entry);
+        if(tab<static_cast<int>(ui::tabs.size())&&auroraNavItem(tab,ui::tabs[tab].m_name,ui::tabs[tab].m_icon,origin+ImVec2(8,itemY(tab)),{side-16,27}))auroraNavigate(tab,0);
+        ImGui::PopStyleVar();
+    }
     d->AddText(origin+ImVec2(20,56+navCount*28+6),ImGui::GetColorU32(ImGuiCol_TextDisabled),L(u8"КОНФИГУРАЦИЯ","CONFIGURATION"));
     if(auroraNavItem(7,"Misc / Config",ui::tabs[7].m_icon,origin+ImVec2(8,itemY(7)),{side-16,30}))auroraNavigate(7,0);
     {ImVec2 k=origin+ImVec2(12,ui::size.y-82);auroraKey(d,k,MenuTheme::currentMenuKey().name);auroraHint(d,k,L(u8"меню","menu"));auroraKey(d,k,"Y");auroraKey(d,k,"U");auroraHint(d,k,L(u8"чат","chat"));}
@@ -189,11 +206,13 @@ static void auroraLayout(){
 
     // Top bar: section title, segmented subtabs with a sliding pill, history.
     auto &tab=ui::tabs[ui::next_tab];
-    d->AddText(font(3),font(3)->FontSize,origin+ImVec2(mainX+14,(bar-font(3)->FontSize)/2),ImGui::GetColorU32(ImGuiCol_Text),tab.m_name);
     std::vector<const char *> subs=tab.m_subtabs;if(subs.empty())subs.push_back(tab.m_name);
     float total=8;for(auto name:subs)total+=ImGui::CalcTextSize(name).x+22;
     float titleW=font(3)->CalcTextSizeA(font(3)->FontSize,FLT_MAX,0,tab.m_name).x;
-    float boxX=std::max(mainX+26+titleW,mainX+(mainW-total)/2),boxR=mainX+mainW-70;if(boxX+total>boxR)boxX=std::max(mainX+26+titleW,boxR-total);
+    bool showTitle=total+titleW+106<mainW;
+    if(showTitle)d->AddText(font(3),font(3)->FontSize,origin+ImVec2(mainX+14,(bar-font(3)->FontSize)/2),ImGui::GetColorU32(ImGuiCol_Text),tab.m_name);
+    float left=showTitle?mainX+26+titleW:mainX+10,boxR=mainX+mainW-70;
+    float boxX=std::max(left,std::min(mainX+(mainW-total)/2,boxR-total));
     ImVec2 box=origin+ImVec2(boxX,7);d->AddRectFilled(box,box+ImVec2(total,30),auroraC(IM_COL32(11,12,18,255)),11);d->AddRect(box,box+ImVec2(total,30),auroraC(IM_COL32(255,255,255,15)),11);
     {
         float x=4;std::vector<ImVec2> spans;for(auto name:subs){float w=ImGui::CalcTextSize(name).x+22;spans.push_back({x,w});x+=w;}
@@ -224,7 +243,8 @@ static void auroraLayout(){
 
     // Page content fades and rises in on every tab/subtab change.
     float pageAlpha=ui::anim*ui::content_anim;
-    ImGui::SetCursorPos({mainX+1,bodyY+1+(1-auroraEase(pageAlpha))*14});
+    if(MenuTheme::animations)pageAlpha*=MenuMotion::smooth((menuMotion.progress-.06f)/.86f);
+    ImGui::SetCursorPos({mainX+1,bodyY+1+(MenuTheme::reduceMotion?0.f:(1-auroraEase(pageAlpha))*14)});
     ImGui::PushStyleVar(ImGuiStyleVar_Alpha,ga*pageAlpha);
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,{10,10});ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing,{8,8});
     ImGui::BeginChild("Aurora content",{mainW-2,bodyH-2},false,ImGuiWindowFlags_NoBackground|ImGuiWindowFlags_AlwaysUseWindowPadding);
@@ -243,7 +263,7 @@ static void auroraLayout(){
             int found=0;for(int i=0;i<static_cast<int>(sizeof(peachPages)/sizeof(*peachPages));++i)if(peachMatches(peachPages[i],peachSearch)){
                 ++found;if(auroraQuickRow(slot++,peachName(peachPages[i]),width))auroraNavigate(peachPages[i].tab,peachPages[i].sub);}
             if(!found)ImGui::TextDisabled("%s",L(u8"Ничего не найдено.","Nothing found."));
-        }else for(const PeachVisit &link:{PeachVisit{9,0},PeachVisit{6,0},PeachVisit{6,1},PeachVisit{3,1},PeachVisit{3,0},PeachVisit{8,0}}){
+        }else for(const PeachVisit &link:{PeachVisit{6,4},PeachVisit{6,0},PeachVisit{9,0},PeachVisit{3,1},PeachVisit{3,0},PeachVisit{8,0}}){
             for(const auto &page:peachPages)if(page.tab==link.tab&&page.sub==link.sub){if(auroraQuickRow(slot++,peachName(page),width))auroraNavigate(page.tab,page.sub);break;}
         }
         auto base=ImGui::GetWindowPos()+ImVec2(12,ImGui::GetWindowHeight()-150);

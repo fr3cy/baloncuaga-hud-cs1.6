@@ -6,7 +6,7 @@
   ./source/build.ps1 -Sdk ./third_party/halflife -MinHook ./third_party/minhook
 
 Если компилятор не находится через PATH, добавь параметр -BinDir
-с каталогом MinGW-w64 (i686-w64-mingw32-gcc.exe и g++.exe).
+с каталогом MinGW-w64 (i686-w64-mingw32-gcc.exe, g++.exe и windres.exe).
 
 Результат: CS16Customizer.asi в корне репозитория.
 Промежуточные файлы создаются в source/.build и не публикуются в Git.
@@ -22,3 +22,25 @@
 Готовый ASI установи рядом с hl.exe. version.dll и global.ini возьми
 из готового FULL-архива в Releases; LoadFromScriptsOnly должен быть 0.
 Уведомления о сторонних компонентах находятся в licenses/.
+
+МОДЕЛИ ОДЕЖДЫ
+Для генерации нужны свои штатные models/player CS 1.6, Python, NumPy и Pillow.
+Команды из корня исходников:
+python -B assets/authoring/build_native_outfits.py --players "ПАПКА_ИГРЫ/cstrike/models/player"
+python -B assets/authoring/generate_asset_manifest.py --models assets/cstrike/models/baloncuaga_outfits --header source/outfit_asset_manifest.h --manifest OUTFITS_MANIFEST.json
+Затем пересобери ASI. Файлы MDL и ASI должны быть из одной сборки.
+Каждая новая текстура 512x512; исходные лица/руки/анимации остаются штатными.
+
+ВСТРОЕННЫЕ СКАЙБОКСЫ
+source/build.ps1 собирает source/embedded_skyboxes/skyboxes.rc через windres
+и включает ресурсы в ASI. .bsk и skyboxes.rc уже готовы и входят в исходники.
+После редактирования TGA сначала выполни:
+python -B source/embedded_skyboxes/pack_skyboxes.py baloncuaga_skyboxes
+Все 42 ресурса сжимаются без потерь; затем пересобери ASI.
+
+АВТОУСТАНОВКА
+source/embedded_install содержит готовые files.h, files.rc и 120 сжатых файлов.
+source/build.ps1 включает install.res в ASI. При изменении game_skin или MDL
+пересобери этот набор через assets/authoring/pack_install.py перед сборкой ASI.
+Автоустановка работает только после загрузки ASI существующим загрузчиком.
+При первом изменении ресурсов нужно один раз перезапустить CS.

@@ -52,6 +52,8 @@ namespace ui {
 
 	// Set by MenuTheme::apply while the Aurora theme draws; widgets add glow and gradients.
 	inline bool aurora = false;
+    inline bool carbonMoon = false;
+    inline ImFont *menuTitleFont = nullptr;
 	inline ImU32 aurora_glow = 0;
 	// Colour with style alpha applied and an extra alpha multiplier.
 	inline ImU32 fade( ImU32 col, float alpha ) {

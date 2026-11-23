@@ -1,13 +1,13 @@
 #include "ui.hpp"
 
 void ui::handle_anims( ) {
-    anim = ImLerp( anim, anim_dst, ImMin(1.f,21.f * ImGui::GetIO( ).DeltaTime) );
+    anim = ImLerp( anim, anim_dst, (1.f-std::exp(-21.f*ImGui::GetIO().DeltaTime)) );
     if ( abs( anim - anim_dst ) < 0.01f ) {
         anim_dst = 1.f;
         cur_tab = next_tab;
     }
 
-    content_anim = ImLerp( content_anim, content_anim_dst, ImMin(1.f,21.f * ImGui::GetIO( ).DeltaTime) );
+    content_anim = ImLerp( content_anim, content_anim_dst, (1.f-std::exp(-21.f*ImGui::GetIO().DeltaTime)) );
     if ( abs( content_anim - content_anim_dst ) < 0.01f ) {
         content_anim_dst = 1.f;
         tabs[cur_tab].cur_subtab = tabs[cur_tab].next_subtab;
@@ -157,13 +157,20 @@ void ui::begin_child( const char* name, ImVec2 size ) {
         ImGui::GetWindowDrawList( )->AddRectFilled( ImGui::GetWindowPos( ), { ImGui::GetWindowPos( ).x + ImGui::GetWindowWidth( ), ImGui::GetWindowPos( ).y + 33 }, ImGui::GetColorU32( ImGuiCol_Header ), GImGui->Style.ChildRounding, ImDrawFlags_RoundCornersTop );
         ImGui::GetWindowDrawList( )->AddLine( { ImGui::GetWindowPos( ).x, ImGui::GetWindowPos( ).y + 33 }, { ImGui::GetWindowPos( ).x + ImGui::GetWindowWidth( ), ImGui::GetWindowPos( ).y + 33 }, ImGui::GetColorU32( ImGuiCol_BorderShadow ) );
         float title_x = 13;
-        if ( ui::aurora ) {
+        if ( ui::carbonMoon ) {
+            ImVec2 marker=ImGui::GetWindowPos()+ImVec2(14,16.5f);
+            ImGui::GetWindowDrawList()->AddLine(marker+ImVec2(-2,5),marker+ImVec2(2,-5),ImGui::GetColorU32(ImGuiCol_Text),1.5f);
+            title_x=26;
+        } else if ( ui::aurora ) {
             ImVec2 dot{ ImGui::GetWindowPos( ).x + 16, ImGui::GetWindowPos( ).y + 33 / 2 };
             ImGui::GetWindowDrawList( )->AddRectFilled( dot - ImVec2( 6, 6 ), dot + ImVec2( 6, 6 ), ui::fade( ui::aurora_glow, 0.18f ), 4 );
             ImGui::GetWindowDrawList( )->AddRectFilled( dot - ImVec2( 3, 3 ), dot + ImVec2( 3, 3 ), ui::fade( ui::aurora_glow, 1.f ), 2 );
             title_x = 28;
         }
-        ImGui::GetWindowDrawList( )->AddText( font( 1 ), font( 1 )->FontSize, { ImGui::GetWindowPos( ).x + title_x, ImGui::GetWindowPos( ).y + 33 / 2 - font( 1 )->CalcTextSizeA( font( 1 )->FontSize, FLT_MAX, 0.f, name, ImGui::FindRenderedTextEnd( name ) ).y / 2 }, ImGui::GetColorU32( ImGuiCol_Text ), name, ImGui::FindRenderedTextEnd( name ) );
+        ImFont *title_font = ui::carbonMoon && ui::menuTitleFont ? ui::menuTitleFont : font(1);
+        ImGui::GetWindowDrawList()->AddText(title_font,title_font->FontSize,
+            {ImGui::GetWindowPos().x+title_x,ImGui::GetWindowPos().y+33/2-title_font->CalcTextSizeA(title_font->FontSize,FLT_MAX,0.f,name,ImGui::FindRenderedTextEnd(name)).y/2},
+            ImGui::GetColorU32(ImGuiCol_Text),name,ImGui::FindRenderedTextEnd(name));
         ImGui::SetCursorPosY( 34 );
     }
 

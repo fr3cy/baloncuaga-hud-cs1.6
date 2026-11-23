@@ -3,7 +3,7 @@
 struct PlainChatRow {const Hud::ChatLine *message;std::vector<Hud::ChatSpan> spans;float width;};
 // Newest rows first, stopping once `wanted` rows exist: only what can be shown is wrapped.
 static std::vector<PlainChatRow> plainChatRows(float width,bool fullHistory,ULONGLONG now,size_t wanted=static_cast<size_t>(-1)){
-    const float fontSize=12*ChatBox::textScale();
+    const float fontSize=14*ChatBox::textScale();
     std::vector<PlainChatRow> rows;
     for(auto it=Hud::history.rbegin();it!=Hud::history.rend()&&rows.size()<wanted;++it){const auto &message=*it;
         if(message.serial<=ChatBox::cleared)continue;
@@ -17,9 +17,10 @@ static std::vector<PlainChatRow> plainChatRows(float width,bool fullHistory,ULON
 }
 static void plainChatPanel(bool embedded){
     auto &io=ImGui::GetIO();bool interactive=embedded||Hud::chatOpened;
-    const float fontSize=12*ChatBox::textScale(),rowHeight=fontSize+8,inputHeight=fontSize+10;
+    const float fontSize=14*ChatBox::textScale(),rowHeight=fontSize+8,inputHeight=fontSize+10;
     float w=embedded?ImGui::GetContentRegionAvail().x:std::min(ChatBox::panelWidth(560),io.DisplaySize.x-24);
     float h=embedded?std::min(300.f,ImGui::GetContentRegionAvail().y):std::min(interactive?(ChatBox::lineCount+4)*rowHeight+inputHeight+2:ChatBox::lineCount*rowHeight,io.DisplaySize.y-80);
+    if(!embedded)h=std::min(h,std::max(0.f,io.DisplaySize.y-std::max(48.f,combatChatInset/scale)-8));
     if(w<120||h<(interactive?inputHeight+rowHeight:rowHeight))return;
     float area=h-(interactive?inputHeight+2:0);int fits=std::max(1,static_cast<int>(area/rowHeight));
     auto rows=plainChatRows(w,interactive,GetTickCount64(),static_cast<size_t>(fits+(interactive?std::max(0,Hud::chatScroll)+12:0)));if(!embedded&&rows.empty()&&!Hud::chatOpened)return;
@@ -27,7 +28,7 @@ static void plainChatPanel(bool embedded){
     int flags=ImGuiWindowFlags_NoBackground|ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse;
     if(embedded)ImGui::BeginChild("##PlainChat",{w,h},false,flags);
     else{
-        ImGui::SetNextWindowPos({12,std::max(8.f,io.DisplaySize.y-h-48)},ImGuiCond_Always);ImGui::SetNextWindowSize({w,h});
+        ImGui::SetNextWindowPos({12,std::max(8.f,io.DisplaySize.y-h-std::max(48.f,combatChatInset/scale))},ImGuiCond_Always);ImGui::SetNextWindowSize({w,h});
         flags|=ImGuiWindowFlags_NoDecoration|ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoSavedSettings;
         if(!interactive)flags|=ImGuiWindowFlags_NoInputs;ImGui::Begin("##BALONCUAGAPlainChat",nullptr,flags);
     }

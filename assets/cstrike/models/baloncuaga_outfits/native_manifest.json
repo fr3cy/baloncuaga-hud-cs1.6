@@ -1,0 +1,328 @@
+{
+  "models": {
+    "ct": {
+      "bytes": 3417736,
+      "sha256": "e1c61ce5653b415f3c1e8c81fb031692a1e65ca3ad5f21cf58c3f814527eb7c4",
+      "bones": 53,
+      "sequences": 111,
+      "vertices": 645,
+      "normals": 691,
+      "triangles": 1234,
+      "commands": 226,
+      "submitted_corners": 1686,
+      "cpu_boundary": 2361224,
+      "texture_sizes": [
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ]
+      ],
+      "native_vertices": 400,
+      "native_triangles": 790,
+      "native_head_hand_triangles_preserved": 290,
+      "native_head_hand_vertices_preserved": 149,
+      "native": "urban",
+      "team": "ct",
+      "path": "cstrike/models/baloncuaga_outfits/ct.mdl",
+      "source_bytes": 2329144,
+      "source_textureindex": 2061204,
+      "source_numtextures": 2
+    },
+    "gign": {
+      "bytes": 3416956,
+      "sha256": "0b7b01edaa4de66932e7e9298788065d7190f3775e2d57180903a6e1531240df",
+      "bones": 53,
+      "sequences": 111,
+      "vertices": 626,
+      "normals": 658,
+      "triangles": 1200,
+      "commands": 225,
+      "submitted_corners": 1650,
+      "cpu_boundary": 2360444,
+      "texture_sizes": [
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ]
+      ],
+      "native_vertices": 371,
+      "native_triangles": 740,
+      "native_head_hand_triangles_preserved": 208,
+      "native_head_hand_vertices_preserved": 107,
+      "native": "gign",
+      "team": "ct",
+      "path": "cstrike/models/baloncuaga_outfits/gign.mdl",
+      "source_bytes": 2329328,
+      "source_textureindex": 2061388,
+      "source_numtextures": 2
+    },
+    "gsg9": {
+      "bytes": 3427552,
+      "sha256": "d4c17e290ddccd1d6aa4e26a27ac3b0ed818ee08e9e05d243ea2e0ab1d6782e0",
+      "bones": 53,
+      "sequences": 111,
+      "vertices": 646,
+      "normals": 703,
+      "triangles": 1226,
+      "commands": 229,
+      "submitted_corners": 1684,
+      "cpu_boundary": 2366176,
+      "texture_sizes": [
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ]
+      ],
+      "native_vertices": 391,
+      "native_triangles": 766,
+      "native_head_hand_triangles_preserved": 268,
+      "native_head_hand_vertices_preserved": 143,
+      "native": "gsg9",
+      "team": "ct",
+      "path": "cstrike/models/baloncuaga_outfits/gsg9.mdl",
+      "source_bytes": 2333832,
+      "source_textureindex": 2060944,
+      "source_numtextures": 3
+    },
+    "sas": {
+      "bytes": 3482512,
+      "sha256": "c4cbf43cc1bbb5222a94138ba69c88ee5f44d03d3d175db4cac84ab5636a2144",
+      "bones": 55,
+      "sequences": 111,
+      "vertices": 635,
+      "normals": 739,
+      "triangles": 1208,
+      "commands": 213,
+      "submitted_corners": 1634,
+      "cpu_boundary": 2421136,
+      "texture_sizes": [
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ]
+      ],
+      "native_vertices": 382,
+      "native_triangles": 752,
+      "native_head_hand_triangles_preserved": 319,
+      "native_head_hand_vertices_preserved": 167,
+      "native": "sas",
+      "team": "ct",
+      "path": "cstrike/models/baloncuaga_outfits/sas.mdl",
+      "source_bytes": 2388900,
+      "source_textureindex": 2116012,
+      "source_numtextures": 3
+    },
+    "vip": {
+      "bytes": 3079276,
+      "sha256": "9ed1d00a7a816b3b1bfc571d5980b195dd38488741965f48f111acfc573fbbc0",
+      "bones": 53,
+      "sequences": 111,
+      "vertices": 626,
+      "normals": 687,
+      "triangles": 1192,
+      "commands": 227,
+      "submitted_corners": 1646,
+      "cpu_boundary": 2207084,
+      "texture_sizes": [
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ]
+      ],
+      "native_vertices": 355,
+      "native_triangles": 704,
+      "native_head_hand_triangles_preserved": 286,
+      "native_head_hand_vertices_preserved": 148,
+      "native": "vip",
+      "team": "ct",
+      "path": "cstrike/models/baloncuaga_outfits/vip.mdl",
+      "source_bytes": 2175676,
+      "source_textureindex": 2092056,
+      "source_numtextures": 2
+    },
+    "tt": {
+      "bytes": 3440400,
+      "sha256": "2f79e58793597448d879bd53d409487cbc196b012ba40eb4cd59e94f2b3798dc",
+      "bones": 53,
+      "sequences": 111,
+      "vertices": 625,
+      "normals": 655,
+      "triangles": 1200,
+      "commands": 217,
+      "submitted_corners": 1634,
+      "cpu_boundary": 2371600,
+      "texture_sizes": [
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ]
+      ],
+      "native_vertices": 372,
+      "native_triangles": 740,
+      "native_head_hand_triangles_preserved": 226,
+      "native_head_hand_vertices_preserved": 117,
+      "native": "terror",
+      "team": "tt",
+      "path": "cstrike/models/baloncuaga_outfits/tt.mdl",
+      "source_bytes": 2340680,
+      "source_textureindex": 2060452,
+      "source_numtextures": 2
+    },
+    "leet": {
+      "bytes": 3508120,
+      "sha256": "3e9072f71549c0f2727cc32335b5ac35443df2fe7cdbb30da0ac1722124e7ddb",
+      "bones": 55,
+      "sequences": 111,
+      "vertices": 643,
+      "normals": 707,
+      "triangles": 1208,
+      "commands": 243,
+      "submitted_corners": 1694,
+      "cpu_boundary": 2434456,
+      "texture_sizes": [
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ]
+      ],
+      "native_vertices": 390,
+      "native_triangles": 752,
+      "native_head_hand_triangles_preserved": 288,
+      "native_head_hand_vertices_preserved": 159,
+      "native": "leet",
+      "team": "tt",
+      "path": "cstrike/models/baloncuaga_outfits/leet.mdl",
+      "source_bytes": 2401992,
+      "source_textureindex": 2116816,
+      "source_numtextures": 3
+    },
+    "arctic": {
+      "bytes": 3495928,
+      "sha256": "748ba8f73cb98e44bcacf3c30bdd42029c856297aac8dde7c464d70d0399b452",
+      "bones": 55,
+      "sequences": 111,
+      "vertices": 625,
+      "normals": 670,
+      "triangles": 1177,
+      "commands": 231,
+      "submitted_corners": 1639,
+      "cpu_boundary": 2427128,
+      "texture_sizes": [
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ]
+      ],
+      "native_vertices": 372,
+      "native_triangles": 721,
+      "native_head_hand_triangles_preserved": 210,
+      "native_head_hand_vertices_preserved": 109,
+      "native": "arctic",
+      "team": "tt",
+      "path": "cstrike/models/baloncuaga_outfits/arctic.mdl",
+      "source_bytes": 2395944,
+      "source_textureindex": 2115716,
+      "source_numtextures": 2
+    },
+    "guerilla": {
+      "bytes": 3443608,
+      "sha256": "821a390e5d8e8d9a8345d155e547dd1e2b2a0709afa4e04369bc50d609f07981",
+      "bones": 53,
+      "sequences": 111,
+      "vertices": 664,
+      "normals": 705,
+      "triangles": 1272,
+      "commands": 239,
+      "submitted_corners": 1750,
+      "cpu_boundary": 2374808,
+      "texture_sizes": [
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ],
+        [
+          512,
+          512
+        ]
+      ],
+      "native_vertices": 393,
+      "native_triangles": 784,
+      "native_head_hand_triangles_preserved": 248,
+      "native_head_hand_vertices_preserved": 129,
+      "native": "guerilla",
+      "team": "tt",
+      "path": "cstrike/models/baloncuaga_outfits/guerilla.mdl",
+      "source_bytes": 2341764,
+      "source_textureindex": 2061536,
+      "source_numtextures": 2
+    }
+  }
+}

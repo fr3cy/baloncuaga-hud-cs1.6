@@ -1,0 +1,685 @@
+{
+  "theme": "baLONCUaga Glass HUD",
+  "native_resources": 113,
+  "runtime_tested": false,
+  "files": [
+    {
+      "path": "cstrike/gfx/vgui/CS_logo.tga",
+      "bytes": 16428,
+      "sha256": "26111413615e26ef00ae8516ff9ce3792058534214a732c1f800e6abf428be17",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/gfx/vgui/glass_scoreboard.tga",
+      "new_in_stock_install": true,
+      "sha256": "371abeb49035c4f44974e7980ca5151a07eee05465a41d0cf2b1e2f5f87e8b9c",
+      "bytes": 2744364
+    },
+    {
+      "path": "cstrike/resource/BackgroundLayout.txt",
+      "bytes": 714,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750",
+      "new_in_stock_install": true
+    },
+    {
+      "path": "cstrike/resource/BackgroundLoadingLayout.txt",
+      "bytes": 714,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750",
+      "new_in_stock_install": true
+    },
+    {
+      "path": "cstrike/resource/ClientScheme.res",
+      "bytes": 20567,
+      "sha256": "85d027157c48ba6bbe655e9ffff98c4b3d4b2ed2ac977bd06bd4eba1066e6cc4",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/CreateMultiplayerGameGameplayPage.res",
+      "bytes": 1884,
+      "sha256": "e0293294a500e1e9e3bec72e4fd38ab36b9d988df3cbfa33be0e40395c206651",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/CreateMultiplayerGameServerPage.res",
+      "bytes": 4370,
+      "sha256": "6b7f890649c6da9ff3d96ff2a14d0fe63e5fe5a0426f622210ca3701aabb65a1",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/OptionsSubMultiplayer.res",
+      "bytes": 11827,
+      "sha256": "8b45d12fc5506e804c2caab99a5628d0196c71c5420307add475822a28bf5dd0",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/TrackerScheme.res",
+      "bytes": 15728,
+      "sha256": "953bdc3a61b94d8bd758a1b7b2a91778f1980841e0f1354bdb994892dfafb6a7",
+      "new_in_stock_install": true
+    },
+    {
+      "path": "cstrike/resource/UI/BackgroundPanel.res",
+      "bytes": 2474,
+      "sha256": "c7315fc049669dd1f01a6e0b5382619af3e3bafb58b4c396034fc4f28efdf95b",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/BottomSpectator.res",
+      "bytes": 2123,
+      "sha256": "e5704c0737e9008f8c828fe93f555f050b83aae8571907eb65761ee5a432b53c",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/BuyEquipment.res",
+      "bytes": 3498,
+      "sha256": "7e403d1df8d8ce59cb63d545b2c5ce6324b89968c17c1ad06a9c7211766f7274",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/BuyEquipment_CT.res",
+      "bytes": 4641,
+      "sha256": "b670585194c04080ab069f48b32af1147821ef319925a832147cd1de78f145cf",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/BuyEquipment_TER.res",
+      "bytes": 3823,
+      "sha256": "821b41a63ca709d5e11822dd50140c934ab6182d206ff10203e5f0f1fedaf95f",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/BuyMachineguns_CT.res",
+      "bytes": 1789,
+      "sha256": "c3d4ffc2455ce2e00648db932dc5cdd63fd1a0f36ef130acf02f337431c0dcb7",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/BuyMachineguns_TER.res",
+      "bytes": 1810,
+      "sha256": "ca7c1aca34acd377e7bc9b66d393b5202bfb0862edfec834421120995e1c032a",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/BuyPistols_CT.res",
+      "bytes": 3384,
+      "sha256": "25e07bf60f827227e6d3d30a9f84df4a3ee59b2eb907050d6a2bdb1eb9d1415e",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/BuyPistols_TER.res",
+      "bytes": 3331,
+      "sha256": "5fcbeb49323d0e15309e6625a29862565dc6d0fd804874705e158eb2ed65edfa",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/BuyRifles_CT.res",
+      "bytes": 3781,
+      "sha256": "e56292b4dc6e9dfad0b313a755287e40c3a996a7add42da716939a8ea68ef1f1",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/BuyRifles_TER.res",
+      "bytes": 3790,
+      "sha256": "a064b56f801d6584ff0dbfc98ef36b3ea08e03f706b90a558e973014f6186256",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/BuyShotguns_CT.res",
+      "bytes": 2134,
+      "sha256": "4e1408337f6f92b7dc2b73b4e118e2922b40bbfadf4e4e59510f48949339773f",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/BuyShotguns_TER.res",
+      "bytes": 2191,
+      "sha256": "cfe744c6f774137ce430d94dfa7ff521043691525f7283d5e6c57bbc6d73989a",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/BuySubMachineguns_CT.res",
+      "bytes": 2961,
+      "sha256": "4068432a18a20745d896881ccbba7008569b055e42e5898b48800bb27e698b5b",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/BuySubMachineguns_TER.res",
+      "bytes": 2983,
+      "sha256": "7c332e575a2c9ee26176e712d231da4eee0372a48c17791a13568fc5ec0b8e07",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/Classmenu_CT.res",
+      "bytes": 4468,
+      "sha256": "04714aa74581c995b1327984d61aece650085e7e776ec9be14a9fbf0ad112f21",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/Classmenu_TER.res",
+      "bytes": 4492,
+      "sha256": "48b9af2009597261f40acacac9d5e1871cff2c08ea61dddc831fbc7b58871724",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/MOTD.res",
+      "bytes": 1439,
+      "sha256": "51f51ecbd77df62e9dc6bff6b74848d952a424baae7fc146dfeedfc36ca841d3",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/MainBuyMenu.res",
+      "bytes": 5891,
+      "sha256": "d53cfbc387b5359dfe1888be8f63493130c77bc62a244e6eccb67dc3ecb5cbbe",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/ScoreBoard.res",
+      "bytes": 916,
+      "sha256": "890c4e334cc475959823df08ea4e9903e304620c64175f499e722f7473b16fa2",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/Spectator.res",
+      "bytes": 4338,
+      "sha256": "1297494e40acbcfd8cef5a21addde74da62dd243ce2ae044ce7be66106b4c289",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/UI/Teammenu.res",
+      "bytes": 3895,
+      "sha256": "c440a26f506e4b6a5cbf3f2d2de04945cd95036b500065cf8cf0cd46872f8adc",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/background/800_1_a_loading.tga",
+      "bytes": 196652,
+      "sha256": "59fa5ed3ff88a909f48ea33b19083a95fa76640925e91d3b2e805b0c6e39adf9",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/background/800_1_b_loading.tga",
+      "bytes": 196652,
+      "sha256": "4db572fe1fcc20b0f14c6fcf755a69acc9bbd31c9fc47d395dc7b40e91921c8e",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/background/800_1_c_loading.tga",
+      "bytes": 196652,
+      "sha256": "4766cd5caa3957b7f9bb6b8913ff24dce82ac7b3147d6bfeb6d6f63d3b63adf7",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/background/800_1_d_loading.tga",
+      "bytes": 24620,
+      "sha256": "9e9d6b33529a276f5aaae5d62ad6411e081e108b0a6a9c78bbf9808d1202e99c",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/background/800_2_a_loading.tga",
+      "bytes": 196652,
+      "sha256": "38e19c70a074f4d08df87f96c415c8402d5459622904a4a71ec15397527ff248",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/background/800_2_b_loading.tga",
+      "bytes": 196652,
+      "sha256": "72d296ffc20c5567691fea9cef91f1cd70724b75de7a32bcdea6ee5f819c01eb",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/background/800_2_c_loading.tga",
+      "bytes": 196652,
+      "sha256": "1b71f7d1196bab7d0e2aa0dcb076e7186673001576111c87dae954d760387666",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/background/800_2_d_loading.tga",
+      "bytes": 24620,
+      "sha256": "d3d7245ff5a466bc938541b7dc35602467114b40a7c6a0006c8852d1535de649",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/background/800_3_a_loading.tga",
+      "bytes": 67628,
+      "sha256": "066d95127fe2397f841c24589b34457a6bf59b5837d52819b6cf5830e9b1e435",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/background/800_3_b_loading.tga",
+      "bytes": 67628,
+      "sha256": "0e35252f3cf04eb1f96c0978dd570c810682d36d0776d153f802a96ea368e552",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/background/800_3_c_loading.tga",
+      "bytes": 67628,
+      "sha256": "02d7ff26080247d121dfbf457f3eea013df6719e54fbb98b2f1b3756f15690a8",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/background/800_3_d_loading.tga",
+      "bytes": 8492,
+      "sha256": "4402ab4aa0347e0f33ee54e12b1be6cce8e00658b2ffddc7072b686c28b91677",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "cstrike/resource/logo_game.tga",
+      "bytes": 65580,
+      "sha256": "c920b9f36e0a3938ed86cceeb40c77796a4bb9cc45722259a46ad5008696b2fc",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "platform/resource/TrackerScheme.res",
+      "bytes": 15728,
+      "sha256": "953bdc3a61b94d8bd758a1b7b2a91778f1980841e0f1354bdb994892dfafb6a7",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "platform/servers/AddServerGamesPage.res",
+      "bytes": 6986,
+      "sha256": "a7a1698a6fc79779f4f3426ffda9603cd097010b7b1fd8c67b443bdabccbebf1",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "platform/servers/DialogAddServer.res",
+      "bytes": 3559,
+      "sha256": "c66f0072c7030074559abedc78731c0bb7e59c660dd9f5c2234c00d9e92c6416",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "platform/servers/DialogGameInfo.res",
+      "bytes": 9594,
+      "sha256": "bac150f08246c1e8cdfce3d0edb876ce6667842e619c30d3268879480e1e3f35",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "platform/servers/DialogGameInfo_AutoRetry.res",
+      "bytes": 9667,
+      "sha256": "c62f68d91030f6dd601f20cbf05ffa52ac628cc26f0a34581c308a0724f5ffbd",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "platform/servers/DialogGameInfo_SinglePlayer.res",
+      "bytes": 9833,
+      "sha256": "025fbcc12373e7687c3c5db8281f5caa70fc2f6d3bf939b41b4acd78d25f2420",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "platform/servers/DialogServerBrowser.res",
+      "bytes": 971,
+      "sha256": "29530540868b0e3b149902ddddf211a6b4fc6d51db137ec4d2dc73ee3ca20f83",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "platform/servers/DialogServerPassword.res",
+      "bytes": 3002,
+      "sha256": "2786b60fbac0de0c7ff8e5967040c340d5f1cbe1e3b04cbdef49b5b84569954d",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "platform/servers/InternetGamesPage.res",
+      "bytes": 7374,
+      "sha256": "5f74fb945323c11ac1440d22dbe91a29355ca2b65df8b4a3911e37764506069a",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "platform/servers/InternetGamesPage_Filters.res",
+      "bytes": 8600,
+      "sha256": "bf0cfc9fb7a0bf201dc2fccae05bd40d1322e70ed27975b19d1fd16e895d4e3f",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "platform/servers/VACBannedConnRefusedDialog.res",
+      "bytes": 2043,
+      "sha256": "a604c4aed9cb0a30298d0ed9fde94beffc25f0ebaf30aaa251032f91c198f66e",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/gfx/vgui/CS_logo.tga",
+      "bytes": 16428,
+      "sha256": "26111413615e26ef00ae8516ff9ce3792058534214a732c1f800e6abf428be17",
+      "new_in_stock_install": true
+    },
+    {
+      "path": "valve/gfx/vgui/glass_scoreboard.tga",
+      "new_in_stock_install": true,
+      "sha256": "371abeb49035c4f44974e7980ca5151a07eee05465a41d0cf2b1e2f5f87e8b9c",
+      "bytes": 2744364
+    },
+    {
+      "path": "valve/resource/BackgroundLayout.txt",
+      "bytes": 714,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/BackgroundLoadingLayout.txt",
+      "bytes": 714,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/CDKeyEntryDialog.res",
+      "bytes": 3997,
+      "sha256": "da1fbafe517e18262e30c737b40547f994c7e30e6d6c916e0571045c5e4d6550",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/ChangeGameDialog.res",
+      "bytes": 2049,
+      "sha256": "5bec26710b5f2312c7717fb7e86a701c8901b3aa443793b5e408d61403690948",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/ClientScheme.res",
+      "bytes": 15241,
+      "sha256": "c90e780334b3231b0cf700b28ff5dc24cd80d55ba9cde7276d49d67f854e8eb9",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/ContentControlDialog.res",
+      "bytes": 3655,
+      "sha256": "8edeab69f1a0a6df937e60f2833b8b60779e02634adef352307ff00c30a98d47",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/CreateMultiplayerGameGameplayPage.res",
+      "bytes": 1785,
+      "sha256": "e093270be836f58313e821101e49505749fc1639283eb2177678e7c1a0e4ad02",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/CreateMultiplayerGameServerPage.res",
+      "bytes": 4368,
+      "sha256": "62a839e85a88ff49592c1db1c0e0626661138dc76246d6025ef7e251b1aeacc2",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/DemoEditDialog.res",
+      "bytes": 2651,
+      "sha256": "6a13c36d4b04ad9ed33f6a2a0696b49d3ba3347a4095347a955a312e7c100a75",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/DemoEventsDialog.res",
+      "bytes": 1437,
+      "sha256": "027a943e3ba1d6df2fb71ac7043bdc92816e4d0905db7d50485d40b1e8ee0d59",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/DemoPlayerDialog.res",
+      "bytes": 4154,
+      "sha256": "d6a8fd5a5f30aa5f6e26413b6930474360a84e167fec41d41a62563358f0940a",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/DemoPlayerFileDialog.res",
+      "bytes": 1006,
+      "sha256": "456397dc055d3cf01680dbd553fd100c703daa7a7b679a7f9613b79493460cee",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/DialogOptionsIngame.res",
+      "bytes": 1285,
+      "sha256": "fffb2007685a10fc0a092eea5fe744b287f5917680e68fb6baa32f6130f94fa4",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/LoadGameDialog.res",
+      "bytes": 3487,
+      "sha256": "e6d7d43f2ca15a31c87c0ddc622cfa902b6d4773c404880a43f966801fd20e57",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/LoadingDialog.res",
+      "bytes": 2568,
+      "sha256": "37aaeea4e1649c5bc02147ac5713f48abe18fb171df29f7a48811aeee5b1a308",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/LoadingDialogConnectionLost.res",
+      "bytes": 2698,
+      "sha256": "bdb4adf0bce524e955c25c03d9af1a4b121615bc58a31197d9548b9ef28b7a3e",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/LoadingDialogDualProgress.res",
+      "bytes": 2616,
+      "sha256": "e2be2b6eb27b75b26482e3fe2b28932aec42ec365438898caeee5ff66d4ea891",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/LoadingDialogDualProgressVAC.res",
+      "bytes": 3581,
+      "sha256": "c1f808d8dc37f50be945805ec778d5b2b3748588246c1bf9debb83ec0bdae449",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/LoadingDialogError.res",
+      "bytes": 3247,
+      "sha256": "74930971efc65df70f4e1ce4c9f3919a580070db7c1753669ef9879c4b63c1d4",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/LoadingDialogErrorLoggedInElsewhere.res",
+      "bytes": 2704,
+      "sha256": "4eba65b7aed414cd345a117e7f439a04e5fa1a04b9c0e8d6959cecd8ab703e50",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/LoadingDialogErrorNoSteamConnection.res",
+      "bytes": 3119,
+      "sha256": "e2c8ca03275bb547096c7a63425cabbfe27f1a9ca4e51147bbdd77ec4c9ab0ec",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/LoadingDialogErrorVACBanned.res",
+      "bytes": 2925,
+      "sha256": "21fc576138c2075ba6025b9cda836d3a0768dae4872b571223ed5b0e657dcca1",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/LoadingDialogNoBanner.res",
+      "bytes": 2806,
+      "sha256": "2c9f78800e8231d99a4e98e86e7cb3dc254d6d72fe13edc3d8bac357583d7f39",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/LoadingDialogNoBannerSingle.res",
+      "bytes": 2798,
+      "sha256": "56e89ac72f82216bb92c52fd435b79f43edc13f157f525818df0f93f182bc96f",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/LoadingDialogVAC.res",
+      "bytes": 3763,
+      "sha256": "417b813fa9ce3c8ebc9eb2e677b7fc84cf862e7e4319bd8ba6efa7dc6ab8575d",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/MultiplayerAdvancedDialog.res",
+      "bytes": 1589,
+      "sha256": "1b3ab91e86a978f7999ccb686bee5c26b7d66387ebeb008b7fa4818c8e8084d0",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/NewGameDialog.res",
+      "bytes": 3138,
+      "sha256": "49efc5b9122b4bc7552bc54eca7e31255239fead716862d4df7060ca4bcd4e7c",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/OptionsSubAdvanced.res",
+      "bytes": 888,
+      "sha256": "031352a40d132ace399b82716074c2cd2096fe78fd8729fac79d69900bb214ac",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/OptionsSubAudio.res",
+      "bytes": 3372,
+      "sha256": "acd11e25356d25f73a6b1911f46acff909f6e6de7d0eb959c01ab9029a677ec1",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/OptionsSubKeyboard.res",
+      "bytes": 1557,
+      "sha256": "a5056c6cd0ad01cd7b54c63ddd610b20814f513b4a9ce8ace06f8c834658dcc9",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/OptionsSubMouse.res",
+      "bytes": 6624,
+      "sha256": "ae0acbde18b5531c6c4ae040d5e404b703844803826b7750aa4ef2d152f8a7e0",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/OptionsSubMultiplayer.res",
+      "bytes": 9283,
+      "sha256": "83c2aa1bdeeca349a99e5008864f2d56c729a41af0749a3a384bb7eaaeb3b056",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/OptionsSubVideo.res",
+      "bytes": 6453,
+      "sha256": "425ebf61168472b2adb33a35bc07444959301fe298e89acf75a1c19f852fd49c",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/OptionsSubVoice.res",
+      "bytes": 5352,
+      "sha256": "dd8d2ddc69e95b0b9652919fc52eb2e2274ef220ea8ac29733f188077ac97cc6",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/PlayerListDialog.res",
+      "bytes": 1414,
+      "sha256": "1aa9ccf5ae049d6cc2eea93abffcb6d0c53e4c36636c076f693a02d0f4aaeebd",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/SaveGameDialog.res",
+      "bytes": 2095,
+      "sha256": "4b4a71366e8bd1abc4dae6f7a4b9a7f4ceaddb636702552a747a80b0b9b57839",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/SteamPasswordDialog.res",
+      "bytes": 2059,
+      "sha256": "12b7738ea4fcd5074549fd7b061bccf826942fd3e9450b9d0b1ca308bd4e272c",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/TrackerScheme.res",
+      "bytes": 15728,
+      "sha256": "953bdc3a61b94d8bd758a1b7b2a91778f1980841e0f1354bdb994892dfafb6a7",
+      "new_in_stock_install": true
+    },
+    {
+      "path": "valve/resource/UI/MOTD.res",
+      "bytes": 1327,
+      "sha256": "acc668fcfa34a9a1d41b20bc0b3275d9d9f89d28a27fa26ae71b3b20a497d737",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/UI/ScoreBoard.res",
+      "bytes": 1098,
+      "sha256": "4125fef79809409b11cd97877afa6f5c9015e501b5ebfd85bff823103dadc357",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/UI/TextWindow.res",
+      "bytes": 1355,
+      "sha256": "e3a1b9bf5de79067596cbdc86dcf9cefdcb043971571f541639d28bb9560da16",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/ValveCDKeyEntryDialog.res",
+      "bytes": 3628,
+      "sha256": "6c0282aab4faab8b0100136f2462ea761de28875892e661a7e5503c45a8888d8",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/background/800_1_a_loading.tga",
+      "bytes": 196652,
+      "sha256": "59fa5ed3ff88a909f48ea33b19083a95fa76640925e91d3b2e805b0c6e39adf9",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/background/800_1_b_loading.tga",
+      "bytes": 196652,
+      "sha256": "4db572fe1fcc20b0f14c6fcf755a69acc9bbd31c9fc47d395dc7b40e91921c8e",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/background/800_1_c_loading.tga",
+      "bytes": 196652,
+      "sha256": "4766cd5caa3957b7f9bb6b8913ff24dce82ac7b3147d6bfeb6d6f63d3b63adf7",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/background/800_1_d_loading.tga",
+      "bytes": 24620,
+      "sha256": "9e9d6b33529a276f5aaae5d62ad6411e081e108b0a6a9c78bbf9808d1202e99c",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/background/800_2_a_loading.tga",
+      "bytes": 196652,
+      "sha256": "38e19c70a074f4d08df87f96c415c8402d5459622904a4a71ec15397527ff248",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/background/800_2_b_loading.tga",
+      "bytes": 196652,
+      "sha256": "72d296ffc20c5567691fea9cef91f1cd70724b75de7a32bcdea6ee5f819c01eb",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/background/800_2_c_loading.tga",
+      "bytes": 196652,
+      "sha256": "1b71f7d1196bab7d0e2aa0dcb076e7186673001576111c87dae954d760387666",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/background/800_2_d_loading.tga",
+      "bytes": 24620,
+      "sha256": "d3d7245ff5a466bc938541b7dc35602467114b40a7c6a0006c8852d1535de649",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/background/800_3_a_loading.tga",
+      "bytes": 67628,
+      "sha256": "066d95127fe2397f841c24589b34457a6bf59b5837d52819b6cf5830e9b1e435",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/background/800_3_b_loading.tga",
+      "bytes": 67628,
+      "sha256": "0e35252f3cf04eb1f96c0978dd570c810682d36d0776d153f802a96ea368e552",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/background/800_3_c_loading.tga",
+      "bytes": 67628,
+      "sha256": "02d7ff26080247d121dfbf457f3eea013df6719e54fbb98b2f1b3756f15690a8",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/background/800_3_d_loading.tga",
+      "bytes": 8492,
+      "sha256": "4402ab4aa0347e0f33ee54e12b1be6cce8e00658b2ffddc7072b686c28b91677",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/logo_game.tga",
+      "bytes": 65580,
+      "sha256": "c920b9f36e0a3938ed86cceeb40c77796a4bb9cc45722259a46ad5008696b2fc",
+      "new_in_stock_install": false
+    },
+    {
+      "path": "valve/resource/refreshlogin.res",
+      "bytes": 3735,
+      "sha256": "828e3e8ee2bc494fcae24c97ceefc096ed6b0845ef9fb47a0364a19bbab4137f",
+      "new_in_stock_install": false
+    }
+  ]
+}

@@ -19,7 +19,9 @@ static bool saveProfile(const char *name){
     message=std::string(u8"Конфиг сохранён: ")+name;return true;
 }
 static void apply(){
-    MenuTheme::load();Lang::load();Showkeys::load();Watermark::load();
+    MenuTheme::load();Lang::load();Showkeys::load();Watermark::load();Skybox::load();
+    Weave::combatSettingsLoaded=false;Weave::loadCombatHud();
+    PlayerOutfits::settingsLoaded=false;PlayerOutfits::loadSettings();PlayerOutfits::reset();
     ChatBox::loadTheme();
     fov=std::clamp(static_cast<int>(GetPrivateProfileIntA("settings","fov",90,iniPath)),60,120);
     crossStyle=std::clamp(static_cast<int>(GetPrivateProfileIntA("crosshair","style",12,iniPath)),0,12);crossColor=std::clamp(static_cast<int>(GetPrivateProfileIntA("crosshair","color",0,iniPath)),0,8);

@@ -439,8 +439,10 @@ static UserMsg **messageList() {
 // A message slot gets a forwarder (see makeStub) rather than our function itself: a plugin
 // that wraps the slot after us keeps a pointer that stays valid after F11.
 struct SlotForward {pfnUserMsgHook ours;void *stub;void *volatile *slot;};
-static SlotForward slotForwards[8];
+static SlotForward slotForwards[32];
+static SRWLOCK slotForwardLock=SRWLOCK_INIT;
 static pfnUserMsgHook slotFor(pfnUserMsgHook ours){
+    AcquireSRWLockExclusive(&slotForwardLock);struct Guard {~Guard(){ReleaseSRWLockExclusive(&slotForwardLock);}} guard;
     for(auto &f:slotForwards){if(f.ours==ours)return reinterpret_cast<pfnUserMsgHook>(f.stub);
         if(!f.ours){void *volatile *slot=nullptr;void *stub=makeStub(reinterpret_cast<void *>(ours),slot);if(!stub)return ours;f={ours,stub,slot};return reinterpret_cast<pfnUserMsgHook>(stub);}}
     return ours;

@@ -4,3 +4,6 @@ Its diagnostic build paths were shortened to basenames and its obsolete
 Authenticode certificate was removed. Executable code was retained.
 See licenses/ for third-party license notices. Font attribution remains
 embedded in the original font data. These notices are not product activation.
+
+Segoe UI is read from the Windows installation at runtime; its font files
+are not included in these archives. Embedded fallback-font notices remain.

@@ -1,0 +1,604 @@
+{
+  "brand": "baLONCUaga",
+  "artwork_sources": [
+    {
+      "path": "assets/branding/baloncuaga_3xl_main_background.png",
+      "sha256": "7e333e23b45d7c381421209626815ce93ce57f2622dc3cd623c30fd5a2f6afce",
+      "origin": "built_in_image_gen"
+    },
+    {
+      "path": "assets/branding/baloncuaga_3xl_cutout.png",
+      "sha256": "4391c7203049f87e56137a739a24c9abee9648b7093004640f731eb7c9b5291b",
+      "origin": "built_in_image_gen"
+    },
+    {
+      "path": "assets/branding/wordmark_native.png",
+      "sha256": "aa7513418f98f05bfa3aacb02eb0486a081543538b6635ef52a9bf8608728e0e",
+      "origin": "code_native_typography"
+    }
+  ],
+  "wordmark_vector": "assets/branding/wordmark_native.svg",
+  "artwork_edits": "none; technical format/size exports only",
+  "native_export": {
+    "stock_layout": "800x600 / 12 native tiles",
+    "native_headers": "unchanged",
+    "native_footer": "TRUEVISION-XFILE",
+    "wordmark": [
+      512,
+      32
+    ],
+    "shoe_icon": [
+      64,
+      64
+    ]
+  },
+  "variants": {
+    "5_4": {
+      "path": "game_skin",
+      "display_size": [
+        1280,
+        1024
+      ],
+      "contained_art_size": [
+        1280,
+        853
+      ],
+      "padding_offset": [
+        0,
+        85
+      ],
+      "native_resolution": [
+        800,
+        600
+      ],
+      "tiles_per_module": 12,
+      "modules": [
+        "cstrike",
+        "valve"
+      ],
+      "crop": false
+    },
+    "4_3": {
+      "path": "background_variants/4_3",
+      "display_size": [
+        1600,
+        1200
+      ],
+      "contained_art_size": [
+        1600,
+        1067
+      ],
+      "padding_offset": [
+        0,
+        66
+      ],
+      "native_resolution": [
+        800,
+        600
+      ],
+      "tiles_per_module": 12,
+      "modules": [
+        "cstrike",
+        "valve"
+      ],
+      "crop": false
+    },
+    "16_9": {
+      "path": "background_variants/16_9",
+      "display_size": [
+        1600,
+        900
+      ],
+      "contained_art_size": [
+        1350,
+        900
+      ],
+      "padding_offset": [
+        125,
+        0
+      ],
+      "native_resolution": [
+        800,
+        600
+      ],
+      "tiles_per_module": 12,
+      "modules": [
+        "cstrike",
+        "valve"
+      ],
+      "crop": false
+    }
+  },
+  "scheme_alias_files": [],
+  "game_files_modified": false,
+  "native_runtime_verified": false,
+  "files": [
+    {
+      "path": "game_skin/cstrike/gfx/vgui/CS_logo.tga",
+      "bytes": 16428,
+      "sha256": "26111413615e26ef00ae8516ff9ce3792058534214a732c1f800e6abf428be17"
+    },
+    {
+      "path": "game_skin/cstrike/resource/background/800_1_a_loading.tga",
+      "bytes": 196652,
+      "sha256": "59fa5ed3ff88a909f48ea33b19083a95fa76640925e91d3b2e805b0c6e39adf9"
+    },
+    {
+      "path": "game_skin/cstrike/resource/background/800_1_b_loading.tga",
+      "bytes": 196652,
+      "sha256": "4db572fe1fcc20b0f14c6fcf755a69acc9bbd31c9fc47d395dc7b40e91921c8e"
+    },
+    {
+      "path": "game_skin/cstrike/resource/background/800_1_c_loading.tga",
+      "bytes": 196652,
+      "sha256": "4766cd5caa3957b7f9bb6b8913ff24dce82ac7b3147d6bfeb6d6f63d3b63adf7"
+    },
+    {
+      "path": "game_skin/cstrike/resource/background/800_1_d_loading.tga",
+      "bytes": 24620,
+      "sha256": "9e9d6b33529a276f5aaae5d62ad6411e081e108b0a6a9c78bbf9808d1202e99c"
+    },
+    {
+      "path": "game_skin/cstrike/resource/background/800_2_a_loading.tga",
+      "bytes": 196652,
+      "sha256": "38e19c70a074f4d08df87f96c415c8402d5459622904a4a71ec15397527ff248"
+    },
+    {
+      "path": "game_skin/cstrike/resource/background/800_2_b_loading.tga",
+      "bytes": 196652,
+      "sha256": "72d296ffc20c5567691fea9cef91f1cd70724b75de7a32bcdea6ee5f819c01eb"
+    },
+    {
+      "path": "game_skin/cstrike/resource/background/800_2_c_loading.tga",
+      "bytes": 196652,
+      "sha256": "1b71f7d1196bab7d0e2aa0dcb076e7186673001576111c87dae954d760387666"
+    },
+    {
+      "path": "game_skin/cstrike/resource/background/800_2_d_loading.tga",
+      "bytes": 24620,
+      "sha256": "d3d7245ff5a466bc938541b7dc35602467114b40a7c6a0006c8852d1535de649"
+    },
+    {
+      "path": "game_skin/cstrike/resource/background/800_3_a_loading.tga",
+      "bytes": 67628,
+      "sha256": "066d95127fe2397f841c24589b34457a6bf59b5837d52819b6cf5830e9b1e435"
+    },
+    {
+      "path": "game_skin/cstrike/resource/background/800_3_b_loading.tga",
+      "bytes": 67628,
+      "sha256": "0e35252f3cf04eb1f96c0978dd570c810682d36d0776d153f802a96ea368e552"
+    },
+    {
+      "path": "game_skin/cstrike/resource/background/800_3_c_loading.tga",
+      "bytes": 67628,
+      "sha256": "02d7ff26080247d121dfbf457f3eea013df6719e54fbb98b2f1b3756f15690a8"
+    },
+    {
+      "path": "game_skin/cstrike/resource/background/800_3_d_loading.tga",
+      "bytes": 8492,
+      "sha256": "4402ab4aa0347e0f33ee54e12b1be6cce8e00658b2ffddc7072b686c28b91677"
+    },
+    {
+      "path": "game_skin/cstrike/resource/BackgroundLayout.txt",
+      "bytes": 714,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750"
+    },
+    {
+      "path": "game_skin/cstrike/resource/BackgroundLoadingLayout.txt",
+      "bytes": 714,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750"
+    },
+    {
+      "path": "game_skin/cstrike/resource/logo_game.tga",
+      "bytes": 65580,
+      "sha256": "c920b9f36e0a3938ed86cceeb40c77796a4bb9cc45722259a46ad5008696b2fc"
+    },
+    {
+      "path": "game_skin/valve/gfx/vgui/CS_logo.tga",
+      "bytes": 16428,
+      "sha256": "26111413615e26ef00ae8516ff9ce3792058534214a732c1f800e6abf428be17"
+    },
+    {
+      "path": "game_skin/valve/resource/background/800_1_a_loading.tga",
+      "bytes": 196652,
+      "sha256": "59fa5ed3ff88a909f48ea33b19083a95fa76640925e91d3b2e805b0c6e39adf9"
+    },
+    {
+      "path": "game_skin/valve/resource/background/800_1_b_loading.tga",
+      "bytes": 196652,
+      "sha256": "4db572fe1fcc20b0f14c6fcf755a69acc9bbd31c9fc47d395dc7b40e91921c8e"
+    },
+    {
+      "path": "game_skin/valve/resource/background/800_1_c_loading.tga",
+      "bytes": 196652,
+      "sha256": "4766cd5caa3957b7f9bb6b8913ff24dce82ac7b3147d6bfeb6d6f63d3b63adf7"
+    },
+    {
+      "path": "game_skin/valve/resource/background/800_1_d_loading.tga",
+      "bytes": 24620,
+      "sha256": "9e9d6b33529a276f5aaae5d62ad6411e081e108b0a6a9c78bbf9808d1202e99c"
+    },
+    {
+      "path": "game_skin/valve/resource/background/800_2_a_loading.tga",
+      "bytes": 196652,
+      "sha256": "38e19c70a074f4d08df87f96c415c8402d5459622904a4a71ec15397527ff248"
+    },
+    {
+      "path": "game_skin/valve/resource/background/800_2_b_loading.tga",
+      "bytes": 196652,
+      "sha256": "72d296ffc20c5567691fea9cef91f1cd70724b75de7a32bcdea6ee5f819c01eb"
+    },
+    {
+      "path": "game_skin/valve/resource/background/800_2_c_loading.tga",
+      "bytes": 196652,
+      "sha256": "1b71f7d1196bab7d0e2aa0dcb076e7186673001576111c87dae954d760387666"
+    },
+    {
+      "path": "game_skin/valve/resource/background/800_2_d_loading.tga",
+      "bytes": 24620,
+      "sha256": "d3d7245ff5a466bc938541b7dc35602467114b40a7c6a0006c8852d1535de649"
+    },
+    {
+      "path": "game_skin/valve/resource/background/800_3_a_loading.tga",
+      "bytes": 67628,
+      "sha256": "066d95127fe2397f841c24589b34457a6bf59b5837d52819b6cf5830e9b1e435"
+    },
+    {
+      "path": "game_skin/valve/resource/background/800_3_b_loading.tga",
+      "bytes": 67628,
+      "sha256": "0e35252f3cf04eb1f96c0978dd570c810682d36d0776d153f802a96ea368e552"
+    },
+    {
+      "path": "game_skin/valve/resource/background/800_3_c_loading.tga",
+      "bytes": 67628,
+      "sha256": "02d7ff26080247d121dfbf457f3eea013df6719e54fbb98b2f1b3756f15690a8"
+    },
+    {
+      "path": "game_skin/valve/resource/background/800_3_d_loading.tga",
+      "bytes": 8492,
+      "sha256": "4402ab4aa0347e0f33ee54e12b1be6cce8e00658b2ffddc7072b686c28b91677"
+    },
+    {
+      "path": "game_skin/valve/resource/BackgroundLayout.txt",
+      "bytes": 714,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750"
+    },
+    {
+      "path": "game_skin/valve/resource/BackgroundLoadingLayout.txt",
+      "bytes": 714,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750"
+    },
+    {
+      "path": "game_skin/valve/resource/logo_game.tga",
+      "bytes": 65580,
+      "sha256": "c920b9f36e0a3938ed86cceeb40c77796a4bb9cc45722259a46ad5008696b2fc"
+    },
+    {
+      "path": "background_variants/16_9/cstrike/gfx/vgui/CS_logo.tga",
+      "bytes": 16428,
+      "sha256": "26111413615e26ef00ae8516ff9ce3792058534214a732c1f800e6abf428be17"
+    },
+    {
+      "path": "background_variants/16_9/cstrike/resource/background/800_1_a_loading.tga",
+      "bytes": 196652,
+      "sha256": "9d1a043f4abd1a62efd441c105e8a3f4f68e3f136431e2ba6e860681eb22969a"
+    },
+    {
+      "path": "background_variants/16_9/cstrike/resource/background/800_1_b_loading.tga",
+      "bytes": 196652,
+      "sha256": "23793c0220d14338113c0ea0f6e373de8bc0c8c94dd8c1f5f32faa704b2c91c0"
+    },
+    {
+      "path": "background_variants/16_9/cstrike/resource/background/800_1_c_loading.tga",
+      "bytes": 196652,
+      "sha256": "c52073c0738e8141ac9d686ff60c29bd3453b49e423543e33d0274dba83b532d"
+    },
+    {
+      "path": "background_variants/16_9/cstrike/resource/background/800_1_d_loading.tga",
+      "bytes": 24620,
+      "sha256": "aa34405f557b6e5745e29015f339b33a099fabea8b8b30b8dc67918e6b5cdf8f"
+    },
+    {
+      "path": "background_variants/16_9/cstrike/resource/background/800_2_a_loading.tga",
+      "bytes": 196652,
+      "sha256": "767dfab95796471638ec768181b6a89ec17982885304301eea0e0c67bf2e470d"
+    },
+    {
+      "path": "background_variants/16_9/cstrike/resource/background/800_2_b_loading.tga",
+      "bytes": 196652,
+      "sha256": "4eed985fa07484844d74307d6c387ced40798d9db1daef6d336654478e8c7905"
+    },
+    {
+      "path": "background_variants/16_9/cstrike/resource/background/800_2_c_loading.tga",
+      "bytes": 196652,
+      "sha256": "c5031ed88e26d39218223b7b232e28fae9b3a51b09a023cb00c3df12193653d7"
+    },
+    {
+      "path": "background_variants/16_9/cstrike/resource/background/800_2_d_loading.tga",
+      "bytes": 24620,
+      "sha256": "aa34405f557b6e5745e29015f339b33a099fabea8b8b30b8dc67918e6b5cdf8f"
+    },
+    {
+      "path": "background_variants/16_9/cstrike/resource/background/800_3_a_loading.tga",
+      "bytes": 67628,
+      "sha256": "039c23e7268c8b86b30d64499bb70459ef1f4f03bad0cdeefdf7c267347ae71d"
+    },
+    {
+      "path": "background_variants/16_9/cstrike/resource/background/800_3_b_loading.tga",
+      "bytes": 67628,
+      "sha256": "517fa00cd0d907a1fd454b7c903e91da8d28127484810809964ae10879360da0"
+    },
+    {
+      "path": "background_variants/16_9/cstrike/resource/background/800_3_c_loading.tga",
+      "bytes": 67628,
+      "sha256": "9de6cd1ac4290d6f3500bcb8f798952be26fe83c9ea45ef08c32834dd430fcb2"
+    },
+    {
+      "path": "background_variants/16_9/cstrike/resource/background/800_3_d_loading.tga",
+      "bytes": 8492,
+      "sha256": "9ba90c26826abb44e270670b348eee0f4093031993af7ca8d42abd98d6057d6a"
+    },
+    {
+      "path": "background_variants/16_9/cstrike/resource/BackgroundLayout.txt",
+      "bytes": 714,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750"
+    },
+    {
+      "path": "background_variants/16_9/cstrike/resource/BackgroundLoadingLayout.txt",
+      "bytes": 714,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750"
+    },
+    {
+      "path": "background_variants/16_9/cstrike/resource/logo_game.tga",
+      "bytes": 65580,
+      "sha256": "c920b9f36e0a3938ed86cceeb40c77796a4bb9cc45722259a46ad5008696b2fc"
+    },
+    {
+      "path": "background_variants/16_9/valve/gfx/vgui/CS_logo.tga",
+      "bytes": 16428,
+      "sha256": "26111413615e26ef00ae8516ff9ce3792058534214a732c1f800e6abf428be17"
+    },
+    {
+      "path": "background_variants/16_9/valve/resource/background/800_1_a_loading.tga",
+      "bytes": 196652,
+      "sha256": "9d1a043f4abd1a62efd441c105e8a3f4f68e3f136431e2ba6e860681eb22969a"
+    },
+    {
+      "path": "background_variants/16_9/valve/resource/background/800_1_b_loading.tga",
+      "bytes": 196652,
+      "sha256": "23793c0220d14338113c0ea0f6e373de8bc0c8c94dd8c1f5f32faa704b2c91c0"
+    },
+    {
+      "path": "background_variants/16_9/valve/resource/background/800_1_c_loading.tga",
+      "bytes": 196652,
+      "sha256": "c52073c0738e8141ac9d686ff60c29bd3453b49e423543e33d0274dba83b532d"
+    },
+    {
+      "path": "background_variants/16_9/valve/resource/background/800_1_d_loading.tga",
+      "bytes": 24620,
+      "sha256": "aa34405f557b6e5745e29015f339b33a099fabea8b8b30b8dc67918e6b5cdf8f"
+    },
+    {
+      "path": "background_variants/16_9/valve/resource/background/800_2_a_loading.tga",
+      "bytes": 196652,
+      "sha256": "767dfab95796471638ec768181b6a89ec17982885304301eea0e0c67bf2e470d"
+    },
+    {
+      "path": "background_variants/16_9/valve/resource/background/800_2_b_loading.tga",
+      "bytes": 196652,
+      "sha256": "4eed985fa07484844d74307d6c387ced40798d9db1daef6d336654478e8c7905"
+    },
+    {
+      "path": "background_variants/16_9/valve/resource/background/800_2_c_loading.tga",
+      "bytes": 196652,
+      "sha256": "c5031ed88e26d39218223b7b232e28fae9b3a51b09a023cb00c3df12193653d7"
+    },
+    {
+      "path": "background_variants/16_9/valve/resource/background/800_2_d_loading.tga",
+      "bytes": 24620,
+      "sha256": "aa34405f557b6e5745e29015f339b33a099fabea8b8b30b8dc67918e6b5cdf8f"
+    },
+    {
+      "path": "background_variants/16_9/valve/resource/background/800_3_a_loading.tga",
+      "bytes": 67628,
+      "sha256": "039c23e7268c8b86b30d64499bb70459ef1f4f03bad0cdeefdf7c267347ae71d"
+    },
+    {
+      "path": "background_variants/16_9/valve/resource/background/800_3_b_loading.tga",
+      "bytes": 67628,
+      "sha256": "517fa00cd0d907a1fd454b7c903e91da8d28127484810809964ae10879360da0"
+    },
+    {
+      "path": "background_variants/16_9/valve/resource/background/800_3_c_loading.tga",
+      "bytes": 67628,
+      "sha256": "9de6cd1ac4290d6f3500bcb8f798952be26fe83c9ea45ef08c32834dd430fcb2"
+    },
+    {
+      "path": "background_variants/16_9/valve/resource/background/800_3_d_loading.tga",
+      "bytes": 8492,
+      "sha256": "9ba90c26826abb44e270670b348eee0f4093031993af7ca8d42abd98d6057d6a"
+    },
+    {
+      "path": "background_variants/16_9/valve/resource/BackgroundLayout.txt",
+      "bytes": 714,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750"
+    },
+    {
+      "path": "background_variants/16_9/valve/resource/BackgroundLoadingLayout.txt",
+      "bytes": 714,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750"
+    },
+    {
+      "path": "background_variants/16_9/valve/resource/logo_game.tga",
+      "bytes": 65580,
+      "sha256": "c920b9f36e0a3938ed86cceeb40c77796a4bb9cc45722259a46ad5008696b2fc"
+    },
+    {
+      "path": "background_variants/4_3/cstrike/gfx/vgui/CS_logo.tga",
+      "bytes": 16428,
+      "sha256": "26111413615e26ef00ae8516ff9ce3792058534214a732c1f800e6abf428be17"
+    },
+    {
+      "path": "background_variants/4_3/cstrike/resource/background/800_1_a_loading.tga",
+      "bytes": 196652,
+      "sha256": "61ea722781634bdcf24c26fb3eb855a46615187340eb31793ce39ce03c9ecdac"
+    },
+    {
+      "path": "background_variants/4_3/cstrike/resource/background/800_1_b_loading.tga",
+      "bytes": 196652,
+      "sha256": "25507e9984c61c88b100fc0d4695f61b6c6a9a5a4bde5f6dbd640ac2cc6f1a0a"
+    },
+    {
+      "path": "background_variants/4_3/cstrike/resource/background/800_1_c_loading.tga",
+      "bytes": 196652,
+      "sha256": "aa851c07419ce555c7359d46d9bf67a1a7ed0e40a65f4fdb942814a1a31b712f"
+    },
+    {
+      "path": "background_variants/4_3/cstrike/resource/background/800_1_d_loading.tga",
+      "bytes": 24620,
+      "sha256": "e5e2dc8dd6e26f6ac27370c4b40e77964a0952a42a7bf6056dc927792e12f990"
+    },
+    {
+      "path": "background_variants/4_3/cstrike/resource/background/800_2_a_loading.tga",
+      "bytes": 196652,
+      "sha256": "ec2e6b1541f395360eed2c7bc4a8141241064da9b1635964ec8ae5fd73809957"
+    },
+    {
+      "path": "background_variants/4_3/cstrike/resource/background/800_2_b_loading.tga",
+      "bytes": 196652,
+      "sha256": "48eae8d5c6c6f68d6eb548c8a69f65c3e3383a13a9eb8738d04bd955dfefeeb1"
+    },
+    {
+      "path": "background_variants/4_3/cstrike/resource/background/800_2_c_loading.tga",
+      "bytes": 196652,
+      "sha256": "afcd8130751caf5a87b8ddb20beaee29e3bb77f55d5bc2f1600a563e76c2ef45"
+    },
+    {
+      "path": "background_variants/4_3/cstrike/resource/background/800_2_d_loading.tga",
+      "bytes": 24620,
+      "sha256": "e4ff54ab2292d89a82a7bd01c4eef7c2015fd1b76b90312fb2ea32aa84a3ca42"
+    },
+    {
+      "path": "background_variants/4_3/cstrike/resource/background/800_3_a_loading.tga",
+      "bytes": 67628,
+      "sha256": "922b448711a5eca8aeb9ed8dbb2a7bf97fbef62124a904abd3aa263727c3997e"
+    },
+    {
+      "path": "background_variants/4_3/cstrike/resource/background/800_3_b_loading.tga",
+      "bytes": 67628,
+      "sha256": "00f2409185711bbd46daf7e426dbd7c522986839076dababf2f2312c75b1146a"
+    },
+    {
+      "path": "background_variants/4_3/cstrike/resource/background/800_3_c_loading.tga",
+      "bytes": 67628,
+      "sha256": "1a0368a09cf925b01ccdcb8dc2e45307b99505c4bd9180c1f5ae4512f74204fe"
+    },
+    {
+      "path": "background_variants/4_3/cstrike/resource/background/800_3_d_loading.tga",
+      "bytes": 8492,
+      "sha256": "1bce0a9050848d0632ccbaff46dca4f793a430ef39f828e2ed02ba27b329f457"
+    },
+    {
+      "path": "background_variants/4_3/cstrike/resource/BackgroundLayout.txt",
+      "bytes": 714,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750"
+    },
+    {
+      "path": "background_variants/4_3/cstrike/resource/BackgroundLoadingLayout.txt",
+      "bytes": 714,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750"
+    },
+    {
+      "path": "background_variants/4_3/cstrike/resource/logo_game.tga",
+      "bytes": 65580,
+      "sha256": "c920b9f36e0a3938ed86cceeb40c77796a4bb9cc45722259a46ad5008696b2fc"
+    },
+    {
+      "path": "background_variants/4_3/valve/gfx/vgui/CS_logo.tga",
+      "bytes": 16428,
+      "sha256": "26111413615e26ef00ae8516ff9ce3792058534214a732c1f800e6abf428be17"
+    },
+    {
+      "path": "background_variants/4_3/valve/resource/background/800_1_a_loading.tga",
+      "bytes": 196652,
+      "sha256": "61ea722781634bdcf24c26fb3eb855a46615187340eb31793ce39ce03c9ecdac"
+    },
+    {
+      "path": "background_variants/4_3/valve/resource/background/800_1_b_loading.tga",
+      "bytes": 196652,
+      "sha256": "25507e9984c61c88b100fc0d4695f61b6c6a9a5a4bde5f6dbd640ac2cc6f1a0a"
+    },
+    {
+      "path": "background_variants/4_3/valve/resource/background/800_1_c_loading.tga",
+      "bytes": 196652,
+      "sha256": "aa851c07419ce555c7359d46d9bf67a1a7ed0e40a65f4fdb942814a1a31b712f"
+    },
+    {
+      "path": "background_variants/4_3/valve/resource/background/800_1_d_loading.tga",
+      "bytes": 24620,
+      "sha256": "e5e2dc8dd6e26f6ac27370c4b40e77964a0952a42a7bf6056dc927792e12f990"
+    },
+    {
+      "path": "background_variants/4_3/valve/resource/background/800_2_a_loading.tga",
+      "bytes": 196652,
+      "sha256": "ec2e6b1541f395360eed2c7bc4a8141241064da9b1635964ec8ae5fd73809957"
+    },
+    {
+      "path": "background_variants/4_3/valve/resource/background/800_2_b_loading.tga",
+      "bytes": 196652,
+      "sha256": "48eae8d5c6c6f68d6eb548c8a69f65c3e3383a13a9eb8738d04bd955dfefeeb1"
+    },
+    {
+      "path": "background_variants/4_3/valve/resource/background/800_2_c_loading.tga",
+      "bytes": 196652,
+      "sha256": "afcd8130751caf5a87b8ddb20beaee29e3bb77f55d5bc2f1600a563e76c2ef45"
+    },
+    {
+      "path": "background_variants/4_3/valve/resource/background/800_2_d_loading.tga",
+      "bytes": 24620,
+      "sha256": "e4ff54ab2292d89a82a7bd01c4eef7c2015fd1b76b90312fb2ea32aa84a3ca42"
+    },
+    {
+      "path": "background_variants/4_3/valve/resource/background/800_3_a_loading.tga",
+      "bytes": 67628,
+      "sha256": "922b448711a5eca8aeb9ed8dbb2a7bf97fbef62124a904abd3aa263727c3997e"
+    },
+    {
+      "path": "background_variants/4_3/valve/resource/background/800_3_b_loading.tga",
+      "bytes": 67628,
+      "sha256": "00f2409185711bbd46daf7e426dbd7c522986839076dababf2f2312c75b1146a"
+    },
+    {
+      "path": "background_variants/4_3/valve/resource/background/800_3_c_loading.tga",
+      "bytes": 67628,
+      "sha256": "1a0368a09cf925b01ccdcb8dc2e45307b99505c4bd9180c1f5ae4512f74204fe"
+    },
+    {
+      "path": "background_variants/4_3/valve/resource/background/800_3_d_loading.tga",
+      "bytes": 8492,
+      "sha256": "1bce0a9050848d0632ccbaff46dca4f793a430ef39f828e2ed02ba27b329f457"
+    },
+    {
+      "path": "background_variants/4_3/valve/resource/BackgroundLayout.txt",
+      "bytes": 714,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750"
+    },
+    {
+      "path": "background_variants/4_3/valve/resource/BackgroundLoadingLayout.txt",
+      "bytes": 714,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750"
+    },
+    {
+      "path": "background_variants/4_3/valve/resource/logo_game.tga",
+      "bytes": 65580,
+      "sha256": "c920b9f36e0a3938ed86cceeb40c77796a4bb9cc45722259a46ad5008696b2fc"
+    }
+  ],
+  "luminous_sky": {
+    "asset": "assets/branding/baloncuaga_3xl_luminous.png",
+    "sha256": "80879d388aad3e94358cd78a42909d24f444ce5b3484fbb782db9c3c7b7ba4d8",
+    "tool": "built-in image_gen",
+    "prompt": "artwork/BRANDING_PROMPTS.txt",
+    "projection": "direction-continuous native cubemap; camera-right basis; halo visual only"
+  }
+}

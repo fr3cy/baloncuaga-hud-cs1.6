@@ -11,7 +11,7 @@ static void speedometerBorder(ImDrawList *d,ImFont *font,float fs,ImVec2 at,cons
         for(auto dir:directions){
             // ImGui rounds text origins to whole logical pixels. Translate the
             // finished glyph vertices instead to keep fractional HUD scales exact.
-            int first=d->VtxBuffer.Size;d->AddText(font,fs,at,color,text);
+            int first=d->VtxBuffer.Size;hudDrawText(d,font,fs,at,color,text);
             for(int i=first;i<d->VtxBuffer.Size;++i)d->VtxBuffer[i].pos+=dir*r;
         }
     }
@@ -36,7 +36,8 @@ static std::vector<Watermark::Field> watermarkFields(){
 }
 static void gameInfoOverlay(){
     if(!Hud::watermarkOn)return;auto &io=ImGui::GetIO();
-    Watermark::draw(ImGui::GetBackgroundDrawList(),{0,0},io.DisplaySize,watermarkFields(),Watermark::fields&Watermark::Brand,Watermark::opacity/100.f,1.f);
+    Watermark::modernChrome=combatHudEnabled;Watermark::modernBrand=combatLabel;Watermark::modernValue=combatSmall;Watermark::modernUnit=combatSmall;
+    Watermark::draw(ImGui::GetBackgroundDrawList(),{0,0},io.DisplaySize,watermarkFields(),Watermark::fields&Watermark::Brand,Watermark::opacity/100.f,HudResolution::factor(screenW,screenH)/scale);
 }
 // Showkeys on screen; while the menu is open the widget can be dragged.
 static bool showkeysDragging;
@@ -79,10 +80,20 @@ static void movementOverlay(bool preview=false){
     FogArt value(result,fresh?Speedometer::speed:286.f,demo?45.f:MovementHud::track.gain,Speedometer::enabled,(measured&&MovementHud::showDetails(result))||demo,MovementHud::showGain&&(measured||demo));
     if(!value.top&&!value.bottom)return;
     float resolution=HudResolution::factor(screenW,screenH),fs=std::max(14.f,Speedometer::size*resolution)/scale;
-    auto &io=ImGui::GetIO();auto extent=fogArtSize(MovementHud::style,fs,value);float pad=std::max(3.f/scale,fs*.3f);
-    if(Speedometer::outline)pad=std::max(pad,(Speedometer::outlineWidth+1)/scale);extent=fogArtSize(MovementHud::style,fs,value)+ImVec2(pad*2,pad*2);
-    ImVec2 p={2/scale+std::max(0.f,io.DisplaySize.x-extent.x-4/scale)*Speedometer::xPercent/100.f,
-              2/scale+std::max(0.f,io.DisplaySize.y-extent.y-4/scale)*Speedometer::yPercent/100.f};
+    auto &io=ImGui::GetIO();ImVec2 extent;float pad;
+    // Include glow/backdrop/outline in the fit, not just the digit string.
+    for(int pass=0;pass<4;++pass){
+        pad=std::max(3.f/scale,fs*.3f);
+        if(Speedometer::outline)pad=std::max(pad,(Speedometer::outlineWidth+1)/scale);
+        extent=fogArtSize(MovementHud::style,fs,value)+ImVec2(pad*2,pad*2);
+        float fit=HudBounds::fit(io.DisplaySize.x,io.DisplaySize.y,extent.x,extent.y,2/scale);
+        if(fit>=.9999f)break;fs*=fit*.995f;
+    }
+    pad=std::max(3.f/scale,fs*.3f);
+    if(Speedometer::outline)pad=std::max(pad,(Speedometer::outlineWidth+1)/scale);
+    extent=fogArtSize(MovementHud::style,fs,value)+ImVec2(pad*2,pad*2);
+    ImVec2 p={HudBounds::axis(io.DisplaySize.x,extent.x,2/scale,Speedometer::xPercent),
+              HudBounds::axis(io.DisplaySize.y,extent.y,2/scale,Speedometer::yPercent)};
     fogArt(ImGui::GetForegroundDrawList(),p+ImVec2(pad,pad),MovementHud::style,fs,value,now);
 }
 static void speedometerOverlay(bool preview=false){
@@ -96,13 +107,15 @@ static void speedometerOverlay(bool preview=false){
     if(!preview&&(!fresh||!level||!*level))return;
     char text[32];snprintf(text,sizeof(text),"%.0f",fresh?Speedometer::speed:0.f);
     auto &io=ImGui::GetIO();ImFont *font=speedFont?speedFont:chatBold?chatBold:ImGui::GetFont();
-    float fontSize=std::max(14.f,std::clamp(Speedometer::size,12,96)*HudResolution::factor(screenW,screenH))/scale;font=hudFontFor(font,fontSize);auto extent=font->CalcTextSizeA(fontSize,FLT_MAX,0,text);
-    // Keep the whole number on screen, including at the extreme positions.
+    float fontSize=std::max(14.f,std::clamp(Speedometer::size,12,96)*HudResolution::factor(screenW,screenH))/scale;
     float margin=(Speedometer::outline?Speedometer::outlineWidth+1:2)/scale;
-    ImVec2 p={std::max(0.f,io.DisplaySize.x-extent.x-margin*2)*std::clamp(Speedometer::xPercent,0,100)/100.f+margin,
-              std::max(0.f,io.DisplaySize.y-extent.y-margin*2)*std::clamp(Speedometer::yPercent,0,100)/100.f+margin};
+    font=hudFontFor(font,fontSize);auto extent=font->CalcTextSizeA(fontSize,FLT_MAX,0,text);
+    float fit=HudBounds::fit(io.DisplaySize.x,io.DisplaySize.y,extent.x,extent.y,margin+1/scale);
+    if(fit<1.f){fontSize*=fit;font=hudFontFor(font,fontSize);extent=font->CalcTextSizeA(fontSize,FLT_MAX,0,text);}
+    ImVec2 p={HudBounds::axis(io.DisplaySize.x,extent.x,margin+1/scale,Speedometer::xPercent),
+              HudBounds::axis(io.DisplaySize.y,extent.y,margin+1/scale,Speedometer::yPercent)};
     p={std::round(p.x*scale)/scale,std::round(p.y*scale)/scale};
     auto *d=ImGui::GetForegroundDrawList();
     speedometerBorder(d,font,fontSize,p,text);
-    d->AddText(font,fontSize,p,IM_COL32(Speedometer::rgb[0],Speedometer::rgb[1],Speedometer::rgb[2],255),text);
+    hudDrawText(d,font,fontSize,p,IM_COL32(Speedometer::rgb[0],Speedometer::rgb[1],Speedometer::rgb[2],255),text);
 }

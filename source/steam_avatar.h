@@ -49,7 +49,7 @@ static void update(){
     }
 }
 static void draw(ImVec2 p,const std::string &nick){
-    auto *d=ImGui::GetWindowDrawList();if(avatar){d->AddImageRounded(reinterpret_cast<ImTextureID>(static_cast<intptr_t>(avatar)),p,p+ImVec2(24,24),{0,0},{1,1},IM_COL32(255,255,255,255),12);return;}
-    d->AddCircleFilled(p+ImVec2(12,12),12,ImGui::GetColorU32(ImGuiCol_Scheme));std::string initial=Hud::utf8(Hud::wide(nick).substr(0,1));auto size=ImGui::CalcTextSize(initial.c_str());d->AddText(p+ImVec2(12,12)-size/2,IM_COL32(255,255,255,255),initial.c_str());
+    auto *d=ImGui::GetWindowDrawList();if(avatar){d->AddImageRounded(reinterpret_cast<ImTextureID>(static_cast<intptr_t>(avatar)),p,p+ImVec2(24,24),{0,0},{1,1},ImGui::GetColorU32(IM_COL32_WHITE),12);return;}
+    d->AddCircleFilled(p+ImVec2(12,12),12,ImGui::GetColorU32(ImGuiCol_Scheme));std::string initial=Hud::utf8(Hud::wide(nick).substr(0,1));auto size=ImGui::CalcTextSize(initial.c_str());d->AddText(p+ImVec2(12,12)-size/2,ui::carbonMoon?ImGui::GetColorU32(ImGuiCol_CheckMark):ImGui::GetColorU32(IM_COL32_WHITE),initial.c_str());
 }
 }

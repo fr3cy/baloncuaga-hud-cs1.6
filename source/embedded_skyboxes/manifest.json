@@ -1,0 +1,338 @@
+[
+  {
+    "id": 4100,
+    "path": "baloncuaga_skyboxes/sunny/rt.tga",
+    "file": "sunny_rt.bsk",
+    "bytes": 3145746,
+    "packed": 207515,
+    "sha256": "37e4d6268d6f3c81e7d641053f32377253d87b483dc3b4f95ad69f90730827f6"
+  },
+  {
+    "id": 4101,
+    "path": "baloncuaga_skyboxes/sunny/bk.tga",
+    "file": "sunny_bk.bsk",
+    "bytes": 3145746,
+    "packed": 231702,
+    "sha256": "db99c575695f34e96ab328b21ca86846b57b7bdadc80ecd96b9af6c87508f42b"
+  },
+  {
+    "id": 4102,
+    "path": "baloncuaga_skyboxes/sunny/lf.tga",
+    "file": "sunny_lf.bsk",
+    "bytes": 3145746,
+    "packed": 198369,
+    "sha256": "b6fe0d9e32d1e1a114bcb2694c36da4f4e3752821531ecfb83ec5b7e213f056e"
+  },
+  {
+    "id": 4103,
+    "path": "baloncuaga_skyboxes/sunny/ft.tga",
+    "file": "sunny_ft.bsk",
+    "bytes": 3145746,
+    "packed": 219602,
+    "sha256": "82e58d876f32d1ad244cee6b78bafbf8e691fba8ca7f02d1e348a096dd0449e4"
+  },
+  {
+    "id": 4104,
+    "path": "baloncuaga_skyboxes/sunny/up.tga",
+    "file": "sunny_up.bsk",
+    "bytes": 3145746,
+    "packed": 452012,
+    "sha256": "b1907a44b7fcde3ab2e41eacc501d5d8ec9563f2caa35bc53651e9c05cfa5409"
+  },
+  {
+    "id": 4105,
+    "path": "baloncuaga_skyboxes/sunny/dn.tga",
+    "file": "sunny_dn.bsk",
+    "bytes": 3145746,
+    "packed": 56790,
+    "sha256": "60f15dd4212647038e27ca7528db25f1540f647a7820dc5d9198964fc802f77b"
+  },
+  {
+    "id": 4106,
+    "path": "baloncuaga_skyboxes/sunny/preview.tga",
+    "file": "sunny_preview.bsk",
+    "bytes": 393234,
+    "packed": 71189,
+    "sha256": "09c6fabf88d275a34c8e5d0a093bf72dc1899db20799a2800274fdb837addc5b"
+  },
+  {
+    "id": 4107,
+    "path": "baloncuaga_skyboxes/night/rt.tga",
+    "file": "night_rt.bsk",
+    "bytes": 3145746,
+    "packed": 142746,
+    "sha256": "f8aed7496006bf1e5843dfa78109db56aeabc3321c22bee0bdd3be29e41e811d"
+  },
+  {
+    "id": 4108,
+    "path": "baloncuaga_skyboxes/night/bk.tga",
+    "file": "night_bk.bsk",
+    "bytes": 3145746,
+    "packed": 407746,
+    "sha256": "27171e7472d83c3a99317cca9429c83c7a7c8f55d4708305dd7787e025ab7e56"
+  },
+  {
+    "id": 4109,
+    "path": "baloncuaga_skyboxes/night/lf.tga",
+    "file": "night_lf.bsk",
+    "bytes": 3145746,
+    "packed": 123296,
+    "sha256": "fb1378367934a60443c2e207888bd0256f4b09a3989bb7801916d2c5bde62d0a"
+  },
+  {
+    "id": 4110,
+    "path": "baloncuaga_skyboxes/night/ft.tga",
+    "file": "night_ft.bsk",
+    "bytes": 3145746,
+    "packed": 129684,
+    "sha256": "28a64dc365cce35c809cfca210bfe1ceec055b3ac59fa38b50130b6231073970"
+  },
+  {
+    "id": 4111,
+    "path": "baloncuaga_skyboxes/night/up.tga",
+    "file": "night_up.bsk",
+    "bytes": 3145746,
+    "packed": 275195,
+    "sha256": "4d88c10a05275ec3b314229e69ea006a72b0f1fc3c268cf1a5dc7384b1456de7"
+  },
+  {
+    "id": 4112,
+    "path": "baloncuaga_skyboxes/night/dn.tga",
+    "file": "night_dn.bsk",
+    "bytes": 3145746,
+    "packed": 43881,
+    "sha256": "525cc4b754e88cbd3da0af99f42d1585da3225b27fc8b53509aff27f7ca38d95"
+  },
+  {
+    "id": 4113,
+    "path": "baloncuaga_skyboxes/night/preview.tga",
+    "file": "night_preview.bsk",
+    "bytes": 393234,
+    "packed": 112343,
+    "sha256": "13db9c17ba341361a2fa48e8a17d2cc07f9c73428b1d74ce5f5305c50dab5b2e"
+  },
+  {
+    "id": 4114,
+    "path": "baloncuaga_skyboxes/sunset/rt.tga",
+    "file": "sunset_rt.bsk",
+    "bytes": 3145746,
+    "packed": 374604,
+    "sha256": "42a76438c65fccd22ef138a2383cb230487e61881dd7229b754fac5fa89d1111"
+  },
+  {
+    "id": 4115,
+    "path": "baloncuaga_skyboxes/sunset/bk.tga",
+    "file": "sunset_bk.bsk",
+    "bytes": 3145746,
+    "packed": 410200,
+    "sha256": "20632148ff00ad446925c6867bf4044c0ce8cdd8f69c34964bd7371388804614"
+  },
+  {
+    "id": 4116,
+    "path": "baloncuaga_skyboxes/sunset/lf.tga",
+    "file": "sunset_lf.bsk",
+    "bytes": 3145746,
+    "packed": 391194,
+    "sha256": "76d1bd73c5e39b0c47f32aa9f244385cdd27c73de1ddb9a46fd3fc4002e268d4"
+  },
+  {
+    "id": 4117,
+    "path": "baloncuaga_skyboxes/sunset/ft.tga",
+    "file": "sunset_ft.bsk",
+    "bytes": 3145746,
+    "packed": 443531,
+    "sha256": "03f65ca2f8e7465200f59e3473c2852f7219056347c135f950a739993b56f22a"
+  },
+  {
+    "id": 4118,
+    "path": "baloncuaga_skyboxes/sunset/up.tga",
+    "file": "sunset_up.bsk",
+    "bytes": 3145746,
+    "packed": 488547,
+    "sha256": "361c51f4138e32b448ab7d33ace2eadc2572751886e4ba41e79f75ccae54fe73"
+  },
+  {
+    "id": 4119,
+    "path": "baloncuaga_skyboxes/sunset/dn.tga",
+    "file": "sunset_dn.bsk",
+    "bytes": 3145746,
+    "packed": 73077,
+    "sha256": "2c029283f5c7e8214ec9b1d3e218e092b8ede5e82b05f82106ea404fdfb10b10"
+  },
+  {
+    "id": 4120,
+    "path": "baloncuaga_skyboxes/sunset/preview.tga",
+    "file": "sunset_preview.bsk",
+    "bytes": 393234,
+    "packed": 109683,
+    "sha256": "2e38f4074a44fa699f564550b82cb3d166967caaf91bf05807e59909bcc9b1c2"
+  },
+  {
+    "id": 4121,
+    "path": "baloncuaga_skyboxes/overcast/rt.tga",
+    "file": "overcast_rt.bsk",
+    "bytes": 3145746,
+    "packed": 127239,
+    "sha256": "42dc3b26d9cb8977513cf786c09e654391f44401c4da8cd3c76f55ae660f68fd"
+  },
+  {
+    "id": 4122,
+    "path": "baloncuaga_skyboxes/overcast/bk.tga",
+    "file": "overcast_bk.bsk",
+    "bytes": 3145746,
+    "packed": 102036,
+    "sha256": "58e54fd567eea6e34c278350d785c5d29207733c11fadd98d7b94cf6ea1278ff"
+  },
+  {
+    "id": 4123,
+    "path": "baloncuaga_skyboxes/overcast/lf.tga",
+    "file": "overcast_lf.bsk",
+    "bytes": 3145746,
+    "packed": 132729,
+    "sha256": "0278564b8a402ed80dc83d967855eca5abf2551c3168b61af92da627a00e119f"
+  },
+  {
+    "id": 4124,
+    "path": "baloncuaga_skyboxes/overcast/ft.tga",
+    "file": "overcast_ft.bsk",
+    "bytes": 3145746,
+    "packed": 125866,
+    "sha256": "c5ff1c5acb3924f0664bb539c47f41d9913d9ad44b29363bd459a1f996dea29d"
+  },
+  {
+    "id": 4125,
+    "path": "baloncuaga_skyboxes/overcast/up.tga",
+    "file": "overcast_up.bsk",
+    "bytes": 3145746,
+    "packed": 195118,
+    "sha256": "1d4c6e74ff6c8e125a287b1f0919ac0544af5bbdd401384cf7d7deecc9998fbe"
+  },
+  {
+    "id": 4126,
+    "path": "baloncuaga_skyboxes/overcast/dn.tga",
+    "file": "overcast_dn.bsk",
+    "bytes": 3145746,
+    "packed": 67894,
+    "sha256": "4994dca2557208dbeae0074cf75712f57e67fd1294de70f95954c0391216887d"
+  },
+  {
+    "id": 4127,
+    "path": "baloncuaga_skyboxes/overcast/preview.tga",
+    "file": "overcast_preview.bsk",
+    "bytes": 393234,
+    "packed": 40705,
+    "sha256": "28f7bb868ec11e2c21a8de42baff452fdc760daf996acbebc7d6e158b5a31ce6"
+  },
+  {
+    "id": 4128,
+    "path": "baloncuaga_skyboxes/aurora/rt.tga",
+    "file": "aurora_rt.bsk",
+    "bytes": 3145746,
+    "packed": 652280,
+    "sha256": "701907be8a52cca751b9e5f1a367fa7d252b9ef1ba9d0f61053f9356c8bf7b5d"
+  },
+  {
+    "id": 4129,
+    "path": "baloncuaga_skyboxes/aurora/bk.tga",
+    "file": "aurora_bk.bsk",
+    "bytes": 3145746,
+    "packed": 853352,
+    "sha256": "10eecd0fe6134f2fb0e734439a693f3bf349bcd8662c80b20a5f13739c318638"
+  },
+  {
+    "id": 4130,
+    "path": "baloncuaga_skyboxes/aurora/lf.tga",
+    "file": "aurora_lf.bsk",
+    "bytes": 3145746,
+    "packed": 523955,
+    "sha256": "47ffa6965653d0f7101feb10480a7acc51eee53693fc5b730864ced0b84b956d"
+  },
+  {
+    "id": 4131,
+    "path": "baloncuaga_skyboxes/aurora/ft.tga",
+    "file": "aurora_ft.bsk",
+    "bytes": 3145746,
+    "packed": 447814,
+    "sha256": "bc56b587e37ba27529b5a3ad8f9297c24d3c4dc2bc55a9e39cfb1684b2c2156a"
+  },
+  {
+    "id": 4132,
+    "path": "baloncuaga_skyboxes/aurora/up.tga",
+    "file": "aurora_up.bsk",
+    "bytes": 3145746,
+    "packed": 1001184,
+    "sha256": "00eb4cd629c2669fc45af30c25f48110a5417b11a115027602e81d14cbdca0ed"
+  },
+  {
+    "id": 4133,
+    "path": "baloncuaga_skyboxes/aurora/dn.tga",
+    "file": "aurora_dn.bsk",
+    "bytes": 3145746,
+    "packed": 41854,
+    "sha256": "cab451c172a4cea8d0b5b9413c4ccab0251c1df546368b77db09d124b4dae3ae"
+  },
+  {
+    "id": 4134,
+    "path": "baloncuaga_skyboxes/aurora/preview.tga",
+    "file": "aurora_preview.bsk",
+    "bytes": 393234,
+    "packed": 108838,
+    "sha256": "fdb74d922b5c7552774d7b7a15520f2fb522706dac008f43a69de56579d214b2"
+  },
+  {
+    "id": 4135,
+    "path": "baloncuaga_skyboxes/space/rt.tga",
+    "file": "space_rt.bsk",
+    "bytes": 3145746,
+    "packed": 1200233,
+    "sha256": "ba7498a3ec618c4142b379df28bd972f2326a11bac8a173167aa98259af85231"
+  },
+  {
+    "id": 4136,
+    "path": "baloncuaga_skyboxes/space/bk.tga",
+    "file": "space_bk.bsk",
+    "bytes": 3145746,
+    "packed": 1110132,
+    "sha256": "86e267e9adddd1f555b0f56f10357ef75d785e556f3d9b734e5bc989a7a5f0f0"
+  },
+  {
+    "id": 4137,
+    "path": "baloncuaga_skyboxes/space/lf.tga",
+    "file": "space_lf.bsk",
+    "bytes": 3145746,
+    "packed": 1124862,
+    "sha256": "44ba6b18a590b2b96cd07568f2b297d0f5ff0e0fcae2c96e84b39ed3f2d93887"
+  },
+  {
+    "id": 4138,
+    "path": "baloncuaga_skyboxes/space/ft.tga",
+    "file": "space_ft.bsk",
+    "bytes": 3145746,
+    "packed": 1085928,
+    "sha256": "91b9b455beceb08ec99e00706767912212a51d697d55ce87746790c8a54949b2"
+  },
+  {
+    "id": 4139,
+    "path": "baloncuaga_skyboxes/space/up.tga",
+    "file": "space_up.bsk",
+    "bytes": 3145746,
+    "packed": 440603,
+    "sha256": "8120d50261dd6b3798d0f035c3241b7b7e0590020286dbbdbefcac8053b97210"
+  },
+  {
+    "id": 4140,
+    "path": "baloncuaga_skyboxes/space/dn.tga",
+    "file": "space_dn.bsk",
+    "bytes": 3145746,
+    "packed": 460106,
+    "sha256": "761035d31eb75ccde9f60ca7c056c354a43ec6895cb8589a18ee81c985bedb49"
+  },
+  {
+    "id": 4141,
+    "path": "baloncuaga_skyboxes/space/preview.tga",
+    "file": "space_preview.bsk",
+    "bytes": 393234,
+    "packed": 157096,
+    "sha256": "b812361cb3862c853534e88438f33227e3a59e133b6830f2f941aca05c5907cc"
+  }
+]

@@ -17,7 +17,7 @@ static void observe(model_t *model){if(!SmokeTint::model(model)||observed.size()
 static thread_local bool textureCloud;
 
 static bool (*scopeActive)();
-static thread_local GLuint boundTexture;static thread_local bool active,probing,forwardingColor;static thread_local float nativeColor[4];static thread_local GLint nativeEnv;
+static thread_local GLuint boundTexture;static thread_local bool active,probing,forwardingColor;static thread_local volatile float nativeColor[4];static thread_local GLint nativeEnv;
 static bool matched(GLuint id){return id&&std::find(textures.begin(),textures.end(),id)!=textures.end();}
 static void invalidate(){textures.clear();context=nullptr;checked=0;active=false;boundTexture=0;}
 static void probe(){
@@ -46,7 +46,7 @@ static void APIENTRY begin(GLenum mode){CallbackScope scope;
     const bool scoped=scopeActive&&scopeActive();
     if(!ready||unloading||probing||!Hud::smokeTintOn||(!scoped&&!matched(boundTexture))){active=false;originalBegin(mode);return;}
     GLint actualTexture=0;glGetIntegerv(GL_TEXTURE_BINDING_2D,&actualTexture);boundTexture=static_cast<GLuint>(actualTexture);active=(scoped||matched(boundTexture))&&glIsEnabled(GL_TEXTURE_2D);
-    if(active){textureCloud=matched(boundTexture)&&!(scopeActive&&scopeActive());glGetFloatv(GL_CURRENT_COLOR,nativeColor);glGetTexEnviv(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,&nativeEnv);
+    if(active){textureCloud=matched(boundTexture)&&!(scopeActive&&scopeActive());float capturedColor[4];glGetFloatv(GL_CURRENT_COLOR,capturedColor);for(int i=0;i<4;++i)nativeColor[i]=capturedColor[i];glGetTexEnviv(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,&nativeEnv);
         glPushAttrib(GL_TEXTURE_BIT);
         if(textureCloud){float selected[4]={Hud::smokeRgb[0]/255.f,Hud::smokeRgb[1]/255.f,Hud::smokeRgb[2]/255.f,1};glTexEnvfv(GL_TEXTURE_ENV,GL_TEXTURE_ENV_COLOR,selected);glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_BLEND);}
         else glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);

@@ -1,6 +1,7 @@
 #pragma once
 namespace Models {
 static engine_studio_api_t *api;
+static r_studio_interface_t *studioInterface;
 static int (*drawOriginal)(int);
 static bool available;
 static int pending[4];
@@ -31,9 +32,12 @@ static bool apply(int category,int selected){
     loadedName[category]=name;cachedName[category]=staged;maps[category]=asset.sequenceMap;choice[category]=pending[category]=selected;save();message=u8"Применено: "+name;return true;
 }
 static void refresh(){save();scanModels();for(int c=0;c<4;++c)pending[c]=choice[c];Preview::release();message=u8"Список обновлён. Выберите модель и нажмите «Применить».";}
+#if defined(__GNUC__) && defined(__i386__)
+__attribute__((force_align_arg_pointer))
+#endif
 static int draw(int flags){
     CallbackScope scope;if(!ready||unloading||!api||!eng)return drawOriginal(flags);auto entity=api->GetCurrentEntity();auto view=eng->GetViewModel();
-    if(!entity||entity!=view||!view->model)return drawOriginal(flags);
+    if(!entity||entity!=view||!view->model)return PlayerOutfits::drawWorld(flags,drawOriginal);
     const char *n=strrchr(view->model->name,'/');n=n?n+1:view->model->name;int c=-1;for(int i=0;i<4;++i)if(!_stricmp(n,stockNames[i])){c=i;break;}
     if(c<0||!choice[c]||choice[c]>counts[c])return drawOriginal(flags);
     if(loadedName[c]!=files[c][choice[c]-1]){int wanted=choice[c];if(!apply(c,wanted)){choice[c]=0;save();return drawOriginal(flags);}}
@@ -64,7 +68,7 @@ static bool install(HMODULE client,HMODULE hw){
     auto hookStatus=MH_CreateHook(reinterpret_cast<void *>(iface->StudioDrawModel),reinterpret_cast<void *>(draw),reinterpret_cast<void **>(&drawOriginal));
     if(hookStatus!=MH_OK){if(reason!=3){reason=3;char msg[128];snprintf(msg,sizeof(msg),"Models: studio draw hook rejected: MinHook status %d",int(hookStatus));logLine(msg);}return false;}
     if(ready&&MH_EnableHook(reinterpret_cast<void *>(iface->StudioDrawModel))!=MH_OK){MH_RemoveHook(reinterpret_cast<void *>(iface->StudioDrawModel));drawOriginal=nullptr;return false;}
-    api=candidate;available=true;for(int c=0;c<4;++c)pending[c]=choice[c];logLine("Models: render-only studio hook installed; native animation and sound events retained.");return true;
+    api=candidate;studioInterface=iface;available=true;for(int c=0;c<4;++c)pending[c]=choice[c];logLine("Models: render-only studio hook installed; native animation and sound events retained.");return true;
 }
 static void ensureInstalled(){static ULONGLONG checked;ULONGLONG now=GetTickCount64();if(available||unloading||now-checked<1000)return;checked=now;install(GetModuleHandleA("client.dll"),GetModuleHandleA("hw.dll"));}
 static void reset(){for(int c=0;c<4;++c){loadedName[c].clear();cachedName[c].clear();maps[c].clear();}}

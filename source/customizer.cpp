@@ -26,6 +26,7 @@ enum netsrc_s { NS_CLIENT, NS_SERVER, NS_MULTICAST };
 #include "usercmd.h"
 #include "r_studioint.h"
 #include "triangleapi.h"
+#include "demo_api.h"
 #include "cvardef.h"
 #include "MinHook.h"
 // Every hook this plugin creates goes through a small forwarder in memory of its own,
@@ -35,6 +36,8 @@ enum netsrc_s { NS_CLIENT, NS_SERVER, NS_MULTICAST };
 // is pointed at the game's original code and the forwarders and MinHook's trampolines stay
 // in memory, so no jump of any plugin ever lands in the freed DLL.
 static void *makeStub(void *to,void *volatile *&slot){
+    static SRWLOCK allocationLock=SRWLOCK_INIT;
+    struct AllocationGuard{SRWLOCK *lock;AllocationGuard(SRWLOCK *value):lock(value){AcquireSRWLockExclusive(lock);}~AllocationGuard(){ReleaseSRWLockExclusive(lock);}} guard(&allocationLock);
     static unsigned char *page;static size_t used;
     if(!page||used+16>4096){page=static_cast<unsigned char *>(VirtualAlloc(nullptr,4096,MEM_COMMIT|MEM_RESERVE,PAGE_EXECUTE_READWRITE));used=0;if(!page)return nullptr;}
     unsigned char *code=page+used;used+=16;
@@ -81,7 +84,7 @@ static void restoreUnsharedHooks(int &restored,int &shared){
         else ++shared;}
 }
 
-// Only first-person cosmetic models and the client camera are modified.
+// Cosmetics are local render substitutions; server weapon/player logic stays native.
 static cl_enginefunc_t *eng;
 static HMODULE selfModule;
 static char iniPath[MAX_PATH], logPath[MAX_PATH], rootPath[MAX_PATH];
@@ -135,9 +138,14 @@ namespace Hud { static void paint(int,int,const char *,bool);static void save();
 namespace Weave {static void savePreferences();}
 namespace Showkeys {static void wheelEvent(int);}
 namespace Models {static void ensureInstalled();}
+namespace PlayerOutfits {static void loadSettings();static void saveSettings();static bool install();static void ensure();static void reset();static void release();static int drawWorld(int,int(*)(int));}
 namespace SmokeGL {static void probe();}
 namespace SmokeParticle {static void ensure();}
 namespace FlashTint {static void apply();static void message(const void *data,int size);}
+namespace NativeMenuAnimation {static bool install(HMODULE);static void armFromRenderThread();static void requestRepaint();static bool available();}
+namespace Skybox {static void load();static void save();static void frame();static void resetVideo();static void release();}
+namespace GlassScoreboard {static bool install(HMODULE);static void frame();static void resetVideo();static void release();static bool available();static const char* status();}
+static void skyboxFrameForDC(HDC);
 static void beginUnload();
 static BOOL (WINAPI *originalSwap)(HDC), (WINAPI *originalWglSwap)(HDC);
 static thread_local bool swapping;
@@ -145,15 +153,23 @@ static ULONGLONG lastRedrawTick;
 static void menuOutsideGame();
 static BOOL swapFrame(HDC dc,BOOL (WINAPI *original)(HDC)){
     CallbackScope scope;
-    if(!swapping){swapping=true;
-        if(ready&&!unloading){IniCache::tick();Models::ensureInstalled();SmokeParticle::ensure();SmokeGL::probe();DWORD pid=0;GetWindowThreadProcessId(GetForegroundWindow(),&pid);bool down=pid==GetCurrentProcessId()&&(GetAsyncKeyState(VK_F11)&0x8000);if(down&&!f11WasDown)unloadRequested=true;f11WasDown=down;
-            if(unloadRequested&&(!initThread||WaitForSingleObject(initThread,0)==WAIT_OBJECT_0))beginUnload();
-            else if(!unloadRequested)menuOutsideGame();}
-        swapping=false;
-    }
+    if(swapping)return original(dc);
+    swapping=true;
+    // Cover the real presentation as well: GDI SwapBuffers may enter the WGL
+    // export that we also hook. The nested call must never submit a second UI.
+    struct PresentScope {~PresentScope(){swapping=false;}} presentScope;
+    if(ready&&!unloading){IniCache::tick();Models::ensureInstalled();PlayerOutfits::ensure();SmokeParticle::ensure();SmokeGL::probe();DWORD pid=0;GetWindowThreadProcessId(GetForegroundWindow(),&pid);bool down=pid==GetCurrentProcessId()&&(GetAsyncKeyState(VK_F11)&0x8000);if(down&&!f11WasDown)unloadRequested=true;f11WasDown=down;
+        if(unloadRequested&&(!initThread||WaitForSingleObject(initThread,0)==WAIT_OBJECT_0))beginUnload();
+        else if(!unloadRequested&&dc==wglGetCurrentDC()){skyboxFrameForDC(dc);NativeMenuAnimation::armFromRenderThread();menuOutsideGame();}}
     return original(dc);
 }
+#if defined(__GNUC__)
+__attribute__((force_align_arg_pointer))
+#endif
 static BOOL WINAPI swapBuffers(HDC dc){return swapFrame(dc,originalSwap);}
+#if defined(__GNUC__)
+__attribute__((force_align_arg_pointer))
+#endif
 static BOOL WINAPI wglSwapBuffersHook(HDC dc){return swapFrame(dc,originalWglSwap);}
 
 
@@ -169,7 +185,7 @@ static void save() {
     WritePrivateProfileStringA("settings", "fov", value, iniPath);
     snprintf(value,sizeof(value),"%d",crossStyle);WritePrivateProfileStringA("crosshair","style",value,iniPath);
     snprintf(value,sizeof(value),"%d",crossColor);WritePrivateProfileStringA("crosshair","color",value,iniPath);
-    CrossConfig::save();
+    CrossConfig::save();Skybox::save();PlayerOutfits::saveSettings();
     for (int i = 0; i < 4; ++i)
         WritePrivateProfileStringA("models", categories[i], choice[i] ? files[i][choice[i]-1] : "", iniPath);
     Hud::save();
@@ -248,6 +264,7 @@ static void guardCrosshair(){
     crossPending=true;applyCrosshair();
 }
 #include "model_validation.h"
+#include "embedded_installer.h"
 static bool ensureModelFolders(){
     bool success=true;
     const char *folders[]={"cstrike","cstrike/models","cstrike/models/customizer",
@@ -357,9 +374,29 @@ static void postRunCmd(local_state_t *from,local_state_t *to,usercmd_t *cmd,int 
 #include "chat_box.h"
 namespace Config {static bool saveProfile(const char *);static bool loadProfile(const char *);static bool saveCurrent();static const char *status();}
 #include "model_runtime.h"
+#include "player_outfits.h"
 #include "sound_audit.h"
 #include "flash_tint.h"
+#include "game_hud_state.h"
+#include "native_hud_style.h"
+#include "skybox_runtime.h"
+// Auxiliary overlay windows may own their own GL contexts. Only this game's
+// foreground host is allowed to commit/recreate sky resources from SwapBuffers.
+static void skyboxFrameForDC(HDC dc){
+    static std::atomic<HWND> knownHost{nullptr};HWND host=knownHost.load(std::memory_order_acquire);
+    HWND surface=WindowFromDC(dc);if(!surface)return;
+    if(!host||!IsWindow(host)){
+        HWND foreground=GetForegroundWindow();DWORD pid=0;GetWindowThreadProcessId(foreground,&pid);
+        if(pid!=GetCurrentProcessId()||(surface!=foreground&&!IsChild(foreground,surface)))return;
+        host=GetAncestor(surface,GA_ROOT);if(!host)host=surface;
+        if(GetWindowThreadProcessId(host,nullptr)!=GetCurrentThreadId())return;
+        knownHost.store(host,std::memory_order_release);
+    }
+    if(GetWindowThreadProcessId(host,nullptr)==GetCurrentThreadId()&&(surface==host||IsChild(host,surface))){Skybox::frame();}
+}
 #include "weave_menu.h"
+#include "native_menu_animation.h"
+#include "glass_scoreboard.h"
 #include "config_profiles.h"
 static void crossSample(int x,int y,float time) {
     if(crossStyle>=7){GoCross::sample(x,y,Preview::spin?100.f:0.f,true);return;}
@@ -434,27 +471,38 @@ static void trainerPanel(int x,int y,int w,int h){
 // There the ImGui menu is drawn from SwapBuffers, so Insert works before joining.
 static void menuOutsideGame(){
     if(!eng||!Weave::useMenu||!wglGetCurrentContext()||GetTickCount64()-lastRedrawTick<300)return;
+    GameHudState::installMessages(); // capture initial connection packets before the first HUD_Redraw
     Mouse::menuScreen=true;ChatScroll::install();
     DWORD foregroundPid=0;GetWindowThreadProcessId(GetForegroundWindow(),&foregroundPid);
     bool insertDown=foregroundPid==GetCurrentProcessId()&&(GetAsyncKeyState(MenuTheme::menuKey)&0x8000);
     if(insertDown&&!insertWasDown)toggleMenu();
     insertWasDown=insertDown;
-    Mouse::sync();if(!opened)return;
-    // In the main menu the engine can report its video mode (e.g. 1280x1024)
-    // while the window is larger (1920x1080). Use the real client area of the
-    // GL window so drawing covers the screen and the cursor lines up.
-    SCREENINFO screen={};screen.iSize=sizeof(screen);RECT client={};HWND glWindow=WindowFromDC(wglGetCurrentDC());
-    if(glWindow&&GetClientRect(glWindow,&client)&&client.right>0&&client.bottom>0){screen.iWidth=client.right;screen.iHeight=client.bottom;}
-    else if(!eng->pfnGetScreenInfo||!eng->pfnGetScreenInfo(&screen)||screen.iWidth<=0||screen.iHeight<=0){
-        GLint viewport[4]={};glGetIntegerv(GL_VIEWPORT,viewport);screen.iWidth=viewport[2];screen.iHeight=viewport[3];
-        if(screen.iWidth<=0||screen.iHeight<=0)return;
-    }
+    Mouse::sync();
+    // Native GameUI owns its retained background and repaint lifecycle. Do not
+    // initialise ImGui/fonts or submit transparent draws while its menu is idle.
+    if(!opened&&!Weave::isAnimating())return;
+    // Use the same presentation size as the in-game ImGui HUD.
+    SCREENINFO screen={};screen.iSize=sizeof(screen);
+    if(eng->pfnGetScreenInfo)eng->pfnGetScreenInfo(&screen);
+    const auto surface=UiSurface::current(screen.iWidth,screen.iHeight);
+    screen.iWidth=surface.width;screen.iHeight=surface.height;
+    if(screen.iWidth<=0||screen.iHeight<=0)return;
     static bool loggedOpen,loggedDrawn;
-    if(!loggedOpen){loggedOpen=true;char line[96];snprintf(line,sizeof(line),"Main menu: opening ImGui menu at %dx%d.",screen.iWidth,screen.iHeight);logLine(line);}
+    const bool menuVisible=opened||Weave::isAnimating();
+    if(menuVisible&&!loggedOpen){loggedOpen=true;char line[96];snprintf(line,sizeof(line),"Main menu: opening ImGui menu at %dx%d.",screen.iWidth,screen.iHeight);logLine(line);}
     Mouse::begin(screen);menuScreenW=screen.iWidth;menuScreenH=screen.iHeight;
-    Hud::outsideGame=Weave::outsideGame=true;bool drawn=Weave::draw(screen,GetTickCount64()/1000.f);Hud::outsideGame=Weave::outsideGame=false;
-    if(!loggedDrawn){loggedDrawn=true;logLine(drawn?"Main menu: first menu frame drawn.":"Main menu: menu frame skipped (renderer not ready).");}
+    // Keep all native background painting inside GameUI. ASI opening/closing
+    // animation stays confined to the explicitly opened BALONCUAGA menu.
+    Weave::outsideGameDecor=nullptr;
+    NativeMenuAnimation::requestRepaint();
+    Hud::outsideGame=Weave::outsideGame=true;
+    bool drawn=opened?Weave::draw(screen,GetTickCount64()/1000.f):Weave::drawOverlay(screen,GetTickCount64()/1000.f);
+    Hud::outsideGame=Weave::outsideGame=false;
+    if(menuVisible&&!loggedDrawn){loggedDrawn=true;logLine(drawn?"Main menu: first menu frame drawn.":"Main menu: menu frame skipped (renderer not ready).");}
 }
+#if defined(__GNUC__)
+__attribute__((force_align_arg_pointer))
+#endif
 static int redraw(float time, int intermission) {
     CallbackScope callbackScope;
     if(ready){DWORD foregroundPid=0;GetWindowThreadProcessId(GetForegroundWindow(),&foregroundPid);
@@ -464,7 +512,8 @@ static int redraw(float time, int intermission) {
     }
     lastRedrawTick=GetTickCount64();Mouse::menuScreen=false;
     if(ready){applyCrosshair();guardCrosshair();FlashTint::apply();Hud::chatPresentationReady=wglGetCurrentContext()!=nullptr;Hud::frame();ChatScroll::install();Trainer::frame();}
-    int result = origRedraw(time, intermission);
+    if(ready)GameHudState::frame(time,intermission);
+    int result;{NativeHudStyle::Frame nativeHud;result=origRedraw(time,intermission);}
     // Some engine input paths do not forward unbound Insert to HUD_Key_Event.
     // Poll only in our foreground process, and suppress the same edge if the client saw it.
     DWORD foregroundPid = 0;
@@ -497,6 +546,9 @@ static void refdef(ref_params_t *params) {CallbackScope scope;origRefdef(params)
 static bool captured[256];
 static int keyEvent(int down, int key, const char *binding) {
     CallbackScope callbackScope;
+    static int scoresKey=-1;
+    if(binding&&!_stricmp(binding,"+showscores")){Weave::combatScoresHeld=down!=0;scoresKey=down?key:-1;}
+    else if(!down&&key==scoresKey){Weave::combatScoresHeld=false;scoresKey=-1;}
     if (!ready) return origKey(down, key, binding);
     if(key==145){if(down)unloadRequested.store(true,std::memory_order_release);return 0;}
     bool chatBinding=binding && (!_stricmp(binding,"messagemode") || !_stricmp(binding,"messagemode2"));
@@ -571,6 +623,8 @@ static int keyEvent(int down, int key, const char *binding) {
 }
 static int vidInit() {
     CallbackScope callbackScope;
+    NativeHudStyle::resetVideo();Skybox::resetVideo();GlassScoreboard::resetVideo();
+    Weave::combatScoresHeld=false;PlayerOutfits::reset();
     // Map changes invalidate model pointers; don't dereference the previous map.
     lastViewModel = nullptr; baseModel = replacement = nullptr;
     SmokeGL::invalidate();SmokeGL::observed.clear();SmokeTint::newMap();
@@ -693,8 +747,17 @@ static void waitForGameStart(){
 static DWORD WINAPI initialize(void *) {
     IniCache::deferred=true;   // in game, settings reach the disk in the background
     waitForGameStart();
+    const auto installation=EmbeddedInstaller::installForGame();
+    if(!installation.ok){
+        char line[128];snprintf(line,sizeof(line),"Automatic assets: failed; error=%lu rollback=%d.",static_cast<unsigned long>(installation.error),int(installation.rollbackOk));logLine(line);
+        MessageBoxW(nullptr,L"Не удалось установить файлы BALONCUAGA. Проверьте доступ к папке игры. Изменённые файлы сохранены в .baloncuaga-install/backups. Плагин не включён.",L"BALONCUAGA",MB_OK|MB_ICONERROR);return 0;
+    }
+    if(installation.restart){
+        logLine("Automatic assets: installed with backups. Restart required for native resources; hooks not enabled in this session.");
+        MessageBoxW(nullptr,L"Нужные файлы BALONCUAGA установлены. TAB возвращён к стандартному виду CS 1.6. Перезапустите игру один раз, чтобы применить ресурсы. Настройки и пользовательские модели сохранены.",L"BALONCUAGA",MB_OK|MB_ICONINFORMATION);return 0;
+    }
     ensureModelFolders();
-    logLine("BALONCUAGA " BALONCUAGA_VERSION " standalone build starting.");
+    logLine("baLONCUaga " BALONCUAGA_VERSION " standalone build starting.");
     HMODULE client = nullptr, hw = nullptr;
     for (int attempt = 0; attempt < 600; ++attempt) {
         client = GetModuleHandleA("client.dll"); hw = GetModuleHandleA("hw.dll");
@@ -721,8 +784,8 @@ static DWORD WINAPI initialize(void *) {
     WritePrivateProfileStringA("cs_fix",nullptr,nullptr,iniPath);WritePrivateProfileStringA("fps_visual",nullptr,nullptr,iniPath);
     // Load the configured opener before the first menu frame. Otherwise the
     // main-menu poll still waits for Insert after a saved key change.
-    MenuTheme::load();
-    logLine("Build: " BALONCUAGA_VERSION "-aurora-only; retired Classic and Peach; legacy profiles migrate to Aurora.");
+    MenuTheme::load();Skybox::load();
+    logLine("Build: " BALONCUAGA_VERSION "-carbon-3xl-skyboxes; native-paint animation; scalar TLS access.");
     scanModels();
     if (MH_Initialize() != MH_OK) { logLine("MinHook initialization failed."); return 0; }
     struct Hook { const char *name; void *callback; void **original; };
@@ -750,6 +813,7 @@ static DWORD WINAPI initialize(void *) {
     else logLine("Movement HUD: unsupported client; takeoff data unavailable.");
     if(!postTarget||MH_CreateHook(postTarget,reinterpret_cast<void *>(postRunCmd),reinterpret_cast<void **>(&origPostRunCmd))!=MH_OK)logLine("Prediction capture unavailable: speedometer and crosshair shooting animation disabled.");
     if(!Models::install(client,hw))logLine("Models: studio API not initialized yet; retrying on the render thread.");
+    PlayerOutfits::install();
     if(!SmokeTint::install(client))logLine("Smoke: particle capture unavailable; temp-entity recoloring remains available.");
     Mouse::activate=reinterpret_cast<void(*)()>(GetProcAddress(client,"IN_ActivateMouse"));
     Mouse::deactivate=reinterpret_cast<void(*)()>(GetProcAddress(client,"IN_DeactivateMouse"));
@@ -765,12 +829,15 @@ static DWORD WINAPI initialize(void *) {
     bool swapOk=swapTarget&&MH_CreateHook(swapTarget,reinterpret_cast<void *>(swapBuffers),reinterpret_cast<void **>(&originalSwap))==MH_OK;
     bool wglOk=wglTarget&&wglTarget!=swapTarget&&MH_CreateHook(wglTarget,reinterpret_cast<void *>(wglSwapBuffersHook),reinterpret_cast<void **>(&originalWglSwap))==MH_OK;
     if(!swapOk&&!wglOk){MH_Uninitialize();logLine("Cannot install render-thread unload dispatcher; initialization stopped.");return 0;}
+    NativeHudStyle::install(hw);Skybox::install(hw);
+    NativeMenuAnimation::install(GetModuleHandleA("GameUI.dll"));
+    // Native CS scoreboard resources/fonts are restored; no glass-TAB hooks.
     ready = true;
     if (MH_EnableHook(MH_ALL_HOOKS) != MH_OK) {
         ready = false; MH_DisableHook(MH_ALL_HOOKS); MH_Uninitialize(); logLine("Enabling hooks failed."); return 0;
     }
     Mouse::extraAction=extraUiAction;Trainer::start();
-    Hud::installMessages();
+    Hud::installMessages();GameHudState::installMessages();
     logLine("Initialized. Insert opens the menu. First-person models; FOV 60..120; zoom preserved.");
     return 0;
 }
@@ -820,14 +887,16 @@ static void beginUnload(){
     if(!ChatScroll::uninstall()){
         logLine("F11: window subclass restoration blocked; DLL retained safely.");SetEvent(gate);unloadRequested=false;unloading=false;return;
     }
+    if(!GameHudState::restore()){logLine("F11: combat HUD message restoration blocked; DLL retained safely.");SetEvent(gate);unloadRequested=false;unloading=false;return;}
     if(!Hud::restoreDirectMessages()){logLine("F11: native message restoration blocked; DLL retained safely.");SetEvent(gate);unloadRequested=false;unloading=false;return;}
     save();IniCache::flushNow();opened=false;ChatEditor::close();Hud::chatOpened=false;restoreModel();SmokeTint::restoreEntities();Mouse::sync();
     if(crossCaptured&&eng&&eng->pfnClientCmd){char command[256];snprintf(command,sizeof(command),
         "cl_crosshair_size \"%s\";cl_dynamiccrosshair %d;cl_crosshair_color \"%s\";crosshair %d;cl_crosshair_translucent %d\n",
         originalCrossSize,originalDynamic,originalCrossColor,originalCrossEnabled,originalTranslucent);eng->pfnClientCmd(command);}
 
+    NativeMenuAnimation::requestRepaint();
     Trainer::allowed=false;Trainer::enabled=false;ready=false;
-    Preview::release();Weave::resetVideo();Hud::resetVideo();Weave::shutdown();Models::reset();Mouse::hits.clear();Mouse::extraAction=nullptr;
+    PlayerOutfits::release();GlassScoreboard::release();Skybox::release();Preview::release();Weave::resetVideo();Hud::resetVideo();Weave::shutdown();Models::reset();Mouse::hits.clear();Mouse::extraAction=nullptr;
     unloadPrepared=true;SetEvent(gate);
 }
 extern "C" __declspec(dllexport) void InitializeASI() {
@@ -846,7 +915,7 @@ extern "C" __declspec(dllexport) void InitializeASI() {
         CloseHandle(single); logLine("Another copy of BALONCUAGA is already loaded in this game; this copy stays inactive.");
         return;
     }
-    logLine("BALONCUAGA HONOR200 " BALONCUAGA_VERSION " x86 starting.");
+    logLine("baLONCUaga " BALONCUAGA_VERSION " x86 starting.");
     initThread = CreateThread(nullptr, 0, initialize, nullptr, 0, nullptr);
     if (!initThread) logLine("Cannot create initialization thread.");
 }
@@ -857,6 +926,8 @@ BOOL WINAPI DllMain(HINSTANCE module, DWORD reason, LPVOID reserved) {
     // InitializeASI and the deferred F11 unload run outside the loader lock.
     return TRUE;
 }
+
+
 
 
 

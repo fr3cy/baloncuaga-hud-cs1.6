@@ -1,7 +1,7 @@
 #pragma once
 static void referenceText(ImDrawList *d,ImFont *font,float size,ImVec2 p,ImU32 color,const std::string &text,bool shadow=true){
     p={std::round(p.x*scale)/scale,std::round(p.y*scale)/scale};
-    if(shadow)d->AddText(font,size,p+ImVec2(1,1),IM_COL32(0,0,0,190),text.c_str());d->AddText(font,size,p,color,text.c_str());
+    if(shadow)hudDrawText(d,font,size,p+ImVec2(1/scale,1/scale),IM_COL32(0,0,0,190),text.c_str());hudDrawText(d,font,size,p,color,text.c_str());
 }
 static bool referenceButton(const char *id,ImVec2 local,ImVec2 size,const char *label,bool active,bool tab=false){
     ImGui::SetCursorPos(local);bool pressed=ImGui::InvisibleButton(id,size);auto p=ImGui::GetItemRectMin();auto *d=ImGui::GetWindowDrawList();
@@ -16,13 +16,14 @@ static void chatPanel(bool embedded){
     const float textSize=18*ChatBox::textScale(),smallSize=12*ChatBox::textScale(),rowHeight=std::max(27.f,textSize+9),timeWidth=58*ChatBox::textScale();
     float w=embedded?ImGui::GetContentRegionAvail().x:std::min(ChatBox::panelWidth(760),io.DisplaySize.x-24);
     float h=embedded?std::min(300.f,ImGui::GetContentRegionAvail().y):interactive?123.f+ChatBox::lineCount*rowHeight:16.f+ChatBox::lineCount*rowHeight;
-    if(w<280||h<(interactive?120:rowHeight+8))return;
+    if(!embedded)h=std::min(h,std::max(0.f,io.DisplaySize.y-std::max(48.f,combatChatInset/scale)-8));
+    if(w<280||h<(interactive?106+rowHeight:rowHeight+16))return;
     struct Row {const Hud::ChatLine *message;std::vector<Hud::ChatSpan> spans;bool first;};std::vector<Row> rows;
     ULONGLONG now=GetTickCount64();float textWidth=w-30-(ChatBox::timeOn?timeWidth:0);
     // Only the rows that can be shown are wrapped, newest first. Wrapping the whole
     // history (up to 2000 messages) every frame cut the frame rate while chat was open.
-    int capacity=std::min(ChatBox::lineCount,std::max(1,static_cast<int>((h-106)/rowHeight)));
-    size_t wanted=interactive?static_cast<size_t>(capacity+std::max(0,Hud::chatScroll)+12):static_cast<size_t>(ChatBox::lineCount);
+    int capacity=std::min(ChatBox::lineCount,std::max(1,static_cast<int>((h-(interactive?106:16))/rowHeight)));
+    size_t wanted=interactive?static_cast<size_t>(capacity+std::max(0,Hud::chatScroll)+12):static_cast<size_t>(capacity);
     size_t unread=0;
     for(auto it=Hud::history.rbegin();it!=Hud::history.rend();++it){const auto &message=*it;
         if(rows.size()>=wanted){unread=static_cast<size_t>(std::distance(it,Hud::history.rend()));break;}
@@ -35,13 +36,13 @@ static void chatPanel(bool embedded){
     if(!embedded&&rows.empty()&&!Hud::chatOpened)return;
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,{0,0});ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize,0.f);
     if(embedded)ImGui::BeginChild("##ChatPanel",{w,h},false,ImGuiWindowFlags_NoBackground|ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse);
-    else{h=std::min(h,io.DisplaySize.y-80);ImGui::SetNextWindowPos({12,std::max(8.f,io.DisplaySize.y-h-48)},ImGuiCond_Always);ImGui::SetNextWindowSize({w,h});
+    else{ImGui::SetNextWindowPos({12,std::max(8.f,io.DisplaySize.y-h-std::max(48.f,combatChatInset/scale))},ImGuiCond_Always);ImGui::SetNextWindowSize({w,h});
         int flags=ImGuiWindowFlags_NoDecoration|ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoBackground|ImGuiWindowFlags_NoSavedSettings|ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse;
         if(!interactive)flags|=ImGuiWindowFlags_NoInputs;ImGui::Begin("##BALONCUAGAChat",nullptr,flags);
     }
     ImGui::PopStyleVar(2);ImVec2 p=ImGui::GetWindowPos();auto *d=ImGui::GetWindowDrawList();
     if(!interactive){
-        if(!ChatBox::collapsed){int end=static_cast<int>(rows.size()),begin=std::max(0,end-ChatBox::lineCount);float y=p.y+8;
+        if(!ChatBox::collapsed){int end=static_cast<int>(rows.size()),begin=std::max(0,end-capacity);float y=p.y+8;
             d->PushClipRect(p+ImVec2(12,4),p+ImVec2(w-14,h-4),true);
             for(int i=begin;i<end;++i){const auto &line=rows[i];float x=p.x+16;
                 if(ChatBox::timeOn){if(line.first)referenceText(d,chatSmall,smallSize,{x,y+3},IM_COL32(146,151,147,255),line.message->date.size()>=16?line.message->date.substr(11,5):"",false);x+=timeWidth;}

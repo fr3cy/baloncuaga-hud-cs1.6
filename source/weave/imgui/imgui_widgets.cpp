@@ -1146,7 +1146,7 @@ bool ImGui::Checkbox( const char* label, bool* v ) {
             draw->AddRect( bb.Min - ImVec2( e, e ), bb.Max + ImVec2( e, e ), GetColorU32( ImGuiCol_Scheme, 0.16f * obj.anim * ( 4 - i ) / 3 ), style.FrameRounding + e, 0, 1.5f );
         }
     }
-    RenderCheckMark( draw, { bb.GetCenter( ).x - ( 9 * obj.anim ) / 2, bb.GetCenter( ).y - ( 9 * obj.anim ) / 2 }, GetColorU32( ImGuiCol_Text, obj.anim ), 9 * obj.anim );
+    RenderCheckMark( draw, { bb.GetCenter( ).x - ( 9 * obj.anim ) / 2, bb.GetCenter( ).y - ( 9 * obj.anim ) / 2 }, GetColorU32( ui::carbonMoon ? ImGuiCol_CheckMark : ImGuiCol_Text, obj.anim ), 9 * obj.anim );
 
     return pressed;
 }

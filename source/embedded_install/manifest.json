@@ -1,0 +1,1205 @@
+{
+  "bundle": "1bfa86c7f9bc98bb",
+  "files": [
+    {
+      "id": 5100,
+      "path": "cstrike/gfx/vgui/CS_logo.tga",
+      "file": "5100.bsk",
+      "bytes": 16428,
+      "packed": 4634,
+      "sha256": "26111413615e26ef00ae8516ff9ce3792058534214a732c1f800e6abf428be17",
+      "fnv64": "1dc2175e37064ee2",
+      "restart": true
+    },
+    {
+      "id": 5101,
+      "path": "cstrike/resource/background/800_1_a_loading.tga",
+      "file": "5101.bsk",
+      "bytes": 196652,
+      "packed": 44891,
+      "sha256": "59fa5ed3ff88a909f48ea33b19083a95fa76640925e91d3b2e805b0c6e39adf9",
+      "fnv64": "6d95be95f7a3e86c",
+      "restart": true
+    },
+    {
+      "id": 5102,
+      "path": "cstrike/resource/background/800_1_b_loading.tga",
+      "file": "5102.bsk",
+      "bytes": 196652,
+      "packed": 78676,
+      "sha256": "4db572fe1fcc20b0f14c6fcf755a69acc9bbd31c9fc47d395dc7b40e91921c8e",
+      "fnv64": "98c26ed6ba82cff9",
+      "restart": true
+    },
+    {
+      "id": 5103,
+      "path": "cstrike/resource/background/800_1_c_loading.tga",
+      "file": "5103.bsk",
+      "bytes": 196652,
+      "packed": 93280,
+      "sha256": "4766cd5caa3957b7f9bb6b8913ff24dce82ac7b3147d6bfeb6d6f63d3b63adf7",
+      "fnv64": "a8b2ef19715ea90f",
+      "restart": true
+    },
+    {
+      "id": 5104,
+      "path": "cstrike/resource/background/800_1_d_loading.tga",
+      "file": "5104.bsk",
+      "bytes": 24620,
+      "packed": 8341,
+      "sha256": "9e9d6b33529a276f5aaae5d62ad6411e081e108b0a6a9c78bbf9808d1202e99c",
+      "fnv64": "f9e398abf3944831",
+      "restart": true
+    },
+    {
+      "id": 5105,
+      "path": "cstrike/resource/background/800_2_a_loading.tga",
+      "file": "5105.bsk",
+      "bytes": 196652,
+      "packed": 75322,
+      "sha256": "38e19c70a074f4d08df87f96c415c8402d5459622904a4a71ec15397527ff248",
+      "fnv64": "fcf9286196a75573",
+      "restart": true
+    },
+    {
+      "id": 5106,
+      "path": "cstrike/resource/background/800_2_b_loading.tga",
+      "file": "5106.bsk",
+      "bytes": 196652,
+      "packed": 135281,
+      "sha256": "72d296ffc20c5567691fea9cef91f1cd70724b75de7a32bcdea6ee5f819c01eb",
+      "fnv64": "a3743eb53328e241",
+      "restart": true
+    },
+    {
+      "id": 5107,
+      "path": "cstrike/resource/background/800_2_c_loading.tga",
+      "file": "5107.bsk",
+      "bytes": 196652,
+      "packed": 135510,
+      "sha256": "1b71f7d1196bab7d0e2aa0dcb076e7186673001576111c87dae954d760387666",
+      "fnv64": "8ad4b29d1f854865",
+      "restart": true
+    },
+    {
+      "id": 5108,
+      "path": "cstrike/resource/background/800_2_d_loading.tga",
+      "file": "5108.bsk",
+      "bytes": 24620,
+      "packed": 12301,
+      "sha256": "d3d7245ff5a466bc938541b7dc35602467114b40a7c6a0006c8852d1535de649",
+      "fnv64": "239093109869c664",
+      "restart": true
+    },
+    {
+      "id": 5109,
+      "path": "cstrike/resource/background/800_3_a_loading.tga",
+      "file": "5109.bsk",
+      "bytes": 67628,
+      "packed": 7688,
+      "sha256": "066d95127fe2397f841c24589b34457a6bf59b5837d52819b6cf5830e9b1e435",
+      "fnv64": "5be544b2d276cf07",
+      "restart": true
+    },
+    {
+      "id": 5110,
+      "path": "cstrike/resource/background/800_3_b_loading.tga",
+      "file": "5110.bsk",
+      "bytes": 67628,
+      "packed": 10870,
+      "sha256": "0e35252f3cf04eb1f96c0978dd570c810682d36d0776d153f802a96ea368e552",
+      "fnv64": "fb0747ecadb5a6b1",
+      "restart": true
+    },
+    {
+      "id": 5111,
+      "path": "cstrike/resource/background/800_3_c_loading.tga",
+      "file": "5111.bsk",
+      "bytes": 67628,
+      "packed": 12605,
+      "sha256": "02d7ff26080247d121dfbf457f3eea013df6719e54fbb98b2f1b3756f15690a8",
+      "fnv64": "60871fce8ad457c3",
+      "restart": true
+    },
+    {
+      "id": 5112,
+      "path": "cstrike/resource/background/800_3_d_loading.tga",
+      "file": "5112.bsk",
+      "bytes": 8492,
+      "packed": 1320,
+      "sha256": "4402ab4aa0347e0f33ee54e12b1be6cce8e00658b2ffddc7072b686c28b91677",
+      "fnv64": "7ecb5db0cb21c5fa",
+      "restart": true
+    },
+    {
+      "id": 5113,
+      "path": "cstrike/resource/BackgroundLayout.txt",
+      "file": "5113.bsk",
+      "bytes": 714,
+      "packed": 148,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750",
+      "fnv64": "591a1cd64ba1672e",
+      "restart": true
+    },
+    {
+      "id": 5114,
+      "path": "cstrike/resource/BackgroundLoadingLayout.txt",
+      "file": "5114.bsk",
+      "bytes": 714,
+      "packed": 148,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750",
+      "fnv64": "591a1cd64ba1672e",
+      "restart": true
+    },
+    {
+      "id": 5115,
+      "path": "cstrike/resource/ClientScheme.res",
+      "file": "5115.bsk",
+      "bytes": 20567,
+      "packed": 3585,
+      "sha256": "85d027157c48ba6bbe655e9ffff98c4b3d4b2ed2ac977bd06bd4eba1066e6cc4",
+      "fnv64": "0b8cb051d1e235bd",
+      "restart": true
+    },
+    {
+      "id": 5116,
+      "path": "cstrike/resource/CreateMultiplayerGameGameplayPage.res",
+      "file": "5116.bsk",
+      "bytes": 1884,
+      "packed": 366,
+      "sha256": "e0293294a500e1e9e3bec72e4fd38ab36b9d988df3cbfa33be0e40395c206651",
+      "fnv64": "61235b9d69a19d95",
+      "restart": true
+    },
+    {
+      "id": 5117,
+      "path": "cstrike/resource/CreateMultiplayerGameServerPage.res",
+      "file": "5117.bsk",
+      "bytes": 4370,
+      "packed": 702,
+      "sha256": "6b7f890649c6da9ff3d96ff2a14d0fe63e5fe5a0426f622210ca3701aabb65a1",
+      "fnv64": "548760a432fae014",
+      "restart": true
+    },
+    {
+      "id": 5118,
+      "path": "cstrike/resource/logo_game.tga",
+      "file": "5118.bsk",
+      "bytes": 65580,
+      "packed": 1168,
+      "sha256": "c920b9f36e0a3938ed86cceeb40c77796a4bb9cc45722259a46ad5008696b2fc",
+      "fnv64": "611face7e6e9396d",
+      "restart": true
+    },
+    {
+      "id": 5119,
+      "path": "cstrike/resource/OptionsSubMultiplayer.res",
+      "file": "5119.bsk",
+      "bytes": 11827,
+      "packed": 1372,
+      "sha256": "8b45d12fc5506e804c2caab99a5628d0196c71c5420307add475822a28bf5dd0",
+      "fnv64": "0eb78a15fd7ad76c",
+      "restart": true
+    },
+    {
+      "id": 5120,
+      "path": "cstrike/resource/TrackerScheme.res",
+      "file": "5120.bsk",
+      "bytes": 15728,
+      "packed": 3160,
+      "sha256": "953bdc3a61b94d8bd758a1b7b2a91778f1980841e0f1354bdb994892dfafb6a7",
+      "fnv64": "1da6a5526a4edfdc",
+      "restart": true
+    },
+    {
+      "id": 5121,
+      "path": "cstrike/resource/UI/BackgroundPanel.res",
+      "file": "5121.bsk",
+      "bytes": 2474,
+      "packed": 491,
+      "sha256": "c7315fc049669dd1f01a6e0b5382619af3e3bafb58b4c396034fc4f28efdf95b",
+      "fnv64": "a53c0ce433bb659f",
+      "restart": true
+    },
+    {
+      "id": 5122,
+      "path": "cstrike/resource/UI/BottomSpectator.res",
+      "file": "5122.bsk",
+      "bytes": 2123,
+      "packed": 423,
+      "sha256": "e5704c0737e9008f8c828fe93f555f050b83aae8571907eb65761ee5a432b53c",
+      "fnv64": "af926afd2daa2108",
+      "restart": true
+    },
+    {
+      "id": 5123,
+      "path": "cstrike/resource/UI/BuyEquipment.res",
+      "file": "5123.bsk",
+      "bytes": 3498,
+      "packed": 547,
+      "sha256": "7e403d1df8d8ce59cb63d545b2c5ce6324b89968c17c1ad06a9c7211766f7274",
+      "fnv64": "5a7ff5fd89664e62",
+      "restart": true
+    },
+    {
+      "id": 5124,
+      "path": "cstrike/resource/UI/BuyEquipment_CT.res",
+      "file": "5124.bsk",
+      "bytes": 4641,
+      "packed": 711,
+      "sha256": "b670585194c04080ab069f48b32af1147821ef319925a832147cd1de78f145cf",
+      "fnv64": "837e5553af21cff2",
+      "restart": true
+    },
+    {
+      "id": 5125,
+      "path": "cstrike/resource/UI/BuyEquipment_TER.res",
+      "file": "5125.bsk",
+      "bytes": 3823,
+      "packed": 629,
+      "sha256": "821b41a63ca709d5e11822dd50140c934ab6182d206ff10203e5f0f1fedaf95f",
+      "fnv64": "c326ab0cc4e04f76",
+      "restart": true
+    },
+    {
+      "id": 5126,
+      "path": "cstrike/resource/UI/BuyMachineguns_CT.res",
+      "file": "5126.bsk",
+      "bytes": 1789,
+      "packed": 469,
+      "sha256": "c3d4ffc2455ce2e00648db932dc5cdd63fd1a0f36ef130acf02f337431c0dcb7",
+      "fnv64": "f3e9a7ffce270747",
+      "restart": true
+    },
+    {
+      "id": 5127,
+      "path": "cstrike/resource/UI/BuyMachineguns_TER.res",
+      "file": "5127.bsk",
+      "bytes": 1810,
+      "packed": 470,
+      "sha256": "ca7c1aca34acd377e7bc9b66d393b5202bfb0862edfec834421120995e1c032a",
+      "fnv64": "810d6bd6bcaa14b8",
+      "restart": true
+    },
+    {
+      "id": 5128,
+      "path": "cstrike/resource/UI/BuyPistols_CT.res",
+      "file": "5128.bsk",
+      "bytes": 3384,
+      "packed": 595,
+      "sha256": "25e07bf60f827227e6d3d30a9f84df4a3ee59b2eb907050d6a2bdb1eb9d1415e",
+      "fnv64": "cf1d8776bdf42f38",
+      "restart": true
+    },
+    {
+      "id": 5129,
+      "path": "cstrike/resource/UI/BuyPistols_TER.res",
+      "file": "5129.bsk",
+      "bytes": 3331,
+      "packed": 576,
+      "sha256": "5fcbeb49323d0e15309e6625a29862565dc6d0fd804874705e158eb2ed65edfa",
+      "fnv64": "7c250ad134c0a498",
+      "restart": true
+    },
+    {
+      "id": 5130,
+      "path": "cstrike/resource/UI/BuyRifles_CT.res",
+      "file": "5130.bsk",
+      "bytes": 3781,
+      "packed": 637,
+      "sha256": "e56292b4dc6e9dfad0b313a755287e40c3a996a7add42da716939a8ea68ef1f1",
+      "fnv64": "1e1c504cfc99f0b8",
+      "restart": true
+    },
+    {
+      "id": 5131,
+      "path": "cstrike/resource/UI/BuyRifles_TER.res",
+      "file": "5131.bsk",
+      "bytes": 3790,
+      "packed": 640,
+      "sha256": "a064b56f801d6584ff0dbfc98ef36b3ea08e03f706b90a558e973014f6186256",
+      "fnv64": "733de644c2667a87",
+      "restart": true
+    },
+    {
+      "id": 5132,
+      "path": "cstrike/resource/UI/BuyShotguns_CT.res",
+      "file": "5132.bsk",
+      "bytes": 2134,
+      "packed": 484,
+      "sha256": "4e1408337f6f92b7dc2b73b4e118e2922b40bbfadf4e4e59510f48949339773f",
+      "fnv64": "dbe765b4ebf826e0",
+      "restart": true
+    },
+    {
+      "id": 5133,
+      "path": "cstrike/resource/UI/BuyShotguns_TER.res",
+      "file": "5133.bsk",
+      "bytes": 2191,
+      "packed": 508,
+      "sha256": "cfe744c6f774137ce430d94dfa7ff521043691525f7283d5e6c57bbc6d73989a",
+      "fnv64": "349e0268c7c4d435",
+      "restart": true
+    },
+    {
+      "id": 5134,
+      "path": "cstrike/resource/UI/BuySubMachineguns_CT.res",
+      "file": "5134.bsk",
+      "bytes": 2961,
+      "packed": 552,
+      "sha256": "4068432a18a20745d896881ccbba7008569b055e42e5898b48800bb27e698b5b",
+      "fnv64": "e1be05d36098163d",
+      "restart": true
+    },
+    {
+      "id": 5135,
+      "path": "cstrike/resource/UI/BuySubMachineguns_TER.res",
+      "file": "5135.bsk",
+      "bytes": 2983,
+      "packed": 562,
+      "sha256": "7c332e575a2c9ee26176e712d231da4eee0372a48c17791a13568fc5ec0b8e07",
+      "fnv64": "e1bbc1222c700656",
+      "restart": true
+    },
+    {
+      "id": 5136,
+      "path": "cstrike/resource/UI/Classmenu_CT.res",
+      "file": "5136.bsk",
+      "bytes": 4468,
+      "packed": 682,
+      "sha256": "04714aa74581c995b1327984d61aece650085e7e776ec9be14a9fbf0ad112f21",
+      "fnv64": "606a00833baedf90",
+      "restart": true
+    },
+    {
+      "id": 5137,
+      "path": "cstrike/resource/UI/Classmenu_TER.res",
+      "file": "5137.bsk",
+      "bytes": 4492,
+      "packed": 691,
+      "sha256": "48b9af2009597261f40acacac9d5e1871cff2c08ea61dddc831fbc7b58871724",
+      "fnv64": "e2f669b2960aba3e",
+      "restart": true
+    },
+    {
+      "id": 5138,
+      "path": "cstrike/resource/UI/MainBuyMenu.res",
+      "file": "5138.bsk",
+      "bytes": 5891,
+      "packed": 743,
+      "sha256": "d53cfbc387b5359dfe1888be8f63493130c77bc62a244e6eccb67dc3ecb5cbbe",
+      "fnv64": "4ef00e0b3da99e5f",
+      "restart": true
+    },
+    {
+      "id": 5139,
+      "path": "cstrike/resource/UI/MOTD.res",
+      "file": "5139.bsk",
+      "bytes": 1439,
+      "packed": 450,
+      "sha256": "51f51ecbd77df62e9dc6bff6b74848d952a424baae7fc146dfeedfc36ca841d3",
+      "fnv64": "dcf0447823a09a50",
+      "restart": true
+    },
+    {
+      "id": 5140,
+      "path": "cstrike/resource/UI/ScoreBoard.res",
+      "file": "5140.bsk",
+      "bytes": 916,
+      "packed": 331,
+      "sha256": "890c4e334cc475959823df08ea4e9903e304620c64175f499e722f7473b16fa2",
+      "fnv64": "21202db83f123b94",
+      "restart": true
+    },
+    {
+      "id": 5141,
+      "path": "cstrike/resource/UI/Spectator.res",
+      "file": "5141.bsk",
+      "bytes": 4338,
+      "packed": 674,
+      "sha256": "1297494e40acbcfd8cef5a21addde74da62dd243ce2ae044ce7be66106b4c289",
+      "fnv64": "e00eb8f1e43b7d01",
+      "restart": true
+    },
+    {
+      "id": 5142,
+      "path": "cstrike/resource/UI/Teammenu.res",
+      "file": "5142.bsk",
+      "bytes": 3895,
+      "packed": 638,
+      "sha256": "c440a26f506e4b6a5cbf3f2d2de04945cd95036b500065cf8cf0cd46872f8adc",
+      "fnv64": "136549260a40f184",
+      "restart": true
+    },
+    {
+      "id": 5143,
+      "path": "platform/resource/TrackerScheme.res",
+      "file": "5143.bsk",
+      "bytes": 15728,
+      "packed": 3160,
+      "sha256": "953bdc3a61b94d8bd758a1b7b2a91778f1980841e0f1354bdb994892dfafb6a7",
+      "fnv64": "1da6a5526a4edfdc",
+      "restart": true
+    },
+    {
+      "id": 5144,
+      "path": "platform/servers/AddServerGamesPage.res",
+      "file": "5144.bsk",
+      "bytes": 6986,
+      "packed": 945,
+      "sha256": "a7a1698a6fc79779f4f3426ffda9603cd097010b7b1fd8c67b443bdabccbebf1",
+      "fnv64": "a02e06a04b4d0285",
+      "restart": true
+    },
+    {
+      "id": 5145,
+      "path": "platform/servers/DialogAddServer.res",
+      "file": "5145.bsk",
+      "bytes": 3559,
+      "packed": 727,
+      "sha256": "c66f0072c7030074559abedc78731c0bb7e59c660dd9f5c2234c00d9e92c6416",
+      "fnv64": "22654a7599d757a1",
+      "restart": true
+    },
+    {
+      "id": 5146,
+      "path": "platform/servers/DialogGameInfo.res",
+      "file": "5146.bsk",
+      "bytes": 9594,
+      "packed": 1039,
+      "sha256": "bac150f08246c1e8cdfce3d0edb876ce6667842e619c30d3268879480e1e3f35",
+      "fnv64": "28783beb75f723f6",
+      "restart": true
+    },
+    {
+      "id": 5147,
+      "path": "platform/servers/DialogGameInfo_AutoRetry.res",
+      "file": "5147.bsk",
+      "bytes": 9667,
+      "packed": 1030,
+      "sha256": "c62f68d91030f6dd601f20cbf05ffa52ac628cc26f0a34581c308a0724f5ffbd",
+      "fnv64": "b111e03e5ab86b2e",
+      "restart": true
+    },
+    {
+      "id": 5148,
+      "path": "platform/servers/DialogGameInfo_SinglePlayer.res",
+      "file": "5148.bsk",
+      "bytes": 9833,
+      "packed": 1059,
+      "sha256": "025fbcc12373e7687c3c5db8281f5caa70fc2f6d3bf939b41b4acd78d25f2420",
+      "fnv64": "3bb949cbf016f178",
+      "restart": true
+    },
+    {
+      "id": 5149,
+      "path": "platform/servers/DialogServerBrowser.res",
+      "file": "5149.bsk",
+      "bytes": 971,
+      "packed": 339,
+      "sha256": "29530540868b0e3b149902ddddf211a6b4fc6d51db137ec4d2dc73ee3ca20f83",
+      "fnv64": "11a28061c63ba463",
+      "restart": true
+    },
+    {
+      "id": 5150,
+      "path": "platform/servers/DialogServerPassword.res",
+      "file": "5150.bsk",
+      "bytes": 3002,
+      "packed": 596,
+      "sha256": "2786b60fbac0de0c7ff8e5967040c340d5f1cbe1e3b04cbdef49b5b84569954d",
+      "fnv64": "7c4bca38bbbb26b9",
+      "restart": true
+    },
+    {
+      "id": 5151,
+      "path": "platform/servers/InternetGamesPage.res",
+      "file": "5151.bsk",
+      "bytes": 7374,
+      "packed": 951,
+      "sha256": "5f74fb945323c11ac1440d22dbe91a29355ca2b65df8b4a3911e37764506069a",
+      "fnv64": "713d83225bd1b707",
+      "restart": true
+    },
+    {
+      "id": 5152,
+      "path": "platform/servers/InternetGamesPage_Filters.res",
+      "file": "5152.bsk",
+      "bytes": 8600,
+      "packed": 1035,
+      "sha256": "bf0cfc9fb7a0bf201dc2fccae05bd40d1322e70ed27975b19d1fd16e895d4e3f",
+      "fnv64": "8f2b14f35e45be58",
+      "restart": true
+    },
+    {
+      "id": 5153,
+      "path": "platform/servers/VACBannedConnRefusedDialog.res",
+      "file": "5153.bsk",
+      "bytes": 2043,
+      "packed": 586,
+      "sha256": "a604c4aed9cb0a30298d0ed9fde94beffc25f0ebaf30aaa251032f91c198f66e",
+      "fnv64": "e98851a2087557c7",
+      "restart": true
+    },
+    {
+      "id": 5154,
+      "path": "valve/gfx/vgui/CS_logo.tga",
+      "file": "5154.bsk",
+      "bytes": 16428,
+      "packed": 4634,
+      "sha256": "26111413615e26ef00ae8516ff9ce3792058534214a732c1f800e6abf428be17",
+      "fnv64": "1dc2175e37064ee2",
+      "restart": true
+    },
+    {
+      "id": 5155,
+      "path": "valve/resource/background/800_1_a_loading.tga",
+      "file": "5155.bsk",
+      "bytes": 196652,
+      "packed": 44891,
+      "sha256": "59fa5ed3ff88a909f48ea33b19083a95fa76640925e91d3b2e805b0c6e39adf9",
+      "fnv64": "6d95be95f7a3e86c",
+      "restart": true
+    },
+    {
+      "id": 5156,
+      "path": "valve/resource/background/800_1_b_loading.tga",
+      "file": "5156.bsk",
+      "bytes": 196652,
+      "packed": 78676,
+      "sha256": "4db572fe1fcc20b0f14c6fcf755a69acc9bbd31c9fc47d395dc7b40e91921c8e",
+      "fnv64": "98c26ed6ba82cff9",
+      "restart": true
+    },
+    {
+      "id": 5157,
+      "path": "valve/resource/background/800_1_c_loading.tga",
+      "file": "5157.bsk",
+      "bytes": 196652,
+      "packed": 93280,
+      "sha256": "4766cd5caa3957b7f9bb6b8913ff24dce82ac7b3147d6bfeb6d6f63d3b63adf7",
+      "fnv64": "a8b2ef19715ea90f",
+      "restart": true
+    },
+    {
+      "id": 5158,
+      "path": "valve/resource/background/800_1_d_loading.tga",
+      "file": "5158.bsk",
+      "bytes": 24620,
+      "packed": 8341,
+      "sha256": "9e9d6b33529a276f5aaae5d62ad6411e081e108b0a6a9c78bbf9808d1202e99c",
+      "fnv64": "f9e398abf3944831",
+      "restart": true
+    },
+    {
+      "id": 5159,
+      "path": "valve/resource/background/800_2_a_loading.tga",
+      "file": "5159.bsk",
+      "bytes": 196652,
+      "packed": 75322,
+      "sha256": "38e19c70a074f4d08df87f96c415c8402d5459622904a4a71ec15397527ff248",
+      "fnv64": "fcf9286196a75573",
+      "restart": true
+    },
+    {
+      "id": 5160,
+      "path": "valve/resource/background/800_2_b_loading.tga",
+      "file": "5160.bsk",
+      "bytes": 196652,
+      "packed": 135281,
+      "sha256": "72d296ffc20c5567691fea9cef91f1cd70724b75de7a32bcdea6ee5f819c01eb",
+      "fnv64": "a3743eb53328e241",
+      "restart": true
+    },
+    {
+      "id": 5161,
+      "path": "valve/resource/background/800_2_c_loading.tga",
+      "file": "5161.bsk",
+      "bytes": 196652,
+      "packed": 135510,
+      "sha256": "1b71f7d1196bab7d0e2aa0dcb076e7186673001576111c87dae954d760387666",
+      "fnv64": "8ad4b29d1f854865",
+      "restart": true
+    },
+    {
+      "id": 5162,
+      "path": "valve/resource/background/800_2_d_loading.tga",
+      "file": "5162.bsk",
+      "bytes": 24620,
+      "packed": 12301,
+      "sha256": "d3d7245ff5a466bc938541b7dc35602467114b40a7c6a0006c8852d1535de649",
+      "fnv64": "239093109869c664",
+      "restart": true
+    },
+    {
+      "id": 5163,
+      "path": "valve/resource/background/800_3_a_loading.tga",
+      "file": "5163.bsk",
+      "bytes": 67628,
+      "packed": 7688,
+      "sha256": "066d95127fe2397f841c24589b34457a6bf59b5837d52819b6cf5830e9b1e435",
+      "fnv64": "5be544b2d276cf07",
+      "restart": true
+    },
+    {
+      "id": 5164,
+      "path": "valve/resource/background/800_3_b_loading.tga",
+      "file": "5164.bsk",
+      "bytes": 67628,
+      "packed": 10870,
+      "sha256": "0e35252f3cf04eb1f96c0978dd570c810682d36d0776d153f802a96ea368e552",
+      "fnv64": "fb0747ecadb5a6b1",
+      "restart": true
+    },
+    {
+      "id": 5165,
+      "path": "valve/resource/background/800_3_c_loading.tga",
+      "file": "5165.bsk",
+      "bytes": 67628,
+      "packed": 12605,
+      "sha256": "02d7ff26080247d121dfbf457f3eea013df6719e54fbb98b2f1b3756f15690a8",
+      "fnv64": "60871fce8ad457c3",
+      "restart": true
+    },
+    {
+      "id": 5166,
+      "path": "valve/resource/background/800_3_d_loading.tga",
+      "file": "5166.bsk",
+      "bytes": 8492,
+      "packed": 1320,
+      "sha256": "4402ab4aa0347e0f33ee54e12b1be6cce8e00658b2ffddc7072b686c28b91677",
+      "fnv64": "7ecb5db0cb21c5fa",
+      "restart": true
+    },
+    {
+      "id": 5167,
+      "path": "valve/resource/BackgroundLayout.txt",
+      "file": "5167.bsk",
+      "bytes": 714,
+      "packed": 148,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750",
+      "fnv64": "591a1cd64ba1672e",
+      "restart": true
+    },
+    {
+      "id": 5168,
+      "path": "valve/resource/BackgroundLoadingLayout.txt",
+      "file": "5168.bsk",
+      "bytes": 714,
+      "packed": 148,
+      "sha256": "f1d2461e3936ab6397a852f4efb971ad807bea0c6c99ca8377886ccd88ada750",
+      "fnv64": "591a1cd64ba1672e",
+      "restart": true
+    },
+    {
+      "id": 5169,
+      "path": "valve/resource/CDKeyEntryDialog.res",
+      "file": "5169.bsk",
+      "bytes": 3997,
+      "packed": 601,
+      "sha256": "da1fbafe517e18262e30c737b40547f994c7e30e6d6c916e0571045c5e4d6550",
+      "fnv64": "4f64f7a3a10413e5",
+      "restart": true
+    },
+    {
+      "id": 5170,
+      "path": "valve/resource/ChangeGameDialog.res",
+      "file": "5170.bsk",
+      "bytes": 2049,
+      "packed": 491,
+      "sha256": "5bec26710b5f2312c7717fb7e86a701c8901b3aa443793b5e408d61403690948",
+      "fnv64": "ad2a83402a5d57d5",
+      "restart": true
+    },
+    {
+      "id": 5171,
+      "path": "valve/resource/ClientScheme.res",
+      "file": "5171.bsk",
+      "bytes": 15241,
+      "packed": 2868,
+      "sha256": "c90e780334b3231b0cf700b28ff5dc24cd80d55ba9cde7276d49d67f854e8eb9",
+      "fnv64": "095d2002a0faec29",
+      "restart": true
+    },
+    {
+      "id": 5172,
+      "path": "valve/resource/ContentControlDialog.res",
+      "file": "5172.bsk",
+      "bytes": 3655,
+      "packed": 611,
+      "sha256": "8edeab69f1a0a6df937e60f2833b8b60779e02634adef352307ff00c30a98d47",
+      "fnv64": "30c532ef942e56d2",
+      "restart": true
+    },
+    {
+      "id": 5173,
+      "path": "valve/resource/CreateMultiplayerGameGameplayPage.res",
+      "file": "5173.bsk",
+      "bytes": 1785,
+      "packed": 353,
+      "sha256": "e093270be836f58313e821101e49505749fc1639283eb2177678e7c1a0e4ad02",
+      "fnv64": "0000a831aff24808",
+      "restart": true
+    },
+    {
+      "id": 5174,
+      "path": "valve/resource/CreateMultiplayerGameServerPage.res",
+      "file": "5174.bsk",
+      "bytes": 4368,
+      "packed": 708,
+      "sha256": "62a839e85a88ff49592c1db1c0e0626661138dc76246d6025ef7e251b1aeacc2",
+      "fnv64": "42958ae1d4105587",
+      "restart": true
+    },
+    {
+      "id": 5175,
+      "path": "valve/resource/DemoEditDialog.res",
+      "file": "5175.bsk",
+      "bytes": 2651,
+      "packed": 513,
+      "sha256": "6a13c36d4b04ad9ed33f6a2a0696b49d3ba3347a4095347a955a312e7c100a75",
+      "fnv64": "4f7eeef320178cf7",
+      "restart": true
+    },
+    {
+      "id": 5176,
+      "path": "valve/resource/DemoEventsDialog.res",
+      "file": "5176.bsk",
+      "bytes": 1437,
+      "packed": 342,
+      "sha256": "027a943e3ba1d6df2fb71ac7043bdc92816e4d0905db7d50485d40b1e8ee0d59",
+      "fnv64": "9a331648ae82e993",
+      "restart": true
+    },
+    {
+      "id": 5177,
+      "path": "valve/resource/DemoPlayerDialog.res",
+      "file": "5177.bsk",
+      "bytes": 4154,
+      "packed": 593,
+      "sha256": "d6a8fd5a5f30aa5f6e26413b6930474360a84e167fec41d41a62563358f0940a",
+      "fnv64": "ff72e25dcc1994f1",
+      "restart": true
+    },
+    {
+      "id": 5178,
+      "path": "valve/resource/DemoPlayerFileDialog.res",
+      "file": "5178.bsk",
+      "bytes": 1006,
+      "packed": 340,
+      "sha256": "456397dc055d3cf01680dbd553fd100c703daa7a7b679a7f9613b79493460cee",
+      "fnv64": "a024802721663d28",
+      "restart": true
+    },
+    {
+      "id": 5179,
+      "path": "valve/resource/DialogOptionsIngame.res",
+      "file": "5179.bsk",
+      "bytes": 1285,
+      "packed": 367,
+      "sha256": "fffb2007685a10fc0a092eea5fe744b287f5917680e68fb6baa32f6130f94fa4",
+      "fnv64": "3330e783c7667c74",
+      "restart": true
+    },
+    {
+      "id": 5180,
+      "path": "valve/resource/LoadGameDialog.res",
+      "file": "5180.bsk",
+      "bytes": 3487,
+      "packed": 593,
+      "sha256": "e6d7d43f2ca15a31c87c0ddc622cfa902b6d4773c404880a43f966801fd20e57",
+      "fnv64": "5bed3a2fcac93b72",
+      "restart": true
+    },
+    {
+      "id": 5181,
+      "path": "valve/resource/LoadingDialog.res",
+      "file": "5181.bsk",
+      "bytes": 2568,
+      "packed": 497,
+      "sha256": "37aaeea4e1649c5bc02147ac5713f48abe18fb171df29f7a48811aeee5b1a308",
+      "fnv64": "aa0569c69183d4f2",
+      "restart": true
+    },
+    {
+      "id": 5182,
+      "path": "valve/resource/LoadingDialogConnectionLost.res",
+      "file": "5182.bsk",
+      "bytes": 2698,
+      "packed": 568,
+      "sha256": "bdb4adf0bce524e955c25c03d9af1a4b121615bc58a31197d9548b9ef28b7a3e",
+      "fnv64": "eb559dfaac567376",
+      "restart": true
+    },
+    {
+      "id": 5183,
+      "path": "valve/resource/LoadingDialogDualProgress.res",
+      "file": "5183.bsk",
+      "bytes": 2616,
+      "packed": 513,
+      "sha256": "e2be2b6eb27b75b26482e3fe2b28932aec42ec365438898caeee5ff66d4ea891",
+      "fnv64": "0fffcc83b9e770bc",
+      "restart": true
+    },
+    {
+      "id": 5184,
+      "path": "valve/resource/LoadingDialogDualProgressVAC.res",
+      "file": "5184.bsk",
+      "bytes": 3581,
+      "packed": 653,
+      "sha256": "c1f808d8dc37f50be945805ec778d5b2b3748588246c1bf9debb83ec0bdae449",
+      "fnv64": "51c1ca9eb2e3e33f",
+      "restart": true
+    },
+    {
+      "id": 5185,
+      "path": "valve/resource/LoadingDialogError.res",
+      "file": "5185.bsk",
+      "bytes": 3247,
+      "packed": 581,
+      "sha256": "74930971efc65df70f4e1ce4c9f3919a580070db7c1753669ef9879c4b63c1d4",
+      "fnv64": "03e14464161b0b0a",
+      "restart": true
+    },
+    {
+      "id": 5186,
+      "path": "valve/resource/LoadingDialogErrorLoggedInElsewhere.res",
+      "file": "5186.bsk",
+      "bytes": 2704,
+      "packed": 562,
+      "sha256": "4eba65b7aed414cd345a117e7f439a04e5fa1a04b9c0e8d6959cecd8ab703e50",
+      "fnv64": "a5d1dbc0932fc9b4",
+      "restart": true
+    },
+    {
+      "id": 5187,
+      "path": "valve/resource/LoadingDialogErrorNoSteamConnection.res",
+      "file": "5187.bsk",
+      "bytes": 3119,
+      "packed": 610,
+      "sha256": "e2c8ca03275bb547096c7a63425cabbfe27f1a9ca4e51147bbdd77ec4c9ab0ec",
+      "fnv64": "fa7b44bfe01c7532",
+      "restart": true
+    },
+    {
+      "id": 5188,
+      "path": "valve/resource/LoadingDialogErrorVACBanned.res",
+      "file": "5188.bsk",
+      "bytes": 2925,
+      "packed": 601,
+      "sha256": "21fc576138c2075ba6025b9cda836d3a0768dae4872b571223ed5b0e657dcca1",
+      "fnv64": "c7755ba14ba75aa8",
+      "restart": true
+    },
+    {
+      "id": 5189,
+      "path": "valve/resource/LoadingDialogNoBanner.res",
+      "file": "5189.bsk",
+      "bytes": 2806,
+      "packed": 523,
+      "sha256": "2c9f78800e8231d99a4e98e86e7cb3dc254d6d72fe13edc3d8bac357583d7f39",
+      "fnv64": "993808aaf63a4840",
+      "restart": true
+    },
+    {
+      "id": 5190,
+      "path": "valve/resource/LoadingDialogNoBannerSingle.res",
+      "file": "5190.bsk",
+      "bytes": 2798,
+      "packed": 525,
+      "sha256": "56e89ac72f82216bb92c52fd435b79f43edc13f157f525818df0f93f182bc96f",
+      "fnv64": "a54edfed13231179",
+      "restart": true
+    },
+    {
+      "id": 5191,
+      "path": "valve/resource/LoadingDialogVAC.res",
+      "file": "5191.bsk",
+      "bytes": 3763,
+      "packed": 669,
+      "sha256": "417b813fa9ce3c8ebc9eb2e677b7fc84cf862e7e4319bd8ba6efa7dc6ab8575d",
+      "fnv64": "e0938713d3724675",
+      "restart": true
+    },
+    {
+      "id": 5192,
+      "path": "valve/resource/logo_game.tga",
+      "file": "5192.bsk",
+      "bytes": 65580,
+      "packed": 1168,
+      "sha256": "c920b9f36e0a3938ed86cceeb40c77796a4bb9cc45722259a46ad5008696b2fc",
+      "fnv64": "611face7e6e9396d",
+      "restart": true
+    },
+    {
+      "id": 5193,
+      "path": "valve/resource/MultiplayerAdvancedDialog.res",
+      "file": "5193.bsk",
+      "bytes": 1589,
+      "packed": 420,
+      "sha256": "1b3ab91e86a978f7999ccb686bee5c26b7d66387ebeb008b7fa4818c8e8084d0",
+      "fnv64": "022d4b5766dd7e34",
+      "restart": true
+    },
+    {
+      "id": 5194,
+      "path": "valve/resource/NewGameDialog.res",
+      "file": "5194.bsk",
+      "bytes": 3138,
+      "packed": 547,
+      "sha256": "49efc5b9122b4bc7552bc54eca7e31255239fead716862d4df7060ca4bcd4e7c",
+      "fnv64": "3f832c024421ee87",
+      "restart": true
+    },
+    {
+      "id": 5195,
+      "path": "valve/resource/OptionsSubAdvanced.res",
+      "file": "5195.bsk",
+      "bytes": 888,
+      "packed": 334,
+      "sha256": "031352a40d132ace399b82716074c2cd2096fe78fd8729fac79d69900bb214ac",
+      "fnv64": "e089947f2a6b1e5f",
+      "restart": true
+    },
+    {
+      "id": 5196,
+      "path": "valve/resource/OptionsSubAudio.res",
+      "file": "5196.bsk",
+      "bytes": 3372,
+      "packed": 583,
+      "sha256": "acd11e25356d25f73a6b1911f46acff909f6e6de7d0eb959c01ab9029a677ec1",
+      "fnv64": "eb9a5c08e9efab63",
+      "restart": true
+    },
+    {
+      "id": 5197,
+      "path": "valve/resource/OptionsSubKeyboard.res",
+      "file": "5197.bsk",
+      "bytes": 1557,
+      "packed": 406,
+      "sha256": "a5056c6cd0ad01cd7b54c63ddd610b20814f513b4a9ce8ace06f8c834658dcc9",
+      "fnv64": "63cc29b5ee860451",
+      "restart": true
+    },
+    {
+      "id": 5198,
+      "path": "valve/resource/OptionsSubMouse.res",
+      "file": "5198.bsk",
+      "bytes": 6624,
+      "packed": 738,
+      "sha256": "ae0acbde18b5531c6c4ae040d5e404b703844803826b7750aa4ef2d152f8a7e0",
+      "fnv64": "3be4e980e013f437",
+      "restart": true
+    },
+    {
+      "id": 5199,
+      "path": "valve/resource/OptionsSubMultiplayer.res",
+      "file": "5199.bsk",
+      "bytes": 9283,
+      "packed": 1145,
+      "sha256": "83c2aa1bdeeca349a99e5008864f2d56c729a41af0749a3a384bb7eaaeb3b056",
+      "fnv64": "b1a21f231d52748e",
+      "restart": true
+    },
+    {
+      "id": 5200,
+      "path": "valve/resource/OptionsSubVideo.res",
+      "file": "5200.bsk",
+      "bytes": 6453,
+      "packed": 803,
+      "sha256": "425ebf61168472b2adb33a35bc07444959301fe298e89acf75a1c19f852fd49c",
+      "fnv64": "b12496941ae74c81",
+      "restart": true
+    },
+    {
+      "id": 5201,
+      "path": "valve/resource/OptionsSubVoice.res",
+      "file": "5201.bsk",
+      "bytes": 5352,
+      "packed": 793,
+      "sha256": "dd8d2ddc69e95b0b9652919fc52eb2e2274ef220ea8ac29733f188077ac97cc6",
+      "fnv64": "75732f85133d205e",
+      "restart": true
+    },
+    {
+      "id": 5202,
+      "path": "valve/resource/PlayerListDialog.res",
+      "file": "5202.bsk",
+      "bytes": 1414,
+      "packed": 415,
+      "sha256": "1aa9ccf5ae049d6cc2eea93abffcb6d0c53e4c36636c076f693a02d0f4aaeebd",
+      "fnv64": "e7cf6ecd63234fe9",
+      "restart": true
+    },
+    {
+      "id": 5203,
+      "path": "valve/resource/refreshlogin.res",
+      "file": "5203.bsk",
+      "bytes": 3735,
+      "packed": 649,
+      "sha256": "828e3e8ee2bc494fcae24c97ceefc096ed6b0845ef9fb47a0364a19bbab4137f",
+      "fnv64": "2a0306ab262a4217",
+      "restart": true
+    },
+    {
+      "id": 5204,
+      "path": "valve/resource/SaveGameDialog.res",
+      "file": "5204.bsk",
+      "bytes": 2095,
+      "packed": 512,
+      "sha256": "4b4a71366e8bd1abc4dae6f7a4b9a7f4ceaddb636702552a747a80b0b9b57839",
+      "fnv64": "642b19e7974c4b2e",
+      "restart": true
+    },
+    {
+      "id": 5205,
+      "path": "valve/resource/SteamPasswordDialog.res",
+      "file": "5205.bsk",
+      "bytes": 2059,
+      "packed": 503,
+      "sha256": "12b7738ea4fcd5074549fd7b061bccf826942fd3e9450b9d0b1ca308bd4e272c",
+      "fnv64": "71266f3414d10942",
+      "restart": true
+    },
+    {
+      "id": 5206,
+      "path": "valve/resource/TrackerScheme.res",
+      "file": "5206.bsk",
+      "bytes": 15728,
+      "packed": 3160,
+      "sha256": "953bdc3a61b94d8bd758a1b7b2a91778f1980841e0f1354bdb994892dfafb6a7",
+      "fnv64": "1da6a5526a4edfdc",
+      "restart": true
+    },
+    {
+      "id": 5207,
+      "path": "valve/resource/UI/MOTD.res",
+      "file": "5207.bsk",
+      "bytes": 1327,
+      "packed": 445,
+      "sha256": "acc668fcfa34a9a1d41b20bc0b3275d9d9f89d28a27fa26ae71b3b20a497d737",
+      "fnv64": "a5c2025372b135d0",
+      "restart": true
+    },
+    {
+      "id": 5208,
+      "path": "valve/resource/UI/ScoreBoard.res",
+      "file": "5208.bsk",
+      "bytes": 1098,
+      "packed": 336,
+      "sha256": "4125fef79809409b11cd97877afa6f5c9015e501b5ebfd85bff823103dadc357",
+      "fnv64": "cc805b8a87b582db",
+      "restart": true
+    },
+    {
+      "id": 5209,
+      "path": "valve/resource/UI/TextWindow.res",
+      "file": "5209.bsk",
+      "bytes": 1355,
+      "packed": 460,
+      "sha256": "e3a1b9bf5de79067596cbdc86dcf9cefdcb043971571f541639d28bb9560da16",
+      "fnv64": "a93bdbef54ab5241",
+      "restart": true
+    },
+    {
+      "id": 5210,
+      "path": "valve/resource/ValveCDKeyEntryDialog.res",
+      "file": "5210.bsk",
+      "bytes": 3628,
+      "packed": 571,
+      "sha256": "6c0282aab4faab8b0100136f2462ea761de28875892e661a7e5503c45a8888d8",
+      "fnv64": "27117ffa7eae3ea0",
+      "restart": true
+    },
+    {
+      "id": 5211,
+      "path": "cstrike/models/baloncuaga_outfits/arctic.mdl",
+      "file": "5211.bsk",
+      "bytes": 3495928,
+      "packed": 2451248,
+      "sha256": "748ba8f73cb98e44bcacf3c30bdd42029c856297aac8dde7c464d70d0399b452",
+      "fnv64": "52a4b29965422153",
+      "restart": false
+    },
+    {
+      "id": 5212,
+      "path": "cstrike/models/baloncuaga_outfits/ct.mdl",
+      "file": "5212.bsk",
+      "bytes": 3417736,
+      "packed": 2381324,
+      "sha256": "e1c61ce5653b415f3c1e8c81fb031692a1e65ca3ad5f21cf58c3f814527eb7c4",
+      "fnv64": "40e72911d055fb59",
+      "restart": false
+    },
+    {
+      "id": 5213,
+      "path": "cstrike/models/baloncuaga_outfits/gign.mdl",
+      "file": "5213.bsk",
+      "bytes": 3416956,
+      "packed": 2482236,
+      "sha256": "0b7b01edaa4de66932e7e9298788065d7190f3775e2d57180903a6e1531240df",
+      "fnv64": "9d149dd52390f565",
+      "restart": false
+    },
+    {
+      "id": 5214,
+      "path": "cstrike/models/baloncuaga_outfits/gsg9.mdl",
+      "file": "5214.bsk",
+      "bytes": 3427552,
+      "packed": 2363054,
+      "sha256": "d4c17e290ddccd1d6aa4e26a27ac3b0ed818ee08e9e05d243ea2e0ab1d6782e0",
+      "fnv64": "56100800d84d30fd",
+      "restart": false
+    },
+    {
+      "id": 5215,
+      "path": "cstrike/models/baloncuaga_outfits/guerilla.mdl",
+      "file": "5215.bsk",
+      "bytes": 3443608,
+      "packed": 2462415,
+      "sha256": "821a390e5d8e8d9a8345d155e547dd1e2b2a0709afa4e04369bc50d609f07981",
+      "fnv64": "ca6534f8d4557f67",
+      "restart": false
+    },
+    {
+      "id": 5216,
+      "path": "cstrike/models/baloncuaga_outfits/leet.mdl",
+      "file": "5216.bsk",
+      "bytes": 3508120,
+      "packed": 2501919,
+      "sha256": "3e9072f71549c0f2727cc32335b5ac35443df2fe7cdbb30da0ac1722124e7ddb",
+      "fnv64": "f5fec4eecbef4e7d",
+      "restart": false
+    },
+    {
+      "id": 5217,
+      "path": "cstrike/models/baloncuaga_outfits/sas.mdl",
+      "file": "5217.bsk",
+      "bytes": 3482512,
+      "packed": 2429159,
+      "sha256": "c4cbf43cc1bbb5222a94138ba69c88ee5f44d03d3d175db4cac84ab5636a2144",
+      "fnv64": "a3aa30148b7f58d5",
+      "restart": false
+    },
+    {
+      "id": 5218,
+      "path": "cstrike/models/baloncuaga_outfits/tt.mdl",
+      "file": "5218.bsk",
+      "bytes": 3440400,
+      "packed": 2450057,
+      "sha256": "2f79e58793597448d879bd53d409487cbc196b012ba40eb4cd59e94f2b3798dc",
+      "fnv64": "27250bd3be2f7101",
+      "restart": false
+    },
+    {
+      "id": 5219,
+      "path": "cstrike/models/baloncuaga_outfits/vip.mdl",
+      "file": "5219.bsk",
+      "bytes": 3079276,
+      "packed": 2281006,
+      "sha256": "9ed1d00a7a816b3b1bfc571d5980b195dd38488741965f48f111acfc573fbbc0",
+      "fnv64": "d8be58c7edfd659b",
+      "restart": false
+    }
+  ]
+}

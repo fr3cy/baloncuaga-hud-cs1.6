@@ -76,8 +76,8 @@ static void fogArt(ImDrawList *d,ImVec2 p,int style,float fs,const FogArt &v,ULO
         at={std::round(at.x*scale)/scale,std::round(at.y*scale)/scale};
         if(lit&&halo)fogGlowText(d,font,sz,at,color,s,pulse,fs*(.07f+.055f*pulse));
         if(s==v.number)speedometerBorder(d,font,sz,at,s);
-        else d->AddText(font,sz,at+ImVec2(.7f,.7f),IM_COL32(0,0,0,150),s);
-        d->AddText(font,sz,at,color,s);
+        else hudDrawText(d,font,sz,at+ImVec2(.7f/scale,.7f/scale),IM_COL32(0,0,0,150),s);
+        hudDrawText(d,font,sz,at,color,s);
     };
     auto line=[&](ImVec2 a,ImVec2 b){
         if(halo)for(int i=3;i>0;--i)d->AddLine(a,b,(accent&~IM_COL32_A_MASK)|IM_COL32(0,0,0,static_cast<int>((16-i*3)*pulse)),fs*(.05f+i*.05f*pulse));
@@ -142,12 +142,20 @@ static void fogStyleGallery(){
     FogArt sample({MovementHud::Bhop,MovementHud::previewFog,284.106f,MovementHud::previewTakeoff(now),true,MovementHud::videoEffects&&MovementHud::previewIdeal},286,45,true,true,true);
     for(int style=0;style<MovementHud::StyleCount;++style){
         ImGui::PushID(style);ImVec2 p=ImGui::GetCursorScreenPos();float w=std::max(32.f,ImGui::GetContentRegionAvail().x),h=104;
+        // fogArt is also used by the in-game HUD, where its colours stay native.
+        // Fade only this menu preview's newly emitted vertices, exactly once.
+        auto *previewDraw=ImGui::GetWindowDrawList();int firstVertex=previewDraw->VtxBuffer.Size;
+        float previewAlpha=ImGui::GetStyle().Alpha;ImGui::PushStyleVar(ImGuiStyleVar_Alpha,1.f);
         if(ImGui::InvisibleButton("##fog style",{w,h})){MovementHud::style=style;save();}
         auto *d=ImGui::GetWindowDrawList();bool selected=MovementHud::style==style;
         d->AddRectFilled(p,p+ImVec2(w,h),IM_COL32(15,15,20,255),6);d->AddRect(p,p+ImVec2(w,h),selected?ImGui::GetColorU32(ImGuiCol_Scheme):IM_COL32(255,255,255,25),6,0,selected?1.5f:1.f);
         d->AddText(p+ImVec2(9,7),ImGui::GetColorU32(selected?ImGuiCol_Text:ImGuiCol_TextDisabled),fogStyleName(style));
         float fs=24;auto extent=fogArtSize(style,fs,sample);float fit=std::min(1.f,std::min((w-24)/extent.x,66.f/extent.y));fs*=std::max(.15f,fit);extent=fogArtSize(style,fs,sample);
         d->PushClipRect(p+ImVec2(3,24),p+ImVec2(w-3,h-3),true);fogArt(d,p+ImVec2((w-extent.x)/2,30+(66-extent.y)/2),style,fs,sample,now,selected);d->PopClipRect();
+        ImGui::PopStyleVar();
+        for(int i=firstVertex;i<d->VtxBuffer.Size;++i){auto &color=d->VtxBuffer[i].col;
+            ImU32 alpha=static_cast<ImU32>(((color>>IM_COL32_A_SHIFT)&255)*previewAlpha+.5f);
+            color=(color&~IM_COL32_A_MASK)|(alpha<<IM_COL32_A_SHIFT);}
         ImGui::PopID();
     }endCard();
 }
