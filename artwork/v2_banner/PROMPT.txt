@@ -1,8 +1,0 @@
-Use case: ads-marketing
-Asset type: final GitHub README release banner, very wide landscape about 3:1, 1800 by 600 visual composition.
-Primary request: a restrained black-and-white carbon identity banner for the Counter-Strike 1.6 HUD baLONCUaga, marking the V2 update.
-Input image 1: reference only, the project's established chunky silver/black technical sneaker logo, custom baLONCUaga wordmark. Preserve the recognizable sneaker design and silver mesh material, no additional brand names.
-Scene: deep matte charcoal black background, subtle fine carbon weave, precise thin silver rules, generous empty space. A single beautifully lit silver/black reference sneaker on the right, three-quarter product photography view with dimensional sole and detailed mesh. Left: clean highly legible baLONCUaga logotype, with a large V2 and a small restrained UPDATE below. Tiny subtitle CS 1.6 HUD.
-Exact text only: 'baLONCUaga', 'V2', 'UPDATE', 'CS 1.6 HUD'. The custom brand has capital L O N C U: b a L O N C U a g a. Keep exact spelling. White/silver clean contemporary bold sans typography. Crisp text, deliberate spacing, strong hierarchy.
-Lighting: cool monochrome studio rim lighting and soft controlled highlights, realistic silver material, no colorful glow.
-Constraints: exactly one cohesive banner, no mock browser UI, no fake settings panels, no people, no watermark. No Aurora, no moon, no slogans, no extra text. Keep key logo/text well inset so nothing is cut off. Professional sparse typography and quiet high contrast, no explosive effects or decorative clutter.

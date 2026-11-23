@@ -1,4 +1,4 @@
-Сборка BALONCUAGA v1
+Сборка BALONCUAGA V2
 
 Нужны Windows, PowerShell и MinGW-w64 с компилятором для x86.
 Из корня репозитория выполни:
