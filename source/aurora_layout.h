@@ -170,7 +170,7 @@ static void auroraLayout(){
     d->AddLine(origin+ImVec2(12,bar),origin+ImVec2(side-12,bar),auroraC(IM_COL32(255,255,255,15)));
     auroraDrag("Aurora drag",{0,0},{side,bar});
     // Sidebar order: Showkeys sits after HUD; Misc/Config stays in its own group.
-    static const int navOrder[]={0,1,2,3,9,4,5,8,6};constexpr int navCount=9;
+    static const int navOrder[]={0,1,2,3,9,4,5,8,10,11,6};constexpr int navCount=11;
     auto itemY=[&](int tab){if(tab==7)return 56.f+navCount*28+26;for(int i=0;i<navCount;++i)if(navOrder[i]==tab)return 56.f+i*28;return 56.f;};
     float target=itemY(ui::next_tab);auroraPillY=auroraPillY<0?target:auroraStep(auroraPillY,target,13);
     {

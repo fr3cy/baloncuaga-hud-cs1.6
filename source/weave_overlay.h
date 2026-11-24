@@ -76,8 +76,9 @@ static void movementOverlay(bool preview=false){
     ULONGLONG now=GetTickCount64();bool fresh=Speedometer::fresh(now);const char *level=eng->pfnGetLevelName?eng->pfnGetLevelName():nullptr;
     if(!preview&&(!fresh||!level||!*level))return;
     bool measured=MovementHud::visible(now),demo=preview&&!measured;
-    auto result=demo?MovementHud::Result{MovementHud::Bhop,MovementHud::previewFog,284.106f,MovementHud::previewTakeoff(now),true}:MovementHud::result;
-    FogArt value(result,fresh?Speedometer::speed:286.f,demo?45.f:MovementHud::track.gain,Speedometer::enabled,(measured&&MovementHud::showDetails(result))||demo,MovementHud::showGain&&(measured||demo));
+    auto result=demo?MovementHud::Result{MovementHud::Bhop,MovementHud::previewFog,284.106f,MovementHud::previewTakeoff(now),true}:MovementHud::displayResult();
+    bool statsOwnFog=false;
+    FogArt value(result,fresh?Speedometer::speed:286.f,demo?45.f:MovementHud::track.gain,Speedometer::enabled,(measured&&MovementHud::showDetails(result)&&!statsOwnFog)||demo,MovementHud::showGain&&(measured||demo));
     if(!value.top&&!value.bottom)return;
     float resolution=HudResolution::factor(screenW,screenH),fs=std::max(14.f,Speedometer::size*resolution)/scale;
     auto &io=ImGui::GetIO();ImVec2 extent;float pad;

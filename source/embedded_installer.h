@@ -74,7 +74,7 @@ static Result install(HMODULE module,const std::wstring &root){
     Result result;std::vector<Change> changes;
     auto failure=[&](){result.error=GetLastError();if(!result.error)result.error=ERROR_INVALID_DATA;try{result.rollbackOk=rollback(root,changes);}catch(...){result.rollbackOk=false;}return result;};
     try {
-        changes.reserve(sizeof(files)/sizeof(files[0]));
+        changes.reserve(sizeof(files)/sizeof(files[0])+sizeof(obsolete)/sizeof(obsolete[0]));
         if(!directory(root)){SetLastError(ERROR_BAD_PATHNAME);return failure();}
         for(const auto &entry:files){
             if(!relative(entry.path)){SetLastError(ERROR_BAD_PATHNAME);return failure();}
@@ -96,6 +96,22 @@ static Result install(HMODULE module,const std::wstring &root){
         }
         const char *folders[]={"cstrike/models/customizer/knife/","cstrike/models/customizer/he/","cstrike/models/customizer/flash/","cstrike/models/customizer/smoke/","cstrike/models/customizer/cache/"};
         for(const char *folder:folders)if(!parents(root,wide(folder)))return failure();
+
+        for(const char *path:obsolete){
+            if(!relative(path)){SetLastError(ERROR_BAD_PATHNAME);return failure();}
+            auto rel=wide(path),target=root+L"/"+rel;std::vector<byte> old;bool exists=false;
+            if(!read(target,old,exists))return failure();if(!exists)continue;
+            if(!parents(root,rel))return failure();
+            wchar_t signature[24];swprintf(signature,24,L".%016llx.bak",static_cast<unsigned long long>(hash(old)));
+            auto backup=L".baloncuaga-install/backups/"+wide(bundle)+L"/"+rel+signature;
+            if(!parents(root,backup))return failure();std::vector<byte> saved;bool savedExists=false;
+            if(!read(root+L"/"+backup,saved,savedExists))return failure();
+            if(!savedExists&&!atomic(root+L"/"+backup,old))return failure();
+            if(savedExists&&saved!=old){SetLastError(ERROR_INVALID_DATA);return failure();}
+            Change change{rel,backup,true};
+            if(!DeleteFileW(target.c_str()))return failure();
+            changes.push_back(std::move(change));++result.written;result.restart=true;
+        }
         result.ok=true;return result;
     }catch(const std::bad_alloc &){SetLastError(ERROR_NOT_ENOUGH_MEMORY);return failure();}catch(const std::length_error &){SetLastError(ERROR_FILENAME_EXCED_RANGE);return failure();}
 }

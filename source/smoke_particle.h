@@ -47,7 +47,7 @@ static bool install(){
     if(MH_CreateHook(target,reinterpret_cast<void *>(core),reinterpret_cast<void **>(&originalCore))!=MH_OK){++failedAttempts;return false;}
     if(classTarget&&MH_CreateHook(classTarget,reinterpret_cast<void *>(draw),reinterpret_cast<void **>(&originalDraw))!=MH_OK)classTarget=nullptr;
     if(ready&&(MH_EnableHook(target)!=MH_OK||(classTarget&&MH_EnableHook(classTarget)!=MH_OK))){if(classTarget)MH_RemoveHook(classTarget);MH_RemoveHook(target);return false;}
-    installed=true;SmokeGL::scopeActive=drawing;SmokeTint::textureTintAvailable=true;logLine(classTarget?"SmokeParticle: native CoreDraw and CPartSmokeGrenade::Draw hooks installed.":"SmokeParticle: native CoreDraw installed; specific class draw unavailable.");return true;
+    installed=true;SmokeGL::scopeActive=drawing;logLine(classTarget?"SmokeParticle: native CoreDraw and CPartSmokeGrenade::Draw hooks installed.":"SmokeParticle: native CoreDraw installed; specific class draw unavailable.");return true;
 }
 static void ensure(){static ULONGLONG checked;auto now=GetTickCount64();if(installed||unloading||now-checked<1000)return;checked=now;install();}
 }

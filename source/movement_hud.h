@@ -54,6 +54,7 @@ struct Tracker {
 static Tracker track;
 static void rememberCaAttempt(bool ideal){track.idealPending=ideal;track.idealAge=0;}
 static Result result;
+static Result displayResult(){return result;}
 static unsigned long long publication=0;
 static bool showDetails(const Result &value){return value.hasFog||value.kind==Ladder;}
 static void reset(){track={};result={};}

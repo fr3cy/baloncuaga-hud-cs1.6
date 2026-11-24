@@ -116,5 +116,5 @@
 5215 RCDATA "5215.bsk"
 5216 RCDATA "5216.bsk"
 5217 RCDATA "5217.bsk"
-5218 RCDATA "5218.bsk"
-5219 RCDATA "5219.bsk"
+
+6000 RCDATA "../embedded_garey/6000.bsk"

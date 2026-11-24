@@ -136,10 +136,16 @@ static void fogArt(ImDrawList *d,ImVec2 p,int style,float fs,const FogArt &v,ULO
 static const char *fogStyleName(int style){static const char *en[]={"Capsule","Underline","Classic","Single line","Split","Badge","Ring","Card"};return Lang::english()?en[style]:MovementHud::styleNames[style];}
 static void fogStyleGallery(){
     card(L(u8"Предпросмотр стилей","Style preview"),{0,ImGui::GetContentRegionAvail().y});
-    if(ImGui::SliderInt(L(u8"FOG в примере","Preview FOG"),&MovementHud::previewFog,1,6,"%d"))MovementHud::previewEpoch=0;
-    if(MovementHud::videoEffects&&ImGui::Checkbox(L(u8"Ideal bhop в примере","Preview Ideal bhop"),&MovementHud::previewIdeal))MovementHud::previewEpoch=0;
+    auto local=MovementHud::displayResult();bool measured=MovementHud::visible(GetTickCount64());
+    if(measured)ImGui::Text(L(u8"FOG: %d","FOG: %d"),local.fog);
+    else{
+        ImGui::TextWrapped("%s",L(u8"Демонстрация оформления. Нет свежего результата прыжка.","Style demonstration. No recent jump result."));
+        if(ImGui::SliderInt(L(u8"FOG в примере","Preview FOG"),&MovementHud::previewFog,1,6,"%d"))MovementHud::previewEpoch=0;
+        if(MovementHud::videoEffects&&ImGui::Checkbox(L(u8"Ideal bhop в примере","Preview Ideal bhop"),&MovementHud::previewIdeal))MovementHud::previewEpoch=0;
+    }
     ULONGLONG now=GetTickCount64();if(MovementHud::videoEffects&&now-MovementHud::previewTakeoff(now)>static_cast<ULONGLONG>(MovementHud::animationMs+900))MovementHud::previewEpoch=now;
-    FogArt sample({MovementHud::Bhop,MovementHud::previewFog,284.106f,MovementHud::previewTakeoff(now),true,MovementHud::videoEffects&&MovementHud::previewIdeal},286,45,true,true,true);
+    MovementHud::Result demo={MovementHud::Bhop,MovementHud::previewFog,284.106f,MovementHud::previewTakeoff(now),true,MovementHud::videoEffects&&MovementHud::previewIdeal};
+    FogArt sample(measured?local:demo,Speedometer::fresh(now)?Speedometer::speed:286.f,measured?MovementHud::track.gain:45.f,true,true,true);
     for(int style=0;style<MovementHud::StyleCount;++style){
         ImGui::PushID(style);ImVec2 p=ImGui::GetCursorScreenPos();float w=std::max(32.f,ImGui::GetContentRegionAvail().x),h=104;
         // fogArt is also used by the in-game HUD, where its colours stay native.

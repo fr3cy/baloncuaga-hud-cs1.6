@@ -1,6 +1,6 @@
 #pragma once
 namespace SmokeTint {
-static bool textureTintAvailable;
+
 struct EntityColor {cl_entity_t *entity;model_t *model;byte original[3],tinted[3];};static std::vector<EntityColor> entityColors;
 static void remember(cl_entity_t *entity){EntityColor saved={entity,entity->model,{entity->curstate.rendercolor.r,entity->curstate.rendercolor.g,entity->curstate.rendercolor.b},{static_cast<byte>(Hud::smokeRgb[0]),static_cast<byte>(Hud::smokeRgb[1]),static_cast<byte>(Hud::smokeRgb[2])}};entityColors.push_back(saved);}
 static void restoreEntities(){for(const auto &saved:entityColors){auto *entity=saved.entity;if(!Hud::readable(entity,sizeof(*entity))||entity->model!=saved.model)continue;auto &color=entity->curstate.rendercolor;if(color.r==saved.tinted[0]&&color.g==saved.tinted[1]&&color.b==saved.tinted[2]){color.r=saved.original[0];color.g=saved.original[1];color.b=saved.original[2];}}entityColors.clear();}
@@ -70,7 +70,9 @@ static bool model(model_t *value){
 }
 static void diagnose(model_t *value,const char *path){static std::vector<std::string> logged;if(!value||logged.size()>=128)return;std::string name(value->name);if(std::find(logged.begin(),logged.end(),name)!=logged.end())return;logged.push_back(name);char line[192];snprintf(line,sizeof(line),"SmokeCustom: %s sprite=%.63s",path,value->name);logLine(line);}
 
-static void tint(float &r,float &g,float &b){float light=std::clamp(std::max(r,std::max(g,b)),0.f,1.f);r=Hud::smokeRgb[0]/255.f*light;g=Hud::smokeRgb[1]/255.f*light;b=Hud::smokeRgb[2]/255.f*light;}
+// Set RGB once or repeatedly without darkening it. Native alpha is preserved.
+static void tint(float &r,float &g,float &b){r=std::clamp(Hud::smokeRgb[0],0,255)/255.f;g=std::clamp(Hud::smokeRgb[1],0,255)/255.f;b=std::clamp(Hud::smokeRgb[2],0,255)/255.f;}
+
 static int (*originalSprite)(model_t *,int);
 static void (*originalColor)(float,float,float,float),(*originalModeColor)(float,float,float,float,int),(*originalTriangles)();
 static void (*originalByteColor)(unsigned char,unsigned char,unsigned char,unsigned char);
@@ -79,7 +81,7 @@ static thread_local bool inParticles,bound,forwarding;
 // prevent aligned 16-byte SIMD stores into this per-thread colour bank.
 static thread_local volatile float color[4]={1,1,1,1};static thread_local int kind,mode;
 struct Forward {bool previous;Forward():previous(forwarding){forwarding=true;}~Forward(){forwarding=previous;}};
-static void emit(){float r=color[0],g=color[1],b=color[2];if(inParticles&&bound&&Hud::smokeTintOn&&!textureTintAvailable)tint(r,g,b);Forward guard;
+static void emit(){float r=color[0],g=color[1],b=color[2];if(inParticles&&bound&&Hud::smokeTintOn)tint(r,g,b);Forward guard;
     if(kind==2&&originalModeColor)originalModeColor(r,g,b,color[3],mode);
     else if(kind==1&&originalByteColor)originalByteColor(static_cast<byte>(std::round(r*255)),static_cast<byte>(std::round(g*255)),static_cast<byte>(std::round(b*255)),static_cast<byte>(std::round(color[3]*255)));
     else if(originalColor)originalColor(r,g,b,color[3]);
@@ -87,7 +89,7 @@ static void emit(){float r=color[0],g=color[1],b=color[2];if(inParticles&&bound&
 static void colorFloat(float r,float g,float b,float a){CallbackScope scope;if(forwarding){originalColor(r,g,b,a);return;}color[0]=r;color[1]=g;color[2]=b;color[3]=a;kind=0;emit();}
 static void colorByte(unsigned char r,unsigned char g,unsigned char b,unsigned char a){CallbackScope scope;if(forwarding){originalByteColor(r,g,b,a);return;}color[0]=r/255.f;color[1]=g/255.f;color[2]=b/255.f;color[3]=a/255.f;kind=1;emit();}
 static void colorMode(float r,float g,float b,float a,int renderMode){CallbackScope scope;if(forwarding){originalModeColor(r,g,b,a,renderMode);return;}color[0]=r;color[1]=g;color[2]=b;color[3]=a;kind=2;mode=renderMode;emit();}
-static int sprite(model_t *value,int frame){CallbackScope scope;int result=originalSprite(value,frame);bound=inParticles&&result!=0&&model(value);if(bound&&Hud::smokeTintOn)diagnose(value,"triangle particle");if(inParticles)emit();static bool logged=false;if(bound&&Hud::smokeTintOn&&!logged){logged=true;logLine("Smoke: matched gas-puff sprite in particle renderer.");}return result;}
+static int sprite(model_t *value,int frame){CallbackScope scope;int result=originalSprite(value,frame);bool smoke=result!=0&&model(value);if(smoke&&Hud::smokeTintOn)SmokeGL::observe(value);bound=inParticles&&smoke;if(bound&&Hud::smokeTintOn)diagnose(value,"triangle particle");if(inParticles)emit();static bool logged=false;if(bound&&Hud::smokeTintOn&&!logged){logged=true;logLine("Smoke: matched gas-puff sprite in particle renderer.");}return result;}
 static void triangles(){CallbackScope scope;inParticles=true;bound=false;kind=0;color[0]=color[1]=color[2]=color[3]=1;originalTriangles();bound=false;emit();inParticles=false;}
 static bool install(HMODULE client){
     auto *api=eng->pTriAPI;if(!api)return false;

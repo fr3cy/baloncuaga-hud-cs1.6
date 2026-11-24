@@ -42,8 +42,6 @@ static bool radarInsideOnly=true;   // in a building the radar shows only that b
 static int radarCenteredZoom=100;
 static int utcOffset=180;
 static bool systemTime=false;
-static char historyPath[MAX_PATH];
-static std::atomic<bool> logWritable{true};
 static int team[33];
 struct RadarDot { float xyz[3]={}; ULONGLONG tick=0; bool dead=false; };
 static RadarDot dots[33];
@@ -159,13 +157,8 @@ static void push(ChatLine line,bool persist) {
     line.serial=++chatSerial;history.push_back(line);if(history.size()>maxHistory)history.pop_front();
     if(chatOpened && chatScroll>0)chatScroll=std::min(static_cast<int>(history.size())-1,chatScroll+1);
     if(historyOffset || historyDetails)historyOffset=std::min(static_cast<int>(history.size())-1,historyOffset+1);
-    if(persist) {
-        // Appended on the I/O thread: a busy server no longer opens a file per message mid-frame.
-        char flags[16];snprintf(flags,sizeof(flags),"%d",(line.serverMessage?1:0)|(line.deadMessage?2:0)|(line.radioMessage?4:0));
-        std::string record=line.date+"\t"+line.nick+"\t"+line.map+"\t"+std::to_string(line.side)+"\t"+line.body+"\t"+hexChat(line.colored)+"\t"+flags+"\n";
-        std::string file=historyPath;
-        BackgroundIo::post([file,record]{FILE *f=fopen(file.c_str(),"ab");if(f){fwrite(record.data(),1,record.size(),f);fclose(f);}logWritable=f!=nullptr;});
-    }
+    // Chat history exists only in memory; never save message bodies or identities.
+
 }
 static void record(int index,const std::string &nick,const std::string &body,const std::string &colored={},bool serverMessage=false,bool deadMessage=false,bool radioMessage=false) {
     auto time=now();char stamp[32];snprintf(stamp,sizeof(stamp),"%04u-%02u-%02u %02u:%02u:%02u",time.wYear,time.wMonth,time.wDay,time.wHour,time.wMinute,time.wSecond);
@@ -229,23 +222,9 @@ static void load(bool readHistory=true) {
     flashTintOn=setting("flash_color_enabled",0,0,1)!=0;
     for(int i=0;i<3;++i){char key[32];snprintf(key,sizeof(key),"flash_rgb_%d",i);flashRgb[i]=setting(key,flashRgb[i],0,255);}
     if(migrated)save();
-    if(!readHistory)return;
-    std::string path=iniPath;size_t dot=path.find_last_of('.');if(dot!=std::string::npos)path.resize(dot);path+="_chat.tsv";
-    snprintf(historyPath,sizeof(historyPath),"%s",path.c_str());
-    FILE *f=fopen(historyPath,"rb");if(!f)return;
-    fseek(f,0,SEEK_END);long length=ftell(f);long start=std::max(0L,length-2*1024*1024);fseek(f,start,SEEK_SET);
-    char line[12000];if(start)fgets(line,sizeof(line),f);
-    while(fgets(line,sizeof(line),f)) {
-        std::string s=line;while(!s.empty()&&(s.back()=='\n'||s.back()=='\r'))s.pop_back();
-        std::vector<std::string> fields;size_t begin=0;
-        for(int i=0;i<4;++i){size_t end=s.find('\t',begin);if(end==std::string::npos)break;fields.push_back(s.substr(begin,end-begin));begin=end+1;}
-        if(fields.size()!=4 || fields[0].size()<19)continue;
-        int side=fields[3]=="1"?1:fields[3]=="2"?2:0;
-        std::string tail=s.substr(begin);size_t extra=tail.find('\t');ChatLine entry={clean(fields[0],32),clean(fields[1],48),clean(fields[2],48),clean(tail.substr(0,extra),1024),side,0};
-        if(extra!=std::string::npos){size_t flagsAt=tail.find('\t',extra+1);entry.colored=unhexChat(tail.substr(extra+1,flagsAt==std::string::npos?std::string::npos:flagsAt-extra-1));if(flagsAt!=std::string::npos){int flags=atoi(tail.c_str()+flagsAt+1);entry.serverMessage=flags&1;entry.deadMessage=flags&2;entry.radioMessage=flags&4;}}
-        push(std::move(entry),false);
-    }fclose(f);
+    // Do not load or create transcripts from earlier releases.
 }
+
 struct Packet {
     const byte *data;int size,pos=0;bool valid=true;
     int byteValue(){if(pos>=size){valid=false;return 0;}return data[pos++];}

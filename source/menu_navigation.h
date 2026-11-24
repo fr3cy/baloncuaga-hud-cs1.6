@@ -2,6 +2,8 @@
 // Shared Aurora page registry, section search and navigation history.
 struct PeachPage {const char *name,*english,*keywords;int tab,sub;};
 static const PeachPage peachPages[]={
+    {u8"Чат / БРАТУХА","Chat / BRATUKHA",u8"помощник бот assistant bot chat братуха поговорить",5,2},
+    {u8"Серверы","Servers",u8"server history favorites connect избранное история сервер подключиться ip",11,0},
     {u8"Модели / Нож","Models / Knife","knife model",0,0},{u8"Модели / HE-граната","Models / HE grenade","grenade model",0,1},
     {u8"Модели / Флешка","Models / Flashbang","flash model",0,2},{u8"Модели / Дымовая","Models / Smoke","smoke model",0,3},
     {u8"Модели / Одежда команд","Models / Team outfits",u8"одежда кт тт ct tt terror hoodie hood vetements enfants rick owens mowalola stomper geobasket костюм",0,4},
@@ -18,6 +20,8 @@ static const PeachPage peachPages[]={
     {u8"Настройки / Ватермарк","Settings / Watermark",u8"watermark ватермарк fps пинг ping ник nick плашка",6,1},
     {u8"Настройки / Экран","Settings / Screen",u8"время часовой пояс timezone time zone utc spectator наблюдатель чёрные полосы black bars",6,3},
     {u8"Настройки / Анимация","Settings / Motion",u8"анимация animated opening closing orbit aurora particles частицы свечение контур плавность шаблон",6,4},
+    {"CS Fix (Garey)","CS Fix (Garey)",u8"fps_visual visual fps голос герцовка voice garey patches",10,0},
+    {u8"HUD / FOG / Стрейфы","HUD / FOG / Strafes",u8"jump stats stat sync gain loss strafes прыжки стрейфы синк гейн",3,1},
     {"Stats","Stats",u8"статистика fog bhop duck sgs jumpbug ideal distr проценты",8,0}
 };
 static const char *peachName(const PeachPage &page){return Lang::english()?page.english:page.name;}struct PeachVisit {int tab,sub;};

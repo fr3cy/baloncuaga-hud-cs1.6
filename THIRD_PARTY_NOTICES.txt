@@ -1,5 +1,5 @@
 BALONCUAGA uses Dear ImGui, FreeType and MinHook.
-The included proxy version.dll is based on Ultimate ASI Loader by ThirteenAG.
+The included proxy dinput.dll is based on Ultimate ASI Loader by ThirteenAG.
 Its diagnostic build paths were shortened to basenames and its obsolete
 Authenticode certificate was removed. Executable code was retained.
 See licenses/ for third-party license notices. Font attribution remains
@@ -7,3 +7,10 @@ embedded in the original font data. These notices are not product activation.
 
 Segoe UI is read from the Windows installation at runtime; its font files
 are not included in these archives. Embedded fallback-font notices remain.
+
+The HUD embeds the user-supplied CS Fix binary by Garey / Garey27 as a
+compressed resource. Only absolute debug/assert paths were removed;
+executable code remains identical. Exact fork sources were not provided.
+See licenses/CS_Patches_NOTICE.txt for provenance and hashes.
+Steam matchmaking ABI is documented in Valve's Source SDK public headers:
+https://github.com/ValveSoftware/source-sdk-2013/tree/master/src/public/steam

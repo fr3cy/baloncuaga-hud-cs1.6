@@ -1,13 +1,13 @@
 #pragma once
 // Carbon 3XL has its own navigation rail, header and content canvas. It shares
 // only the setting-page registry and navigation history with the other layouts.
-static constexpr int carbonNavOrder[]={0,1,2,3,9,4,5,8,6,7};
-static ImVec2 carbonNavLocal(int slot){return {10.f,86.f+slot*44.f};}
+static constexpr int carbonNavOrder[]={0,1,2,3,9,4,5,8,10,11,6,7};
+static ImVec2 carbonNavLocal(int slot){return {10.f,86.f+slot*41.f};}
 static ImVec2 carbonHeaderDragLocal(){return {480.f,70.f};}
 static ImVec2 carbonSearchLocal(){return {ui::size.x-270.f,25.f};}
 static float carbonSelectionY=-1.f,carbonSubX=-1.f,carbonSubW;
 static int carbonSubCategory=-1;
-static float carbonNavHover[10]={};
+static float carbonNavHover[12]={};
 static float carbonStep(float v,float target,float rate=14.f){
     if(!std::isfinite(v)||MenuTheme::reduceMotion)return target;
     return ImLerp(v,target,1.f-std::exp(-rate*ImGui::GetIO().DeltaTime));
@@ -102,19 +102,21 @@ static void carbon3XLLayout(){
     // The same 3XL shoe appears in the rail and the appearance previews.
     SneakerArt::shoe(d,origin+ImVec2(41,40),34,MenuTheme::reduceMotion?0.f:menuEffectTime,1.f);
     carbonWordmark(d,origin+ImVec2(mainX,19));
-    carbonText(d,menuSmall,origin+ImVec2(mainX+1,43),carbonInk(164),"C A R B O N   3 X L");
+    ImVec2 authors=origin+ImVec2(mainX+1,43);
+    auto author=[&](const char *name,ImU32 color){carbonText(d,menuSmall,authors,ImGui::GetColorU32(color),name);authors.x+=menuSmall->CalcTextSizeA(menuSmall->FontSize,FLT_MAX,0,name).x;};
+    author("detoxy",IM_COL32(184,158,248,255));author(" & ",IM_COL32(164,168,177,255));author("weta",IM_COL32(112,214,233,255));
     d->AddLine(origin+ImVec2(300,22),origin+ImVec2(300,58),carbonInk(255,23));
     // A single sliding silver tile makes the rail feel like one control.
-    int selectedSlot=0;for(int i=0;i<10;++i)if(carbonNavOrder[i]==ui::next_tab)selectedSlot=i;
+    int selectedSlot=0;for(int i=0;i<12;++i)if(carbonNavOrder[i]==ui::next_tab)selectedSlot=i;
     float target=carbonNavLocal(selectedSlot).y;
     carbonSelectionY=carbonSelectionY<0?target:carbonStep(carbonSelectionY,target,15);
     ImVec2 select=origin+ImVec2(10,carbonSelectionY);
     for(int i=3;i>=1;--i)d->AddRect(select-ImVec2(i,i),select+ImVec2(62+i,40+i),carbonInk(255,5),9+i);
     int first=d->VtxBuffer.Size;d->AddRectFilled(select,select+ImVec2(62,40),carbonInk(255),9);
     ImGui::ShadeVertsLinearColorGradientKeepAlpha(d,first,d->VtxBuffer.Size,select,select+ImVec2(0,40),IM_COL32(250,250,250,255),IM_COL32(197,197,197,255));
-    static const char *ru[]={u8"Модели",u8"Камера",u8"Прицел","HUD",u8"Клавиши",u8"Колесо",u8"Чат","Stats",u8"Настройки",u8"Конфиг"};
-    static const char *en[]={"Models","Camera","Crosshair","HUD","Keys","Wheel","Chat","Stats","Settings","Config"};
-    for(int i=0;i<10;++i){int tab=carbonNavOrder[i];if(tab>=static_cast<int>(ui::tabs.size()))continue;
+    static const char *ru[]={u8"Модели",u8"Камера",u8"Прицел","HUD",u8"Клавиши",u8"Колесо",u8"Чат","Stats","CS FIX",u8"Серверы",u8"Настройки",u8"Конфиг"};
+    static const char *en[]={"Models","Camera","Crosshair","HUD","Keys","Wheel","Chat","Stats","CS FIX","Servers","Settings","Config"};
+    for(int i=0;i<12;++i){int tab=carbonNavOrder[i];if(tab>=static_cast<int>(ui::tabs.size()))continue;
         ImVec2 p=origin+carbonNavLocal(i);ImGui::SetCursorScreenPos(p);ImGui::PushID(i+750);
         bool hit=ImGui::InvisibleButton("##carbon category",{62,40}),hot=ImGui::IsItemHovered();ImGui::PopID();
         bool active=ui::next_tab==tab;carbonNavHover[i]=carbonStep(carbonNavHover[i],hot?1.f:0.f);

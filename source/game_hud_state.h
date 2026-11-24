@@ -40,7 +40,7 @@ struct Reader {
     bool string(char *out,size_t capacity){size_t n=0;while(pos<size){unsigned char c=static_cast<unsigned char>(byteValue());if(!c){out[n]=0;return true;}if(c<32||c>126||n+1>=capacity){valid=false;return false;}out[n++]=static_cast<char>(c);}valid=false;return false;}
     bool end()const{return valid&&pos==size;}
 };
-enum Message {MHealth,MBattery,MMoney,MAmmoX,MCurWeapon,MWeaponList,MHideWeapon,MRoundTime,MResetHUD,MInitHUD,MSpectator,MArmorType,MessageCount};
+enum Message {MHealth,MBattery,MMoney,MAmmoX,MCurWeapon,MWeaponList,MHideWeapon,MRoundTime,MResetHUD,MInitHUD,MSpectator,MArmorType,MHudText,MHudTextPro,MHudTextArgs,MTextMsg,MessageCount};
 struct Binding {const char *name;pfnUserMsgHook ours,old,stub;Hud::UserMsg *node;bool installed;};
 static Binding bindings[MessageCount];
 
@@ -63,6 +63,10 @@ static double messageTime(bool &known){
 }
 static void consume(Message id,int size,const void *payload){
     if(size<0||size>256||(size&&(!payload||!Hud::readable(payload,size))))return;
+    // No engine text lookup is performed while holding the HUD state lock.
+    if(id==MHudText||id==MHudTextPro||id==MHudTextArgs){ServerStrafes::token(size,payload);return;}
+    if(id==MTextMsg)return;
+    if(id==MResetHUD||id==MInitHUD){MovementHud::reset();JumpStats::reset();}
     Write guard;observeMap();Reader p{static_cast<const unsigned char *>(payload),size};
     switch(id){
     case MHealth:state.healthValid=false;state.healthMessage=true;state.alive=false;if(size==1){state.health=p.byteValue();state.healthValid=true;state.alive=state.health>0;}break;
@@ -96,7 +100,7 @@ template<int Id> GAMEHUD_ALIGN static int message(const char *name,int size,void
 #undef GAMEHUD_ALIGN
 static void prepareBindings(){
     if(bindings[0].name)return;
-    Binding entries[]={{"Health",message<MHealth>},{"Battery",message<MBattery>},{"Money",message<MMoney>},{"AmmoX",message<MAmmoX>},{"CurWeapon",message<MCurWeapon>},{"WeaponList",message<MWeaponList>},{"HideWeapon",message<MHideWeapon>},{"RoundTime",message<MRoundTime>},{"ResetHUD",message<MResetHUD>},{"InitHUD",message<MInitHUD>},{"Spectator",message<MSpectator>},{"ArmorType",message<MArmorType>}};
+    Binding entries[]={{"Health",message<MHealth>},{"Battery",message<MBattery>},{"Money",message<MMoney>},{"AmmoX",message<MAmmoX>},{"CurWeapon",message<MCurWeapon>},{"WeaponList",message<MWeaponList>},{"HideWeapon",message<MHideWeapon>},{"RoundTime",message<MRoundTime>},{"ResetHUD",message<MResetHUD>},{"InitHUD",message<MInitHUD>},{"Spectator",message<MSpectator>},{"ArmorType",message<MArmorType>},{"HudText",message<MHudText>},{"HudTextPro",message<MHudTextPro>},{"HudTextArgs",message<MHudTextArgs>},{"TextMsg",message<MTextMsg>}};
     for(int i=0;i<MessageCount;++i)bindings[i]=entries[i];
 }
 static bool writableCallback(Hud::UserMsg *node){MEMORY_BASIC_INFORMATION info={};return VirtualQuery(&node->callback,&info,sizeof(info))&&info.State==MEM_COMMIT&&!(info.Protect&(PAGE_NOACCESS|PAGE_GUARD))&&(info.Protect&(PAGE_READWRITE|PAGE_WRITECOPY));}

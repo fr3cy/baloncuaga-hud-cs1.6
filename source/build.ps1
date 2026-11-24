@@ -1,4 +1,4 @@
-﻿param([Parameter(Mandatory=$true)][string]$Sdk,[Parameter(Mandatory=$true)][string]$MinHook,[string]$BinDir='')
+param([Parameter(Mandatory=$true)][string]$Sdk,[Parameter(Mandatory=$true)][string]$MinHook,[string]$BinDir='')
 $ErrorActionPreference='Stop'
 $taskGcc=if($BinDir){Join-Path $BinDir 'i686-w64-mingw32-gcc.exe'}else{'gcc'}
 $taskGxx=if($BinDir){Join-Path $BinDir 'i686-w64-mingw32-g++.exe'}else{'g++'}
@@ -37,6 +37,6 @@ $taskOutput=Join-Path (Split-Path $PSScriptRoot -Parent) "CS16Customizer.asi"
 $taskUnits=@("$taskRoot/customizer.cpp","$taskRoot/weave/imgui/imgui.cpp","$taskRoot/weave/imgui/imgui_draw.cpp","$taskRoot/weave/imgui/imgui_widgets.cpp","$taskRoot/weave/imgui/imgui_tables.cpp","$taskRoot/weave/imgui/imgui_freetype.cpp","$taskRoot/weave/ui/ui.cpp")
 # Keep build-machine paths out of the ASI (assert messages embed __FILE__).
 $taskParent=Split-Path $taskRoot -Parent
-& $taskGxx -m32 -shared -O2 -g0 -s "-ffile-prefix-map=$taskRoot=source" "-ffile-prefix-map=$($taskRoot -replace '\\','/')=source" "-ffile-prefix-map=$taskParent=." "-ffile-prefix-map=$($taskParent -replace '\\','/')=." -std=c++17 -static -static-libgcc -static-libstdc++ '-Wl,--kill-at' -DIMGUI_DEFINE_MATH_OPERATORS "-I$Sdk/common" "-I$Sdk/engine" "-I$Sdk/public" "-I$Sdk/pm_shared" "-I$MinHook/include" "-I$MinHook/src/hde" "-I$taskRoot/weave/freetype/include" $taskUnits $taskResource $taskInstallerResource "$MinHook/src/buffer.c" "$MinHook/src/hook.c" "$MinHook/src/trampoline.c" "$MinHook/src/hde/hde32.c" "$taskBuild/libfreetype.a" -o $taskOutput -lkernel32 -luser32 -lopengl32 -lgdi32 -ladvapi32
+& $taskGxx -m32 -shared -mstackrealign -O2 -g0 -s "-ffile-prefix-map=$taskRoot=source" "-ffile-prefix-map=$($taskRoot -replace '\\','/')=source" "-ffile-prefix-map=$taskParent=." "-ffile-prefix-map=$($taskParent -replace '\\','/')=." -std=c++17 -static -static-libgcc -static-libstdc++ '-Wl,--kill-at' -DIMGUI_DEFINE_MATH_OPERATORS "-I$Sdk/common" "-I$Sdk/engine" "-I$Sdk/public" "-I$Sdk/pm_shared" "-I$MinHook/include" "-I$MinHook/src/hde" "-I$taskRoot/weave/freetype/include" $taskUnits $taskResource $taskInstallerResource "$MinHook/src/buffer.c" "$MinHook/src/hook.c" "$MinHook/src/trampoline.c" "$MinHook/src/hde/hde32.c" "$taskBuild/libfreetype.a" -o $taskOutput -lkernel32 -luser32 -lopengl32 -lgdi32 -ladvapi32 -lws2_32
 if($LASTEXITCODE -ne 0){throw 'ASI compilation failed'}
 

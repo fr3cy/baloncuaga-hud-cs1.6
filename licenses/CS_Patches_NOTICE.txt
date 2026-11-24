@@ -1,0 +1,17 @@
+CS Fix / CS_Patches — Garey / Garey27
+Project: https://github.com/Garey27/CS_Patches
+
+The HUD embeds a user-supplied x86 binary in a compressed Windows resource.
+Original SHA-256:
+a8546e972abb605aa69cc8e8ee5be500ec8d160f9dd689f0cece8ef705198efd
+Metadata-cleaned SHA-256:
+7ace1120f2a1595c551d6b0f68e17c2d5167a804a7eae56beac6e48b6a3d4fbd
+
+Three assert source-file paths and one CodeView/PDB path were reduced to
+basenames, and the PE debug-directory entry was cleared. Executable .text
+and .textbss sections are byte-for-byte identical to the original.
+No executable code was patched or reimplemented.
+
+The exact fork sources were not provided. Public 0.4.1 sources are not
+represented as the sources of this binary. The module has its own Windows
+loader lifetime and stays loaded until game exit after HUD F11 unloading.

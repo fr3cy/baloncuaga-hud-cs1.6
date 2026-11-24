@@ -19,7 +19,7 @@ static bool saveProfile(const char *name){
     message=std::string(u8"Конфиг сохранён: ")+name;return true;
 }
 static void apply(){
-    MenuTheme::load();Lang::load();Showkeys::load();Watermark::load();Skybox::load();
+    Garey::load();JumpStats::load();MenuTheme::load();Lang::load();Showkeys::load();Watermark::load();Skybox::load();
     Weave::combatSettingsLoaded=false;Weave::loadCombatHud();
     PlayerOutfits::settingsLoaded=false;PlayerOutfits::loadSettings();PlayerOutfits::reset();
     ChatBox::loadTheme();

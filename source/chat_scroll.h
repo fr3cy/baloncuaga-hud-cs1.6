@@ -68,7 +68,10 @@ static bool uninstall(){
     }
     window=nullptr;return true;
 }
-static void release(){if(ownControls&&controls)FreeLibrary(controls);ownControls=false;controls=nullptr;}
+static void release(){
+    if(ownControls&&controls)FreeLibrary(controls);
+    ownControls=false;controls=nullptr;setSubclass=nullptr;getSubclass=nullptr;removeSubclass=nullptr;defSubclass=nullptr;
+}
 static bool resolveControls(){
     if(!controls)return false;
     // Common Controls 5.x exposes GetWindowSubclass only by ordinal. GoldSrc
@@ -78,13 +81,19 @@ static bool resolveControls(){
     getSubclass=reinterpret_cast<GetSubclass>(resolve("GetWindowSubclass",411));
     removeSubclass=reinterpret_cast<RemoveSubclass>(resolve("RemoveWindowSubclass",412));
     defSubclass=reinterpret_cast<DefSubclass>(resolve("DefSubclassProc",413));
-    return setSubclass&&getSubclass&&removeSubclass&&defSubclass;
+    if(!setSubclass||!getSubclass||!removeSubclass||!defSubclass)return false;
+    // Another window hook can retain Common Controls' master WNDPROC after our
+    // subclass is removed. Keep that Windows module alive for the process;
+    // no BALONCUAGA callbacks or resources are retained by this pin.
+    HMODULE pinned=nullptr;
+    return GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_PIN,
+        reinterpret_cast<LPCSTR>(defSubclass),&pinned)!=FALSE;
 }
 static void install(){
     if(window&&IsWindow(window))return;
     HWND candidate=GetForegroundWindow();DWORD pid=0;DWORD thread=GetWindowThreadProcessId(candidate,&pid);
     if(!candidate||pid!=GetCurrentProcessId()||thread!=GetCurrentThreadId())return;
-    if(!controls){controls=GetModuleHandleA("comctl32.dll");if(!controls){controls=LoadLibraryA("comctl32.dll");ownControls=controls!=nullptr;}
+    if(!controls){controls=LoadLibraryA("comctl32.dll");ownControls=controls!=nullptr;
         if(!controls)return;
     }
     if(!resolveControls()){static bool logged=false;if(!logged){logged=true;logLine("Chat input: Common Controls subclass API unavailable.");}return;}

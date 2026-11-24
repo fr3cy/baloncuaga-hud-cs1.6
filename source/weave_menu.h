@@ -7,6 +7,9 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include <mutex>
+#include <set>
+#include <map>
+#include <memory>
 #include "lang.h"
 #include "menu_theme.h"
 #include "menu_motion.h"
@@ -133,7 +136,7 @@ static std::mutex inputLock;
 static std::deque<Input> inputs;
 static bool useMenu=true,preferencesLoaded,glitchMenu;
 // True while the menu is drawn from SwapBuffers in the game's main menu.
-static bool outsideGame;
+static bool outsideGame,menuOnly;
 static void (*outsideGameDecor)(ImDrawList *,ImVec2,float);
 static void savePreferences(){
     if(!preferencesLoaded)return;
@@ -166,6 +169,12 @@ static void changed(bool value){if(value)save();}
 static void card(const char *name,ImVec2 size={0,0}){ui::begin_child(name,size);ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x);}
 static void endCard(){ImGui::PopItemWidth();ui::end_child();}
 #include "stats_page.h"
+#include "jump_stats_ui.h"
+#include "server_names.h"
+#include "servers.h"
+#include "servers_ui.h"
+#include "bratuha.h"
+#include "bratuha_ui.h"
 
 struct PreviewCommand {int x,y,w,h;std::string path;float opacity=1;};
 static PreviewCommand preview;
@@ -324,9 +333,14 @@ static void radarPreviewCard(ImVec2 size){
     ImGui::Dummy(area);ImGui::GetWindowDrawList()->PushClipRect(origin,origin+area,true);RadarDemo::draw(origin,area);ImGui::GetWindowDrawList()->PopClipRect();
     endCard();
 }
+static int fogPart=0;
 static void hudPage(int section){
     // Radar: live preview on the left, settings on the right. FOG keeps its style gallery on the right.
     row=9;
+    if(section==3){
+        if(ImGui::Button("FOG"))fogPart=0;ImGui::SameLine();if(ImGui::Button(L(u8"Стрейфы","Strafes")))fogPart=1;
+        if(fogPart==1){jumpStatsPage();return;}
+    }
     if(section==2){float h=ImGui::GetContentRegionAvail().y,w=std::floor((ImGui::GetContentRegionAvail().x-10)*.56f);radarPreviewCard({w,h});ImGui::SameLine();}
     card(section==2?L(u8"Радар","Radar"):"FOG",{section==3?0.f:ImGui::GetContentRegionAvail().x,ImGui::GetContentRegionAvail().y});
     if(section==2){
@@ -624,9 +638,6 @@ static void motionPage(){
     ImGui::Separator();edit|=ImGui::Checkbox(L(u8"Свечение и движущийся контур","Glow and moving outline"),&MenuTheme::outerEffects);
     edit|=ImGui::Checkbox(L(u8"Частицы вокруг меню","Particles around menu"),&MenuTheme::particles);
     edit|=ImGui::Checkbox(L(u8"Спокойный режим","Reduced motion"),&MenuTheme::reduceMotion);
-    edit|=ImGui::Checkbox(L(u8"Анимация главного меню CS","CS main menu animation"),&MenuTheme::nativeBackgroundAnimation);
-    if(!NativeMenuAnimation::available())ImGui::TextWrapped("%s",L(u8"Анимация фона недоступна для этой версии GameUI. Статичный фон сохранён.","Background animation is unavailable for this GameUI version. The static background is retained."));
-    ImGui::TextWrapped("%s",L(u8"Спокойный режим оставляет плавное появление без движения окна и частиц.","Reduced motion keeps a soft fade without window movement or particles."));
     if(edit)savePreferences();
     ImGui::Spacing();if(ImGui::Button(L(u8"Повторить открытие","Replay opening"),{ImGui::CalcItemWidth(),30}))menuMotion.reset();
     endCard();ImGui::SameLine();
@@ -784,14 +795,35 @@ static void settings(){
     if(ImGui::Button(L(u8"Выгрузить плагин (F11)","Unload plugin (F11)"),{ImGui::CalcItemWidth(),32}))unloadRequested.store(true,std::memory_order_release);
     if(ImGui::Button(L(u8"Закрыть меню","Close menu"),{ImGui::CalcItemWidth(),32})){opened=false;Mouse::sync();}endCard();
 }
+static void gareyPage(){
+    row=7;card("CS Fix (Garey)",{ImGui::GetContentRegionAvail().x,ImGui::GetContentRegionAvail().y});
+    Garey::frame();auto visual=Garey::variable("fps_visual");
+    ImGui::TextWrapped("%s",visual?L(u8"Оригинальный CS Fix подключён.","Original CS Fix is connected."):L(u8"Ожидание инициализации встроенного CS Fix.","Waiting for the embedded CS Fix to initialize."));
+    if(!visual&&(GareyRuntime::state==GareyRuntime::Failed||GareyRuntime::state==GareyRuntime::Conflict))ImGui::TextWrapped(L(u8"CS Fix не подключён. Код Windows: %lu.","CS Fix is not connected. Windows code: %lu."),static_cast<unsigned long>(GareyRuntime::error));
+    int value=Garey::visual;
+    if(ImGui::SliderInt(L(u8"Визуальный FPS","Visual FPS"),&value,20,1000,"%d",ImGuiSliderFlags_AlwaysClamp))Garey::setVisual(value);
+    if(ImGui::Button(L(u8"Стандарт: 100","Default: 100"),{-1,30}))Garey::setVisual(100);
+    ImGui::TextWrapped("%s",L(u8"Управляет fps_visual оригинального CS Fix. Значение сохраняется в конфигурации HUD.","Controls the original CS Fix fps_visual. The value is saved in the HUD configuration."));
+    if(visual)ImGui::Text(L(u8"Движок принял fps_visual: %.0f","Engine fps_visual: %.0f"),double(visual->value));
+    else if(GareyRuntime::started&&GetTickCount64()-GareyRuntime::started>15000)ImGui::TextWrapped("%s",L(u8"Модуль не зарегистрировал fps_visual. Эта версия CS Fix пока не подключилась к клиенту.","The module has not registered fps_visual; this CS Fix build has not attached to the client."));
+    ImGui::Separator();ImGui::TextUnformatted(L(u8"Голос","Voice"));
+    auto voice=Garey::variable("voice_enable");auto volume=Garey::variable("voice_scale");
+    if(voice){bool enabled=voice->value!=0;if(ImGui::Checkbox(L(u8"Голосовой чат","Voice chat"),&enabled))Garey::setVoice(enabled);}
+    if(volume){int percent=std::clamp(int(std::lround(volume->value*100)),0,100);if(ImGui::SliderInt(L(u8"Громкость игроков","Player voice volume"),&percent,0,100,"%d%%"))Garey::setVolume(percent);}
+    ImGui::TextWrapped("%s",L(u8"Фикс голосов и остальные исправления выполняет оригинальный ASI Garey.","The original Garey ASI performs its voice and other fixes."));
+    ImGui::Separator();ImGui::TextWrapped("%s",L(u8"F11 выгружает BALONCUAGA. CS Fix продолжает работать до закрытия игры.","F11 unloads BALONCUAGA. CS Fix stays active until the game closes."));
+    endCard();
+}
 // Tab and subtab names follow the menu language (rebuilt only when it changes).
 static void applyLanguage(){
     static int applied=-1;const bool e=Lang::english();if(applied==static_cast<int>(e)&&ui::tabs.size()>=10)return;applied=e;
     static const char *ru[]={u8"Модели",u8"Камера",u8"Прицел","HUD",u8"Тренажёр колеса",u8"Чат",u8"Настройки","Misc","Stats","Showkeys"};
     static const char *en[]={"Models","Camera","Crosshair","HUD","Scroll trainer","Chat","Settings","Misc","Stats","Showkeys"};
     for(size_t i=0;i<ui::tabs.size()&&i<10;++i)ui::tabs[i].m_name=e?en[i]:ru[i];
-    if(e){ui::tabs[0].m_subtabs={"Knife","HE grenade","Flashbang","Smoke","Team outfits"};ui::tabs[3].m_subtabs={"Radar","FOG","In-game HUD","Skybox"};ui::tabs[8].m_icon=ICON_FA_CHART_BAR;ui::tabs[5].m_subtabs={"Settings","History"};ui::tabs[6].m_subtabs={"Appearance","Watermark","General","Screen","Motion"};}
-    else{ui::tabs[0].m_subtabs={u8"Нож",u8"HE-граната",u8"Флешка",u8"Дымовая",u8"Одежда команд"};ui::tabs[3].m_subtabs={u8"Радар","FOG",u8"Игровой HUD",u8"Небо"};ui::tabs[5].m_subtabs={u8"Настройки",u8"История"};ui::tabs[6].m_subtabs={u8"Оформление",u8"Ватермарк",u8"Общие",u8"Экран",u8"Анимация"};}
+    ui::tabs[11].m_name=e?"Servers":u8"Серверы";
+    ui::tabs[8].m_subtabs=e?std::vector<const char*>{"General"}:std::vector<const char*>{u8"Общая"};
+    if(e){ui::tabs[0].m_subtabs={"Knife","HE grenade","Flashbang","Smoke","Team outfits"};ui::tabs[3].m_subtabs={"Radar","FOG","In-game HUD","Skybox"};ui::tabs[8].m_icon=ICON_FA_CHART_BAR;ui::tabs[5].m_subtabs={"Settings","History",u8"БРАТУХА"};ui::tabs[6].m_subtabs={"Appearance","Watermark","General","Screen","Motion"};}
+    else{ui::tabs[0].m_subtabs={u8"Нож",u8"HE-граната",u8"Флешка",u8"Дымовая",u8"Одежда команд"};ui::tabs[3].m_subtabs={u8"Радар","FOG",u8"Игровой HUD",u8"Небо"};ui::tabs[5].m_subtabs={u8"Настройки",u8"История",u8"БРАТУХА"};ui::tabs[6].m_subtabs={u8"Оформление",u8"Ватермарк",u8"Общие",u8"Экран",u8"Анимация"};}
 }
 #include "menu_navigation.h"
 #include "aurora_layout.h"
@@ -858,7 +890,7 @@ static bool initialize(){
         io.Fonts->FontBuilderIO=ImGuiFreeType::GetBuilderForFreeType();
         ImFontConfig cfg;cfg.FontDataOwnedByAtlas=false;cfg.FontBuilderFlags=ImGuiFreeTypeBuilderFlags_LightHinting;static const ImWchar letters[]={0x20,0xFF,0x400,0x45F,0x2000,0x206F,0};
         io.Fonts->AddFontFromMemoryTTF(font_medium_bin,sizeof(font_medium_bin),14,&cfg,letters);
-        ImFontConfig icons=cfg;icons.MergeMode=true;icons.PixelSnapH=true;static const ImWchar iconRange[]={0xf030,0xf030,0xf05b,0xf05b,0xf06e,0xf06e,0xf080,0xf080,0xf086,0xf086,0xf0ad,0xf0ad,0xf11c,0xf11c,0xf15b,0xf15b,0xf1de,0xf1de,0xf55d,0xf55d,0xf8cc,0xf8cc,0};
+        ImFontConfig icons=cfg;icons.MergeMode=true;icons.PixelSnapH=true;static const ImWchar iconRange[]={0xf005,0xf005,0xf030,0xf030,0xf05b,0xf05b,0xf06e,0xf06e,0xf080,0xf080,0xf086,0xf086,0xf0ad,0xf0ad,0xf11c,0xf11c,0xf15b,0xf15b,0xf1de,0xf1de,0xf233,0xf233,0xf55d,0xf55d,0xf8cc,0xf8cc,0};
         io.Fonts->AddFontFromMemoryTTF(font_awesome_bin,sizeof(font_awesome_bin),13,&icons,iconRange);
         io.Fonts->AddFontFromMemoryTTF(font_bold_bin,sizeof(font_bold_bin),14,&cfg,letters);
         io.Fonts->AddFontFromMemoryTTF(font_medium_bin,sizeof(font_medium_bin),17,&cfg,letters);
@@ -904,13 +936,15 @@ static bool initialize(){
         hudRegular=hudRegularSizes[6];hudBold=hudBoldSizes[6];speedFont=speedFontSizes[6];
         io.Fonts->TexDesiredWidth=1024;
         for(int i=0;i<4;++i)ui::add_page(0,[i]{models(i);});ui::add_page(0,outfitsPage);ui::add_page(1,camera);ui::add_page(2,crosshair);
-        for(int i=2;i<=3;++i)ui::add_page(3,[i]{hudPage(i);});ui::add_page(3,combatHudPage);ui::add_page(3,skyboxPage);ui::add_page(4,trainer);ui::add_page(5,chatSettingsPage);ui::add_page(5,historyPage);
-        ui::add_page(6,appearancePage);ui::add_page(6,watermarkPage);ui::add_page(6,settings);ui::add_page(6,displaySettingsPage);ui::add_page(6,motionPage);ui::add_page(7,misc);ui::add_page(8,statsPage);
-        ui::tabs.push_back(tab_t(ICON_FA_KEYBOARD,"Showkeys",{}));ui::add_page(9,showkeysPage);ui::tabs[8].m_icon=ICON_FA_CHART_BAR;
+        for(int i=2;i<=3;++i)ui::add_page(3,[i]{hudPage(i);});ui::add_page(3,combatHudPage);ui::add_page(3,skyboxPage);ui::add_page(4,trainer);ui::add_page(5,chatSettingsPage);ui::add_page(5,historyPage);ui::add_page(5,bratuhaPage);
+        ui::add_page(6,appearancePage);ui::add_page(6,watermarkPage);ui::add_page(6,settings);ui::add_page(6,displaySettingsPage);ui::add_page(6,motionPage);ui::add_page(7,misc);ui::add_page(8,statsPage);ui::tabs[8].m_subtabs={u8"Общая"};
+        ui::tabs.push_back(tab_t(ICON_FA_KEYBOARD,"Showkeys",{}));ui::add_page(9,showkeysPage);
+        ui::tabs.push_back(tab_t(ICON_FA_WRENCH,"CS Fix (Garey)",{}));ui::add_page(10,gareyPage);
+        ui::tabs.push_back(tab_t(ICON_FA_SERVER,u8"Серверы",{}));ui::add_page(11,serversPage);ui::tabs[8].m_icon=ICON_FA_CHART_BAR;
         ui::anim=ui::content_anim=1;ui::size={740,530};
         const char *navigation[]={u8"Модели",u8"Камера",u8"Прицел",u8"HUD",u8"Тренажёр колеса",u8"Чат",u8"Настройки","Misc"};
         const char *categoryIcons[]={ICON_FA_BRUSH,ICON_FA_CAMERA,ICON_FA_CROSSHAIRS,ICON_FA_EYE,ICON_FA_COMPUTER_MOUSE,ICON_FA_COMMENTS,ICON_FA_SLIDERS,ICON_FA_FILE};
-        for(int i=0;i<8;++i){ui::tabs[i].m_name=navigation[i];ui::tabs[i].m_icon=categoryIcons[i];}ui::tabs[5].m_subtabs={u8"Настройки",u8"История"};ui::tabs[6].m_subtabs={u8"Оформление",u8"Ватермарк",u8"Общие",u8"Экран",u8"Анимация"};
+        for(int i=0;i<8;++i){ui::tabs[i].m_name=navigation[i];ui::tabs[i].m_icon=categoryIcons[i];}ui::tabs[5].m_subtabs={u8"Настройки",u8"История",u8"БРАТУХА"};ui::tabs[6].m_subtabs={u8"Оформление",u8"Ватермарк",u8"Общие",u8"Экран",u8"Анимация"};
         ui::tabs[0].m_subtabs={u8"Нож",u8"HE-граната",u8"Флешка",u8"Дымовая",u8"Одежда команд"};ui::tabs[3].m_subtabs={u8"Радар","FOG",u8"Игровой HUD",u8"Небо"};
         if(MenuTheme::isCarbon()){ui::cur_tab=ui::next_tab=6;ui::tabs[6].cur_subtab=ui::tabs[6].next_subtab=0;}
     }
@@ -1096,19 +1130,27 @@ static bool renderFrame(const SCREENINFO &screen,float time,bool showMenu){
         if(e.message==WM_KEYDOWN||e.message==WM_KEYUP){auto k=key(e.value);if(k!=ImGuiKey_None)io.AddKeyEvent(k,e.message==WM_KEYDOWN);}
     }
     if(menuVisible)Profile::update();ImGui::NewFrame();
-    if(!outsideGame)combatHudOverlay(menuVisible);
+    if(!outsideGame&&!menuOnly)combatHudOverlay(menuVisible);
     if(outsideGame&&outsideGameDecor)outsideGameDecor(ImGui::GetBackgroundDrawList(),{screenW/scale,screenH/scale},time);
     if(menuVisible){
         // Scope menu colors and geometry so game HUD/chat retain their settings.
-        applyLanguage();if(!outsideGame&&showMenu)showkeysOverlay(true); // under the menu window
+        applyLanguage();if(!outsideGame&&!menuOnly&&showMenu)showkeysOverlay(true); // under the menu window
         MenuFadeScope menuFade;ImGuiStyle original=ImGui::GetStyle();MenuTheme::apply();
         ImGui::PushStyleVar(ImGuiStyleVar_DisabledAlpha,1.f);ImGui::BeginDisabled(!showMenu);
         if(MenuTheme::isCarbon()){ui::menuTitleFont=menuBold;ImGui::PushFont(menuBody);carbon3XLLayout();ImGui::PopFont();ui::menuTitleFont=nullptr;}else auroraLayout();
         ImGui::EndDisabled();ImGui::PopStyleVar();
+        if(nativeResourcesRestartPending){
+            ImGui::SetNextWindowPos({screenW/scale*.5f,8.f},ImGuiCond_Always,{.5f,0});
+            ImGui::SetNextWindowSize({std::max(160.f,std::min(560.f,screenW/scale-16.f)),0});
+            ImGui::SetNextWindowBgAlpha(.94f);
+            ImGui::Begin("##resource_restart_notice",nullptr,ImGuiWindowFlags_NoDecoration|ImGuiWindowFlags_AlwaysAutoResize|ImGuiWindowFlags_NoInputs|ImGuiWindowFlags_NoSavedSettings|ImGuiWindowFlags_NoFocusOnAppearing);
+            ImGui::TextWrapped("%s",L(u8"HUD работает. Чтобы вернуть стандартное оформление окон CS, перезапусти игру один раз.","HUD is active. Restart CS once to restore standard native window styling."));
+            ImGui::End();
+        }
         menuFade.apply(menuMotion.alpha());preview.opacity*=menuMotion.alpha();
         ImGui::GetStyle()=original;ui::aurora=false;ui::carbonMoon=false;MenuTheme::carbonStyle=false;
         if(showMenu&&row!=10&&Hud::chatOpened)ChatEditor::close();
-    }if(!outsideGame){gameInfoOverlay();if(!showMenu)showkeysOverlay(false);speedometerOverlay(showMenu);if(!opened)chatOverlay();}ImGui::Render();renderDrawData();return true;
+    }if(!outsideGame&&!menuOnly){jumpStatsOverlay();gameInfoOverlay();if(!showMenu)showkeysOverlay(false);speedometerOverlay(showMenu);if(!opened)chatOverlay();}ImGui::Render();renderDrawData();return true;
 }
 static bool draw(const SCREENINFO &screen,float time){return renderFrame(screen,time,opened);}
 static bool drawOverlay(const SCREENINFO &screen,float time){return renderFrame(screen,time,false);}
