@@ -7,7 +7,7 @@
 // callbacks. Only the generated manifest is installed; settings are excluded.
 namespace EmbeddedInstaller {
 #include "embedded_install/files.h"
-struct Result {bool ok=false,restart=false;unsigned written=0,unchanged=0;DWORD error=0;bool rollbackOk=true;};
+struct Result {bool ok=false,restart=false;unsigned written=0,unchanged=0;DWORD error=0;bool rollbackOk=true;std::string failedFile;};
 static uint64_t hash(const std::vector<byte> &data){uint64_t h=UINT64_C(1469598103934665603);for(byte b:data)h=(h^b)*UINT64_C(1099511628211);return h;}
 static bool relative(const char *path){
     if(!path||!*path||strlen(path)>220)return false;
@@ -71,12 +71,13 @@ static bool rollback(const std::wstring &root,const std::vector<Change> &changes
     return ok;
 }
 static Result install(HMODULE module,const std::wstring &root){
-    Result result;std::vector<Change> changes;
-    auto failure=[&](){result.error=GetLastError();if(!result.error)result.error=ERROR_INVALID_DATA;try{result.rollbackOk=rollback(root,changes);}catch(...){result.rollbackOk=false;}return result;};
+    Result result;std::vector<Change> changes;const char *current="";
+    auto failure=[&](){result.error=GetLastError();if(!result.error)result.error=ERROR_INVALID_DATA;result.failedFile=relative(current)?current:"";try{result.rollbackOk=rollback(root,changes);}catch(...){result.rollbackOk=false;}return result;};
     try {
         changes.reserve(sizeof(files)/sizeof(files[0])+sizeof(obsolete)/sizeof(obsolete[0]));
         if(!directory(root)){SetLastError(ERROR_BAD_PATHNAME);return failure();}
         for(const auto &entry:files){
+            current=entry.path;
             if(!relative(entry.path)){SetLastError(ERROR_BAD_PATHNAME);return failure();}
             auto rel=wide(entry.path),target=root+L"/"+rel;if(!parents(root,rel))return failure();
             std::vector<byte> old;bool exists=false;if(!read(target,old,exists))return failure();
@@ -95,9 +96,10 @@ static Result install(HMODULE module,const std::wstring &root){
             if(!atomic(target,payload))return failure();changes.push_back(std::move(change));++result.written;result.restart|=entry.restart;
         }
         const char *folders[]={"cstrike/models/customizer/knife/","cstrike/models/customizer/he/","cstrike/models/customizer/flash/","cstrike/models/customizer/smoke/","cstrike/models/customizer/cache/"};
-        for(const char *folder:folders)if(!parents(root,wide(folder)))return failure();
+        for(const char *folder:folders){current=folder;if(!parents(root,wide(folder)))return failure();}
 
         for(const char *path:obsolete){
+            current=path;
             if(!relative(path)){SetLastError(ERROR_BAD_PATHNAME);return failure();}
             auto rel=wide(path),target=root+L"/"+rel;std::vector<byte> old;bool exists=false;
             if(!read(target,old,exists))return failure();if(!exists)continue;

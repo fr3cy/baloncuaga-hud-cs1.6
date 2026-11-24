@@ -9,8 +9,15 @@ Metadata-cleaned SHA-256:
 
 Three assert source-file paths and one CodeView/PDB path were reduced to
 basenames, and the PE debug-directory entry was cleared. Executable .text
-and .textbss sections are byte-for-byte identical to the original.
-No executable code was patched or reimplemented.
+and .textbss sections were retained in that intermediate baseline.
+
+The bundled reduced component changes the startup dispatch: engine/client
+compatibility is checked before scanning, FPS starts after engine API capture,
+voice starts independently with Steam ABI checks and a bounded startup wait,
+and the original unrelated optional-fix initializer is disabled. The compiled
+FPS and voice feature bodies are unchanged. Defaults use fps_visual 100.
+Reduced-component SHA-256:
+d994ec653b1c24a36e49fb4c851750eced6478ac4519110d7daf046f708eaa56
 
 The exact fork sources were not provided. Public 0.4.1 sources are not
 represented as the sources of this binary. The module has its own Windows

@@ -115,6 +115,9 @@ static bool f11WasDown;
 static HANDLE initThread;
 static HANDLE instanceMutex;
 static bool nativeResourcesRestartPending;
+static DWORD resourceInstallError;
+static std::string resourceInstallFile;
+static bool resourceInstallRollbackOk=true;
 struct CallbackScope {CallbackScope(){activeCallbacks.fetch_add(1,std::memory_order_acq_rel);}~CallbackScope(){activeCallbacks.fetch_sub(1,std::memory_order_acq_rel);}};
 static bool insertWasDown;
 static bool insertSeenInClient;
@@ -756,11 +759,13 @@ static DWORD WINAPI initialize(void *) {
     logLine("Startup stage: installing embedded resources.");
     const auto installation=EmbeddedInstaller::installForGame();
     if(!installation.ok){
-        char line[128];snprintf(line,sizeof(line),"Automatic assets: failed; error=%lu rollback=%d.",static_cast<unsigned long>(installation.error),int(installation.rollbackOk));
-        startupFailure(line,L"Не удалось установить файлы BALONCUAGA. Проверьте доступ к папке игры. Резервные копии: .baloncuaga-install/backups.");
-        return 0;
+        // Resource failure must not disable Insert and the entire HUD. Retain
+        // native fallbacks and show only a relative filename and Windows code.
+        resourceInstallError=installation.error;
+        resourceInstallFile=installation.failedFile;
+        resourceInstallRollbackOk=installation.rollbackOk;
     }
-    nativeResourcesRestartPending=installation.restart;
+    nativeResourcesRestartPending=installation.ok&&installation.restart;
     if(installation.restart)
         logLine("Automatic assets: installed with backups; continuing HUD initialization. Only native resource styling needs a restart.");
     logLine("Startup stage: locating the engine API.");
@@ -778,7 +783,7 @@ static DWORD WINAPI initialize(void *) {
         return 0;
     }
     GareyRuntime::startForGame();
-    for(int attempt=0;attempt<50&&!Garey::variable("fps_visual")&&(GareyRuntime::state==GareyRuntime::Loaded||GareyRuntime::state==GareyRuntime::Existing);++attempt)Sleep(20);
+    for(int attempt=0;attempt<500&&GareyRuntime::pending()&&(GareyRuntime::state==GareyRuntime::Loaded||GareyRuntime::state==GareyRuntime::Existing);++attempt)Sleep(20);
     fov = std::max(60, std::min(120, static_cast<int>(GetPrivateProfileIntA("settings", "fov", 90, iniPath))));
     crossStyle=std::max(0,std::min(12,static_cast<int>(GetPrivateProfileIntA("crosshair","style",0,iniPath))));
     CrossConfig::load();
@@ -860,7 +865,6 @@ static DWORD WINAPI initialize(void *) {
     Mouse::extraAction=extraUiAction;Trainer::start();
     Hud::installMessages();GameHudState::installMessages();
     logLine("Initialized. Insert opens the menu in-game; native CS main menu remains unchanged.");
-    if(nativeResourcesRestartPending)MessageBoxW(nullptr,L"Стандартные фон и окна CS 1.6 восстановлены. Один раз полностью перезапустите игру, чтобы обновить уже загруженные ресурсы.",L"BALONCUAGA",MB_OK|MB_ICONINFORMATION);
     return 0;
 }
 // Once entry points are detached, the counter can reach zero a few instructions

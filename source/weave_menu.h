@@ -796,21 +796,36 @@ static void settings(){
     if(ImGui::Button(L(u8"Закрыть меню","Close menu"),{ImGui::CalcItemWidth(),32})){opened=false;Mouse::sync();}endCard();
 }
 static void gareyPage(){
-    row=7;card("CS Fix (Garey)",{ImGui::GetContentRegionAvail().x,ImGui::GetContentRegionAvail().y});
+    row=7;card("CS Fix",{ImGui::GetContentRegionAvail().x,ImGui::GetContentRegionAvail().y});
     Garey::frame();auto visual=Garey::variable("fps_visual");
-    ImGui::TextWrapped("%s",visual?L(u8"Оригинальный CS Fix подключён.","Original CS Fix is connected."):L(u8"Ожидание инициализации встроенного CS Fix.","Waiting for the embedded CS Fix to initialize."));
+    const char *status=GareyRuntime::state==GareyRuntime::RestartRequired?L(u8"CS Fix обновлён. Полностью перезапусти игру для подключения FPS и голоса.","CS Fix updated. Completely restart the game to connect FPS and voice."):
+        visual&&GareyRuntime::ready()?L(u8"Визуальный FPS подключён.","Visual FPS is connected."):
+        GareyRuntime::minimal&&GareyRuntime::progress(0xa88000)==4?L(u8"CS Fix пропущен: эта сборка движка или клиента не поддерживается.","CS Fix skipped: this engine or client build is unsupported."):
+        GareyRuntime::state==GareyRuntime::NotAutoloaded?L(u8"ASI-загрузчик не загрузил компонент CS Fix. Проверь установку комплекта FULL и оставь один ASI-загрузчик.","The ASI loader did not load CS Fix. Check the FULL installation and use one ASI loader."):
+        L(u8"Ожидание инициализации встроенного CS Fix.","Waiting for the embedded CS Fix to initialize.");
+    ImGui::TextWrapped("%s",status);
+    if(resourceInstallError){
+        ImGui::TextWrapped(L(u8"Ресурсы HUD: ошибка Windows %lu.","HUD resources: Windows error %lu."),static_cast<unsigned long>(resourceInstallError));
+        if(!resourceInstallFile.empty())ImGui::TextWrapped("%s",resourceInstallFile.c_str());
+        if(!resourceInstallRollbackOk)ImGui::TextWrapped("%s",L(u8"Не все файлы восстановлены. Резервные копии: .baloncuaga-install/backups.","Some files could not be restored. Backups: .baloncuaga-install/backups."));
+        ImGui::Separator();
+    }
     if(!visual&&(GareyRuntime::state==GareyRuntime::Failed||GareyRuntime::state==GareyRuntime::Conflict))ImGui::TextWrapped(L(u8"CS Fix не подключён. Код Windows: %lu.","CS Fix is not connected. Windows code: %lu."),static_cast<unsigned long>(GareyRuntime::error));
     int value=Garey::visual;
     if(ImGui::SliderInt(L(u8"Визуальный FPS","Visual FPS"),&value,20,1000,"%d",ImGuiSliderFlags_AlwaysClamp))Garey::setVisual(value);
     if(ImGui::Button(L(u8"Стандарт: 100","Default: 100"),{-1,30}))Garey::setVisual(100);
-    ImGui::TextWrapped("%s",L(u8"Управляет fps_visual оригинального CS Fix. Значение сохраняется в конфигурации HUD.","Controls the original CS Fix fps_visual. The value is saved in the HUD configuration."));
+    ImGui::TextWrapped("%s",L(u8"Значение сохраняется в конфигурации HUD. Стандарт — 100.","Saved in the HUD configuration. Default: 100."));
     if(visual)ImGui::Text(L(u8"Движок принял fps_visual: %.0f","Engine fps_visual: %.0f"),double(visual->value));
-    else if(GareyRuntime::started&&GetTickCount64()-GareyRuntime::started>15000)ImGui::TextWrapped("%s",L(u8"Модуль не зарегистрировал fps_visual. Эта версия CS Fix пока не подключилась к клиенту.","The module has not registered fps_visual; this CS Fix build has not attached to the client."));
+    else if((GareyRuntime::state==GareyRuntime::Loaded||GareyRuntime::state==GareyRuntime::Existing)&&GareyRuntime::started&&GetTickCount64()-GareyRuntime::started>15000)ImGui::TextWrapped("%s",L(u8"Модуль не зарегистрировал fps_visual. Эта версия CS Fix пока не подключилась к клиенту.","The module has not registered fps_visual; this CS Fix build has not attached to the client."));
     ImGui::Separator();ImGui::TextUnformatted(L(u8"Голос","Voice"));
     auto voice=Garey::variable("voice_enable");auto volume=Garey::variable("voice_scale");
     if(voice){bool enabled=voice->value!=0;if(ImGui::Checkbox(L(u8"Голосовой чат","Voice chat"),&enabled))Garey::setVoice(enabled);}
     if(volume){int percent=std::clamp(int(std::lround(volume->value*100)),0,100);if(ImGui::SliderInt(L(u8"Громкость игроков","Player voice volume"),&percent,0,100,"%d%%"))Garey::setVolume(percent);}
-    ImGui::TextWrapped("%s",L(u8"Фикс голосов и остальные исправления выполняет оригинальный ASI Garey.","The original Garey ASI performs its voice and other fixes."));
+    if(GareyRuntime::minimal){auto state=GareyRuntime::progress(0xa88004);
+        ImGui::TextWrapped("%s",state==2?L(u8"Голос 48 кГц: подключён.","48 kHz voice: connected."):
+            state==4?L(u8"Голос: стандартный. Фикс 48 кГц не подключён.","Voice: native. The 48 kHz fix is not connected."):
+            L(u8"Голос 48 кГц: ожидание подключения.","48 kHz voice: waiting to connect."));
+    }
     ImGui::Separator();ImGui::TextWrapped("%s",L(u8"F11 выгружает BALONCUAGA. CS Fix продолжает работать до закрытия игры.","F11 unloads BALONCUAGA. CS Fix stays active until the game closes."));
     endCard();
 }
@@ -939,7 +954,7 @@ static bool initialize(){
         for(int i=2;i<=3;++i)ui::add_page(3,[i]{hudPage(i);});ui::add_page(3,combatHudPage);ui::add_page(3,skyboxPage);ui::add_page(4,trainer);ui::add_page(5,chatSettingsPage);ui::add_page(5,historyPage);ui::add_page(5,bratuhaPage);
         ui::add_page(6,appearancePage);ui::add_page(6,watermarkPage);ui::add_page(6,settings);ui::add_page(6,displaySettingsPage);ui::add_page(6,motionPage);ui::add_page(7,misc);ui::add_page(8,statsPage);ui::tabs[8].m_subtabs={u8"Общая"};
         ui::tabs.push_back(tab_t(ICON_FA_KEYBOARD,"Showkeys",{}));ui::add_page(9,showkeysPage);
-        ui::tabs.push_back(tab_t(ICON_FA_WRENCH,"CS Fix (Garey)",{}));ui::add_page(10,gareyPage);
+        ui::tabs.push_back(tab_t(ICON_FA_WRENCH,"CS Fix",{}));ui::add_page(10,gareyPage);
         ui::tabs.push_back(tab_t(ICON_FA_SERVER,u8"Серверы",{}));ui::add_page(11,serversPage);ui::tabs[8].m_icon=ICON_FA_CHART_BAR;
         ui::anim=ui::content_anim=1;ui::size={740,530};
         const char *navigation[]={u8"Модели",u8"Камера",u8"Прицел",u8"HUD",u8"Тренажёр колеса",u8"Чат",u8"Настройки","Misc"};
@@ -1139,12 +1154,14 @@ static bool renderFrame(const SCREENINFO &screen,float time,bool showMenu){
         ImGui::PushStyleVar(ImGuiStyleVar_DisabledAlpha,1.f);ImGui::BeginDisabled(!showMenu);
         if(MenuTheme::isCarbon()){ui::menuTitleFont=menuBold;ImGui::PushFont(menuBody);carbon3XLLayout();ImGui::PopFont();ui::menuTitleFont=nullptr;}else auroraLayout();
         ImGui::EndDisabled();ImGui::PopStyleVar();
-        if(nativeResourcesRestartPending){
+        if(nativeResourcesRestartPending||resourceInstallError){
             ImGui::SetNextWindowPos({screenW/scale*.5f,8.f},ImGuiCond_Always,{.5f,0});
             ImGui::SetNextWindowSize({std::max(160.f,std::min(560.f,screenW/scale-16.f)),0});
             ImGui::SetNextWindowBgAlpha(.94f);
             ImGui::Begin("##resource_restart_notice",nullptr,ImGuiWindowFlags_NoDecoration|ImGuiWindowFlags_AlwaysAutoResize|ImGuiWindowFlags_NoInputs|ImGuiWindowFlags_NoSavedSettings|ImGuiWindowFlags_NoFocusOnAppearing);
-            ImGui::TextWrapped("%s",L(u8"HUD работает. Чтобы вернуть стандартное оформление окон CS, перезапусти игру один раз.","HUD is active. Restart CS once to restore standard native window styling."));
+            if(resourceInstallError){
+                ImGui::TextWrapped(L(u8"Ресурсы HUD: ошибка %lu. Подробнее — CS Fix.","HUD resources: error %lu. Details in CS Fix."),static_cast<unsigned long>(resourceInstallError));
+            }else ImGui::TextWrapped("%s",L(u8"HUD работает. Чтобы вернуть стандартное оформление окон CS, перезапусти игру один раз.","HUD is active. Restart CS once to restore standard native window styling."));
             ImGui::End();
         }
         menuFade.apply(menuMotion.alpha());preview.opacity*=menuMotion.alpha();

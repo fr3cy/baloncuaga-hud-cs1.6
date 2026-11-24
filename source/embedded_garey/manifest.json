@@ -1,11 +1,18 @@
 {
   "id": 6000,
   "file": "6000.bsk",
-  "bytes": 1396736,
-  "packed": 478972,
-  "sha256": "7ace1120f2a1595c551d6b0f68e17c2d5167a804a7eae56beac6e48b6a3d4fbd",
-  "fnv64": "0x63df6bccf68ab85f",
+  "bytes": 1398784,
+  "packed": 479753,
+  "sha256": "d994ec653b1c24a36e49fb4c851750eced6478ac4519110d7daf046f708eaa56",
+  "fnv64": "0xfa46b10619bceea5",
   "original_name": "cs_patches (2).asi",
   "original_sha256": "a8546e972abb605aa69cc8e8ee5be500ec8d160f9dd689f0cece8ef705198efd",
-  "privacy_metadata_only": true
+  "privacy_metadata_only": false,
+  "original_feature_bodies_unchanged": true,
+  "bootstrap": "Early engine/client compatibility gate; FPS after engine API capture; voice on independent guarded thread; unrelated optional pipeline retired",
+  "baseline_file": "6000.original.bsk",
+  "only_features": [
+    "fps_visual",
+    "48kHz voice"
+  ]
 }

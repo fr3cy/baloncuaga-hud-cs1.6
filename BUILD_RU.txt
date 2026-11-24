@@ -1,4 +1,4 @@
-Сборка BALONCUAGA V3
+Сборка BALONCUAGA V3.2
 
 Нужны Windows, PowerShell и MinGW-w64 с компилятором для x86.
 Из корня репозитория выполни:
@@ -23,35 +23,35 @@
 из готового FULL-архива в Releases; LoadFromScriptsOnly должен быть 0.
 Уведомления о сторонних компонентах находятся в licenses/.
 
-МОДЕЛИ ОДЕЖДЫ
-Для генерации нужны свои штатные models/player CS 1.6, Python, NumPy и Pillow.
-Команды из корня исходников:
-python -B assets/authoring/build_native_outfits.py --players "ПАПКА_ИГРЫ/cstrike/models/player"
-python -B assets/authoring/generate_asset_manifest.py --models assets/cstrike/models/baloncuaga_outfits --header source/outfit_asset_manifest.h --manifest OUTFITS_MANIFEST.json
-Затем пересобери ASI. Файлы MDL и ASI должны быть из одной сборки.
-Каждая новая текстура 512x512; исходные лица/руки/анимации остаются штатными.
-
-ВСТРОЕННЫЕ СКАЙБОКСЫ
-source/build.ps1 собирает source/embedded_skyboxes/skyboxes.rc через windres
-и включает ресурсы в ASI. .bsk и skyboxes.rc уже готовы и входят в исходники.
-После редактирования TGA сначала выполни:
-python -B source/embedded_skyboxes/pack_skyboxes.py baloncuaga_skyboxes
-Все 42 ресурса сжимаются без потерь; затем пересобери ASI.
+РЕСУРСЫ
+Готовые модели, текстуры и скайбоксы включены в source/embedded_install
+и source/embedded_skyboxes как сжатые .bsk. Для сборки HUD их достаточно;
+несжатые копии, предпросмотры и исходные материалы не требуются.
+source/build.ps1 собирает оба набора Windows-ресурсов через windres.
 
 АВТОУСТАНОВКА
 source/embedded_install содержит готовые files.h, files.rc и 118 сжатых файлов.
-source/build.ps1 включает install.res в ASI. При изменении native_stock или MDL
-пересобери этот набор через assets/authoring/pack_install.py перед сборкой ASI.
+source/build.ps1 включает install.res в ASI. Готовый набор уже входит в исходники.
 Автоустановка работает только после загрузки ASI существующим загрузчиком.
 Первая установка больше не останавливает запуск HUD. Перезапуск нужен для штатных окон.
 
 CS FIX (GAREY)
 Ресурс source/embedded_garey/6000.bsk включается через files.rc в install.res.
-Это бинарный модуль с очищенными путями отладки. Исходники точной версии
-не предоставлены; исполняемые секции сохранены. Сам ASI извлекает модуль
-в служебную папку и подключает через LoadLibraryExW вне DllMain.
-Для обновления работающей установки достаточно CS16Customizer.asi.
-F11 не выгружает CS Fix. Проверка его готовности идёт по fps_visual.
+Это уменьшенный вариант пользовательского бинарного модуля: общий запуск
+прочих патчей отключён, FPS и голос подключаются отдельно с проверками совместимости.
+Исходники точного стороннего форка не предоставлены. Исходники адаптеров
+находятся в bootstrap_x86.S; скомпилированные тела FPS/voice сохранены.
+
+Для пересоздания ресурса из включённого очищенного бинарного baseline:
+python source/embedded_garey/rebuild_component.py --bin-dir КАТАЛОГ_MINGW_BIN
+Нужны i686-w64-mingw32-as, objcopy, nm и objdump. Команда проверяет SHA-256
+входного и выходного компонентов; готовый ресурс уже входит в исходники.
+
+Сам HUD подготавливает cs_fix.asi рядом с hl.exe для
+следующего полного запуска. При обновлении известные прежние версии остаются
+как .disabled. Совместимость CS Fix: Steam Legacy 8684 и соответствующий client.dll.
+FULL для чистой игры уже содержит готовый компонент.
+F11 не выгружает CS Fix. Готовность FPS проверяется по завершению его инициализации.
 
 ПРИВАТНОСТЬ
 StartupLog и запись переписок отключены в коде. ImGui IniFilename и

@@ -1,6 +1,6 @@
 #pragma once
 // Control only public game cvars. The external CS Fix binary owns its patches
-// and lifetime; BALONCUAGA never maps, modifies or frees that module.
+// and lifetime; BALONCUAGA never maps or frees a running CS Fix module.
 namespace Garey {
 static int visual=100,voiceEnabled=-1,voiceVolume=-1;
 static bool loaded,pending=true,pendingVoice,pendingVolume;
@@ -55,6 +55,6 @@ static void setVoice(bool value){voiceEnabled=value?1:0;pendingVoice=true;nextPo
 static void setVolume(int value){voiceVolume=std::clamp(value,0,100);pendingVolume=true;nextPoll=0;save();frame();}
 static void restore(){
     for(auto &value:originals)if(value.pointer&&variable(value.name)==value.pointer)write(value.name,value.value);
-    // No FreeLibrary: CS Fix is the independently loaded, unmodified plugin.
+    // No FreeLibrary: CS Fix remains independently loaded until process exit.
 }
 }
